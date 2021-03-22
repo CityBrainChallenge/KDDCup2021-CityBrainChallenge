@@ -8,3 +8,4 @@ Welcome to KDDCup's documentation!
     roadnet
     flow
     gym
+    installation
