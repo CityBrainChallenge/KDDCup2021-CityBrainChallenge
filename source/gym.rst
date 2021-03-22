@@ -4,12 +4,38 @@ Gym api
 =======================
 The Gym api is the same as the OpenAi Gym.
 
-.. code-block:: c
 
-    action: {agentid: phase}
-    observation: {agentid_feature: agent_data}  (here key is "{}_{}".format(agentid,feature)  where feature is given by gym.cfg. The first item in the agent_data is current step)
-    reward: {agentid : lane_out_vehicle_number}  (here indicating the out vehicle number of this step)
-    dones: {agent_id: bool_value}
+.. code-block:: python
+
+    observation, reward, dones, info = env.step(action)
+
+
+
+
+`observation`:
+    - a dict
+    - {agentid_feature: agent_data}
+    - Here key is "{}_{}".format(agentid,feature)  where feature is given by *gym.cfg*.
+    - The first item in the agent_data is current step.
+
+`reward`:
+    - a dict
+    - {agent_id: lane_out_vehicle_number}
+    - here indicating the out vehicle number of this step
+
+`dones`:
+    - a dict
+    - {agent_id: bool_value}
+    - indicating whether an agent is end
+
+`info`:
+    - empty
+
+`action`:
+    - a dict
+    - {agent_id: phase}
+    - Here phase is a integer between 0 and 8
+
 
 Here is a simple usage of the api
 

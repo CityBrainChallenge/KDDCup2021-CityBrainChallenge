@@ -2,73 +2,112 @@
 
 Roadnet File Format
 ===================
-Introduction
--------------------
-
-Roadnet file defines the roadnet strcture. Citypb's roadnet mainly consists of intersections and roads.
-
-- *Intersection* is where roads intersects. Users can set the phase of signal to control the traffic flow of this *intersection*.
-
-- *Road* represent a directional road from one intersection to another intersection with some property, including
-  - id
-  - length
-  - number of lanes
-  - speed limit
-
-- *Lane* is the component of *Road*. Each lane could have multiple turning direction. For example, vehicles on a particular lane could go straight or turn left. The turning direction of each lane is defined in roadnet file.
-
-File Format
-----------------------
-
-Let's say there are *n* intersections, *k* roads, *m* intersections with signal, the roadnet file format is as follow
-
-The first line is *n* ,the number of intersections in the roadnet
-
-And there are *n* lines follows, indicating latitude, longitude, intersection_id, boolean value of have_signal
-
-The id of roads and intersections are all long long int value
-
-.. code-block:: c
-
-    n
-    latitude longitude intersection_id have_signal
-    latitude longitude intersection_id have_signal
-    ...
-    latitude longitude intersection_id have_signal
-
-the next line is *k*, the number of roads
-
-the next *3k* lines contains the road configuration. Every road have 2 lines.
-
-The first line indicating start_intersection, end_intersection, length speed_limit, forward_road_lanes, reverse_road_lanes, forward_road_id, reverse_road_id.
-
-The second line indicating the lane configuration of every lane in forward road.
-
-The third line indicating the lane configuration of every lane in forward road.
-
-.. code-block:: c
-
-    k
-    start_intersection end_intersection length speed_limit forward_road_lanes  reverse_road_lanes forward_road_id reverse_road_id
-    lane_0_of_forward_road_could_turnleft lane_0_of_forward_road_could_gostraight lane_0_of_forward_road_could_turnright lane_1_of_forward_road_could_turnleft lane_1_of_forward_road_could_gostraight lane_1_of_forward_road_could_turnright...
-
-    ...
-
-    start_intersection end_intersection length speed_limit forward_road_lane reverse_road_lanes forward_road_id reverse_road_id
-    lane_0_of_forward_road_could_turnleft lane_0_of_forward_road_could_gostraight lane_0_of_forward_road_could_turnright lane_1_of_forward_road_could_turnleft lane_1_of_forward_road_could_gostraight lane_1_of_forward_road_could_turnright...
-
-the next line indicating *m*, the number of intersections with signal.
-
-the following *m* lines indicating *intersection_id*, *road_0*, *road_1*, *road_2*, *road_3*. Here these 4 roads starts at the intersection. If the road is not 4-road intersection, we set -1 as a empty road.
 
 
-.. code-block:: c
+Road network data
+---------------------
+the road network file contains three datasets
 
-    m
-    intersection_id road0 road1 road2 road3
-    ...
-    intersection_id road0 road1 road2 road3
+- Intersection dataset
+    consists of identification, location and traffic signal installation information about an intersection. A snippet of intersection dataset is shown below.
 
+    .. code-block::
+
+        92344 // total number of intersections
+        30.2795476000 120.1653304000 25926073 1
+        30.2801771000 120.1664368000 25926074 0
+        ...
+
+
+    The attributes of intersection dataset is described in details as below.
+
+    +--------------------+----------------------+-----------------------------------------------+
+    |Attribute Name      |       Example        |Description                                    |
+    +====================+======================+===============================================+
+    |latitude            |30.279547600          |local latitude                                 |
+    +--------------------+----------------------+-----------------------------------------------+
+    |longitude           |  120.1653304000      |local longitude                                |
+    +--------------------+----------------------+-----------------------------------------------+
+    |inter_id            |25926073              |intersection ID                                |
+    +--------------------+----------------------+-----------------------------------------------+
+    |signalized          |1                     |1 if traffic signal is installed, 0 otherwise  |
+    +--------------------+----------------------+-----------------------------------------------+
+
+
+- Road dataset
+    Road datase consists information about road segments in the network. In general, there are two directions on each road segment (i.e., dir1 and dir2). A snippet of road dataset is shown as follows.
+
+
+    .. code-block::
+
+        2105 // total number of road segments
+        28571560 4353988632 93.2000000000 20 3 3 1 2
+        1 0 0 0 1 0 0 1 1 // dir1_mov: permissible movements of direction 1
+        1 0 0 0 1 0 0 1 1 // dir2_mov: permissible movements of direction 2
+        28571565 4886970741 170.2000000000 20 3 3 3 4
+        1 0 0 0 1 0 0 1 1
+        1 0 0 0 1 0 0 1 1
+
+    The attributes of road dataset is described in details as below
+
+
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |Attribute Name             |       Example         |Description                                                                                                                                                                                                                                |
+    +===========================+=======================+===========================================================================================================================================================================================================================================+
+    |from_inter_id              |28571560               |upstream intersection ID w.r.t. dir1                                                                                                                                                                                                       |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |to_inter_id                |  4353988632           |downstream intersection ID w.r.t. dir2                                                                                                                                                                                                     |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |length (m)                 |93.2000000000          |length of road segment                                                                                                                                                                                                                     |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |speed_limit (m/s)          |20                     |speed limit of road segment                                                                                                                                                                                                                |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir1_num_lane              |3                      |number of lanes of direction 1                                                                                                                                                                                                             |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir2_num_lane              |3                      |number of lanes of direction 2                                                                                                                                                                                                             |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir1_id                    |1                      |road segment (edge) ID of direction 1                                                                                                                                                                                                      |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir2_id                    |2                      |road segment (edge) ID of direction 2                                                                                                                                                                                                      |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir1_mov                   |1 0 0 0 1 0 0 1 1      |Every three digits form a group to indicate whether left-turn, through and right-turn movements are permissible for a lane of direction 1. For example, '0 1 1' indicate a shared through and right-turn lane.                             |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |dir2_mov                   |1 0 0 0 1 0 0 1 1      |Every three digits form a group to indicate whether left-turn, through and right-turn movements are permissible for a lane of direction 2.  |                                                                                              |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+- Traffic signal dataset
+    Note that, we assume that each intersection has no more than four entering approaches. The entering approaches 1 to 4 starting from the northern one and rotating in clockwise direction. Here, -1 indicates that the corresponding entering approach is missing, which generally indicates a three-leg intersection.
+
+    .. code-block::
+
+        107 // total number of traffic signals
+        1317137908 724 700 611 609 // inter_id, approach_id
+        672874599 311 2260 3830 -1
+        672879594 341 -1 2012 339
+
+
+    The attributes of road dataset is described in details as below
+
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |Attribute Name             |       Example         |Description                                                                                                                                                                                                                                |
+    +===========================+=======================+===========================================================================================================================================================================================================================================+
+    |inter_id                   |1317137908             |intersection ID                                                                                                                                                                                                                            |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |approach1_id               |  724                  |road segment (edge) ID of northern entering approach                                                                                                                                                                                       |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |approach2_id               |700                    |road segment (edge) ID of eastern entering approach                                                                                                                                                                                        |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |approach3_id               |611                    |road segment (edge) ID of southern entering approach                                                                                                                                                                                       |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |approach4_id               |609                    |road segment (edge) ID of southern entering approach                                                                                                                                                                                       |
+    +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+
+Example
+-----------
 Here is an example ``roadnet.txt`` .
 
 .. code-block:: c
