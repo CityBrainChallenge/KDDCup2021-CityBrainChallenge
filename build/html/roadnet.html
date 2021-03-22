@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Roadnet File Format &mdash; KDD_Gym 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flow File Format" href="flow.html" />
+    <link rel="prev" title="Welcome to CityFlow’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> KDD_Gym
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Roadnet File Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-format">File Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flow.html">Flow File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gym.html">Gym api</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">KDD_Gym</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Roadnet File Format</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/roadnet.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="roadnet-file-format">
+<span id="roadnet"></span><h1>Roadnet File Format<a class="headerlink" href="#roadnet-file-format" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Roadnet file defines the roadnet strcture. Citypb’s roadnet mainly consists of intersections and roads.</p>
+<ul class="simple">
+<li><em>Intersection</em> is where roads intersects. Users can set the phase of signal to control the traffic flow of this <em>intersection</em>.</li>
+<li><em>Road</em> represent a directional road from one intersection to another intersection with some property, including
+- id
+- length
+- number of lanes
+- speed limit</li>
+<li><em>Lane</em> is the component of <em>Road</em>. Each lane could have multiple turning direction. For example, vehicles on a particular lane could go straight or turn left. The turning direction of each lane is defined in roadnet file.</li>
+</ul>
+</div>
+<div class="section" id="file-format">
+<h2>File Format<a class="headerlink" href="#file-format" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say there are <em>n</em> intersections, <em>k</em> roads, <em>m</em> intersections with signal, the roadnet file format is as follow</p>
+<p>The first line is <em>n</em> ,the number of intersections in the roadnet</p>
+<p>And there are <em>n</em> lines follows, indicating latitude, longitude, intersection_id, boolean value of have_signal</p>
+<p>The id of roads and intersections are all long long int value</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">n</span>
+<span class="n">latitude</span> <span class="n">longitude</span> <span class="n">intersection_id</span> <span class="n">have_signal</span>
+<span class="n">latitude</span> <span class="n">longitude</span> <span class="n">intersection_id</span> <span class="n">have_signal</span>
+<span class="p">...</span>
+<span class="n">latitude</span> <span class="n">longitude</span> <span class="n">intersection_id</span> <span class="n">have_signal</span>
+</pre></div>
+</div>
+<p>the next line is <em>k</em>, the number of roads</p>
+<p>the next <em>3k</em> lines contains the road configuration. Every road have 2 lines.</p>
+<p>The first line indicating start_intersection, end_intersection, length speed_limit, forward_road_lanes, reverse_road_lanes, forward_road_id, reverse_road_id.</p>
+<p>The second line indicating the lane configuration of every lane in forward road.</p>
+<p>The third line indicating the lane configuration of every lane in forward road.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">k</span>
+<span class="n">start_intersection</span> <span class="n">end_intersection</span> <span class="n">length</span> <span class="n">speed_limit</span> <span class="n">forward_road_lanes</span>  <span class="n">reverse_road_lanes</span> <span class="n">forward_road_id</span> <span class="n">reverse_road_id</span>
+<span class="n">lane_0_of_forward_road_could_turnleft</span> <span class="n">lane_0_of_forward_road_could_gostraight</span> <span class="n">lane_0_of_forward_road_could_turnright</span> <span class="n">lane_1_of_forward_road_could_turnleft</span> <span class="n">lane_1_of_forward_road_could_gostraight</span> <span class="n">lane_1_of_forward_road_could_turnright</span><span class="p">...</span>
+
+<span class="p">...</span>
+
+<span class="n">start_intersection</span> <span class="n">end_intersection</span> <span class="n">length</span> <span class="n">speed_limit</span> <span class="n">forward_road_lane</span> <span class="n">reverse_road_lanes</span> <span class="n">forward_road_id</span> <span class="n">reverse_road_id</span>
+<span class="n">lane_0_of_forward_road_could_turnleft</span> <span class="n">lane_0_of_forward_road_could_gostraight</span> <span class="n">lane_0_of_forward_road_could_turnright</span> <span class="n">lane_1_of_forward_road_could_turnleft</span> <span class="n">lane_1_of_forward_road_could_gostraight</span> <span class="n">lane_1_of_forward_road_could_turnright</span><span class="p">...</span>
+</pre></div>
+</div>
+<p>the next line indicating <em>m</em>, the number of intersections with signal.</p>
+<p>the following <em>m</em> lines indicating <em>intersection_id</em>, <em>road_0</em>, <em>road_1</em>, <em>road_2</em>, <em>road_3</em>. Here these 4 roads starts at the intersection. If the road is not 4-road intersection, we set -1 as a empty road.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">m</span>
+<span class="n">intersection_id</span> <span class="n">road0</span> <span class="n">road1</span> <span class="n">road2</span> <span class="n">road3</span>
+<span class="p">...</span>
+<span class="n">intersection_id</span> <span class="n">road0</span> <span class="n">road1</span> <span class="n">road2</span> <span class="n">road3</span>
+</pre></div>
+</div>
+<p>Here is an example <code class="docutils literal notranslate"><span class="pre">roadnet.txt</span></code> .</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span>
+<span class="mi">30</span> <span class="mi">120</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="mi">31</span> <span class="mi">120</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="mi">30</span> <span class="mi">121</span> <span class="mi">2</span> <span class="mi">0</span>
+<span class="mi">29</span> <span class="mi">120</span> <span class="mi">3</span> <span class="mi">0</span>
+<span class="mi">30</span> <span class="mi">119</span> <span class="mi">4</span> <span class="mi">0</span>
+<span class="mi">4</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">30</span> <span class="mi">20</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">2</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="mi">2</span> <span class="mi">30</span> <span class="mi">20</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">4</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="mi">3</span> <span class="mi">30</span> <span class="mi">20</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">6</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="mi">4</span> <span class="mi">30</span> <span class="mi">20</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">7</span> <span class="mi">8</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="mi">1</span>
+<span class="mi">0</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">7</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="flow.html" class="btn btn-neutral float-right" title="Flow File Format" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to CityFlow’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, KDD_Gym.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

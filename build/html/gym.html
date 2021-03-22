@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Gym api &mdash; KDD_Gym 0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'0.1',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Flow File Format" href="flow.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> KDD_Gym
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="roadnet.html">Roadnet File Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flow.html">Flow File Format</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Gym api</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">KDD_Gym</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Gym api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/gym.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gym-api">
+<span id="gym"></span><h1>Gym api<a class="headerlink" href="#gym-api" title="Permalink to this headline">¶</a></h1>
+<p>The Gym api is the same as the OpenAi Gym.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">action</span><span class="p">:</span> <span class="p">{</span><span class="nl">agentid</span><span class="p">:</span> <span class="n">phase</span><span class="p">}</span>
+<span class="nl">observation</span><span class="p">:</span> <span class="p">{</span><span class="nl">agentid_feature</span><span class="p">:</span> <span class="n">agent_data</span><span class="p">}</span>  <span class="p">(</span><span class="n">here</span> <span class="n">key</span> <span class="n">is</span> <span class="s">&quot;{}_{}&quot;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">agentid</span><span class="p">,</span><span class="n">feature</span><span class="p">)</span>  <span class="n">where</span> <span class="n">feature</span> <span class="n">is</span> <span class="n">given</span> <span class="n">by</span> <span class="n">gym</span><span class="p">.</span><span class="n">cfg</span><span class="p">.</span> <span class="n">The</span> <span class="n">first</span> <span class="n">item</span> <span class="n">in</span> <span class="n">the</span> <span class="n">agent_data</span> <span class="n">is</span> <span class="n">current</span> <span class="n">step</span><span class="p">)</span>
+<span class="nl">reward</span><span class="p">:</span> <span class="p">{</span><span class="nl">agentid</span> <span class="p">:</span> <span class="n">lane_out_vehicle_number</span><span class="p">}</span>  <span class="p">(</span><span class="n">here</span> <span class="n">indicating</span> <span class="n">the</span> <span class="n">out</span> <span class="n">vehicle</span> <span class="n">number</span> <span class="n">of</span> <span class="n">this</span> <span class="n">step</span><span class="p">)</span>
+<span class="nl">dones</span><span class="p">:</span> <span class="p">{</span><span class="nl">agent_id</span><span class="p">:</span> <span class="n">bool_value</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Here is a simple usage of the api</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span>
+<span class="s1">&#39;kdd_gym-v0&#39;</span><span class="p">,</span>
+<span class="n">cfg_file</span><span class="o">=</span><span class="n">cfg_file</span><span class="p">,</span>
+<span class="n">thread_num</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+<span class="n">mx_step</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mx_step</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{}/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">mx_step</span><span class="p">))</span>
+    <span class="n">obs</span><span class="p">,</span> <span class="n">rwd</span><span class="p">,</span> <span class="n">dones</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">obs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;{}:{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="flow.html" class="btn btn-neutral float-left" title="Flow File Format" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, KDD_Gym.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
