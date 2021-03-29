@@ -78,7 +78,7 @@ the road network file contains three datasets
 
 
 - Traffic signal dataset
-    Note that, we assume that each intersection has no more than four entering approaches. The entering approaches 1 to 4 starting from the northern one and rotating in clockwise direction. Here, -1 indicates that the corresponding entering approach is missing, which generally indicates a three-leg intersection.
+    Note that, we assume that each intersection has no more than four exiting approaches. The exiting approaches 1 to 4 starting from the northern one and rotating in clockwise direction. Here, -1 indicates that the corresponding exiting approach is missing, which generally indicates a three-leg intersection.
 
     .. code-block::
 
@@ -95,16 +95,16 @@ the road network file contains three datasets
     +===========================+=======================+===========================================================================================================================================================================================================================================+
     |inter_id                   |1317137908             |intersection ID                                                                                                                                                                                                                            |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach1_id               |  724                  |road segment (edge) ID of northern entering approach                                                                                                                                                                                       |
+    |approach1_id               |  724                  |road segment (edge) ID of northern exiting approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach2_id               |700                    |road segment (edge) ID of eastern entering approach                                                                                                                                                                                        |
+    |approach2_id               |700                    |road segment (edge) ID of eastern exiting approach                                                                                                                                                                                         |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach3_id               |611                    |road segment (edge) ID of southern entering approach                                                                                                                                                                                       |
+    |approach3_id               |611                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach4_id               |609                    |road segment (edge) ID of southern entering approach                                                                                                                                                                                       |
+    |approach4_id               |609                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-
+    For a traffic signal, there are at most 9 phases(0 - 8). For example,
 
 Example
 -----------
