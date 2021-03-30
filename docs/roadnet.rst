@@ -104,11 +104,11 @@ the road network file contains three datasets
     |approach4_id               |609                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    For a traffic signal, there are at most 9 phases(0 - 8). For example,
+    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow 2 traffic movement to pass this intersection.
 
 Example
 -----------
-Here is an example ``roadnet.txt`` .
+Here is an example 1x1 roadnet ``roadnet.txt`` .
 
 .. code-block:: c
 
@@ -133,5 +133,8 @@ Here is an example ``roadnet.txt`` .
     1 0 0 0 1 0 0 1 1
     1
     0 1 3 5 7
+
+
+Here is a diagram of example above
 
 

@@ -5,7 +5,8 @@ Welcome to KDDCup's documentation!
     :maxdepth: 2
     :caption: Contents:
 
+    installation
     roadnet
     flow
     gym
-    installation
+
