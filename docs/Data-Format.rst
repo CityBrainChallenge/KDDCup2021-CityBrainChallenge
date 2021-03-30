@@ -142,7 +142,7 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
 
 Here is a Illustration of example above
 
-.. figure:: https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/blob/main/images/roadnet.jpg
+.. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet.jpg
         :align: center
 
         Illustration of a 1x1 roadnet
