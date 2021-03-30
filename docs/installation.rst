@@ -1,4 +1,4 @@
-.. installation:
+.. _Installation:
 
 Installation Guide
 ==========================

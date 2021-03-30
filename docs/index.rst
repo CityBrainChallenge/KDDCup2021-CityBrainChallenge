@@ -6,7 +6,6 @@ Welcome to KDDCup's documentation!
     :caption: Contents:
 
     installation
-    roadnet
-    flow
+    Data-Format
     gym
 
