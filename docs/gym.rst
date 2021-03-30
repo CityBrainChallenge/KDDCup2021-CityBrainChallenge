@@ -124,6 +124,22 @@ reset
     - reset the engine
 
 
+===========
+gym_cfg.py
+===========
+
+.. code-block:: python
+
+    class gym_cfg():
+        def __init__(self):
+            self.cfg = {
+                'observation_features':['lane_speed','lane_vehicle_num']
+            }
+
+`self.cfg`:
+    - store the configuration of gym
+    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` is available
+
 
 =========
 Example
