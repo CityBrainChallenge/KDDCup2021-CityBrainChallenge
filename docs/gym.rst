@@ -45,9 +45,11 @@ step
 
 `action`:
     - a dict
-    - {agent_id: phase}
-    - Here phase is a integer between 0 and 8
-
+    - set `agent_id` to some `phase`
+    - {`agent_id`: `phase`}
+    - Here phase is a integer between 1 and 8
+    - The initial phase of all agents are 1
+    - If action didn't set an agent's phase, it will be the phase of last step.
 `observation`:
     - a dict
     - Here key is "{}_{}".format(agentid,feature)  where feature is given by *gym_cfg.py*.
@@ -74,7 +76,7 @@ step
 
 `reward`:
     - a dict
-    - {agent_id: reward}
+    - {`agent_id`: `reward`}
 
     .. code-block::
 
@@ -86,7 +88,7 @@ step
 
 `info`:
     - a dict
-    - {vehicle_id: vehicle_info}
+    - {`vehicle_id`: `vehicle_info`}
 
     .. code-block::
 
@@ -105,7 +107,7 @@ step
 
 `dones`:
     - a dict
-    - {agent_id: bool_value}
+    - {`agent_id`: `bool_value`}
     - indicating whether an agent is end
 
 ========

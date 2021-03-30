@@ -8,4 +8,5 @@ Welcome to KDDCup's documentation!
     installation
     Data-Format
     gym
+    Tutorial
 
