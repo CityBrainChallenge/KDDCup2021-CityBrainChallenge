@@ -4,13 +4,49 @@ Gym api
 =======================
 The Gym api is the same as the OpenAi Gym.
 
+===============
+Initialize
+===============
+.. code-block:: python
+
+    env = gym.make(
+            'CBEngine-v0',
+            simulator_cfg_file=simulator_cfg_file,
+            thread_num=1,
+            gym_dict=gym_cfg_instance.cfg
+        )
+
+`simulator_cfg_file`:
+    - the path of simulator.cfg
+    - be used for initialize engine
+
+`thread_num`:
+    - the thread number used for engine
+
+`gym_dict`:
+    - the configuration used for initialize gym
+    - a dict
+    - stored in /agent/gym_cfg.py
+
+======
+step
+======
+
 
 .. code-block:: python
 
     observation, reward, dones, info = env.step(action)
 
 
+`step`:
+    - env.step(action)
+    - return observation, reward, info, dones
 
+
+`action`:
+    - a dict
+    - {agent_id: phase}
+    - Here phase is a integer between 0 and 8
 
 `observation`:
     - a dict
@@ -72,19 +108,26 @@ The Gym api is the same as the OpenAi Gym.
     - {agent_id: bool_value}
     - indicating whether an agent is end
 
+========
+reset
+========
+
+.. code-block:: python
+
+    observation , info = env.reset()
+
+
 
 `reset`:
     - env.reset()
     - return (observation, info)
+    - reset the engine
 
-`step`:
-    - env.step(action)
-    - return observation, reward, info, dones
 
-`action`:
-    - a dict
-    - {agent_id: phase}
-    - Here phase is a integer between 0 and 8
+
+=========
+Example
+=========
 
 
 Here is a simple usage of the api
