@@ -2,7 +2,8 @@
 
 Gym api
 =======================
-The Gym api is the same as the OpenAi Gym.
+The Gym api is the same as the OpenAi Gym. We build out environment based on OpenAI Gym API.
+
 
 ===============
 Initialize
@@ -28,6 +29,26 @@ Initialize
     - a dict
     - stored in /agent/gym_cfg.py
 
+===========
+gym_cfg.py
+===========
+
+gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym environment. Currently it contains `observation space`. There are 2 options in `observation space`: `lane_speed` , `lane_vehicle_num`. You must write at least one of them. The observation that you get from ``env.step()`` is defined by this configuration.
+
+.. code-block:: python
+
+    class gym_cfg():
+        def __init__(self):
+            self.cfg = {
+                'observation_features':['lane_speed','lane_vehicle_num']
+            }
+
+
+`self.cfg`:
+    - store the configuration of gym
+    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` is available
+
+
 ======
 step
 ======
@@ -50,6 +71,7 @@ step
     - Here phase is a integer between 1 and 8
     - The initial phase of all agents are 1
     - If action didn't set an agent's phase, it will be the phase of last step.
+
 `observation`:
     - a dict
     - Here key is "{}_{}".format(agentid,feature)  where feature is given by *gym_cfg.py*.
@@ -80,11 +102,19 @@ step
 
     .. code-block::
 
-        # list of tuple，value indicating (in_number of this step, out_number of this step)
+        # list of tuple,value indicating (in_number of this step, out_number of this step)
         # The length is 24. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
-        0:[(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)，(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
+        0:[(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
+
+    here is a illustration of the lane order in observation and reward.
+
+        .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.jpg
+            :align: center
+
+            lane order
+
 
 `info`:
     - a dict
@@ -125,22 +155,6 @@ reset
     - return (observation, info)
     - reset the engine
 
-
-===========
-gym_cfg.py
-===========
-
-.. code-block:: python
-
-    class gym_cfg():
-        def __init__(self):
-            self.cfg = {
-                'observation_features':['lane_speed','lane_vehicle_num']
-            }
-
-`self.cfg`:
-    - store the configuration of gym
-    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` is available
 
 
 =========

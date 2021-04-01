@@ -109,7 +109,20 @@ the road network file contains three datasets
     |approach4_id               |609                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow 2 traffic movement to pass this intersection.
+    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow 2 traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
+
+
+    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.jpg
+        :align: center
+
+        Lane Order
+
+    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.jpg
+        :align: center
+
+        Phase
+
+
 
 Example
 +++++++++++++
@@ -125,17 +138,17 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
     30 119 4 0
     4
     0 1 30 20 3 3 1 2
-    1 0 0 0 1 0 0 1 1
-    1 0 0 0 1 0 0 1 1
+    1 0 0 0 1 0 0 0 1
+    1 0 0 0 1 0 0 0 1
     0 2 30 20 3 3 3 4
-    1 0 0 0 1 0 0 1 1
-    1 0 0 0 1 0 0 1 1
+    1 0 0 0 1 0 0 0 1
+    1 0 0 0 1 0 0 0 1
     0 3 30 20 3 3 5 6
-    1 0 0 0 1 0 0 1 1
-    1 0 0 0 1 0 0 1 1
+    1 0 0 0 1 0 0 0 1
+    1 0 0 0 1 0 0 0 1
     0 4 30 20 3 3 7 8
-    1 0 0 0 1 0 0 1 1
-    1 0 0 0 1 0 0 1 1
+    1 0 0 0 1 0 0 0 1
+    1 0 0 0 1 0 0 0 1
     1
     0 1 3 5 7
 

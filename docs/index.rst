@@ -9,4 +9,5 @@ Welcome to KDDCup's documentation!
     Data-Format
     gym
     Tutorial
+    visualization
 
