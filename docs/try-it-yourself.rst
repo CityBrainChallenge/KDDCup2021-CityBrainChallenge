@@ -185,6 +185,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 4. open `localhost:3000` with your browser
 
 Here are some Tips:
+
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - The color of signal is meaningless.
 - Lines indicate roads. The color of the line represents the average speed of the road.
@@ -195,9 +196,9 @@ Here are some Tips:
 Make a submission
 ==================
 
-1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that, please make sure you directly compress the ``agent`` folder, rather than a group of files.
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
 
-2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py`` that loads them.
+2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py``, which will load them.
 
 3. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
