@@ -69,7 +69,7 @@ step
 `actions`:
     - Required to be a dict: {`agent_id_1`: `phase_1`, ... , `agent_id_n`: `phase_n`}
     - Set `agent_id` to some `phase` (The figure below demonstrates the allowed traffic movements in each phase)
-    - The phase is required to be an integer in the range [1, 8].
+    - The phase is required to be an integer in the range [1, 8]. (Note there is no 0.)
     - The initial phases of all agents are set to 1.
     - The phase of an agent will remain the same as last phase if not specified in the dict `actions`.
 
@@ -172,9 +172,9 @@ Other interface
 We offer 2 extra interface:
 
 ``set_warning(flag)``:
-    - set flag as False to turn off the warning of invalid phases (i.e. allowing a green signal to an inexistent road).
+    - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
 
 ``set_log(flag)``:
-    - set flag as False to turn off logs for debugging. Note that the score function won't work if the logging is turned off.
+    - set flag as False to turn off logs for a faster speed when training. Note that the score function won't work if the logging is turned off.
 
 

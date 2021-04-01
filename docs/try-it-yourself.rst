@@ -10,7 +10,7 @@ Installation guide
 Installation via Docker
 ----------------------------
 
-The engine and gym environment is built in a docker image. You can pull it down to easily build the nessary environment.
+The engine and gym environment is built in a docker image. You can pull it down to easily build the necessary environment.
 For now, the tag of latest image is 0.1.0, we will notify you if a new version is pushed.
 
 .. code-block::
@@ -36,7 +36,7 @@ After having pull down the docker image and clone the starter-kit, you could run
 Run simulation
 ================
 
-To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `action` is empty.
+To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` is simply fixed. In your implementation, you could use act() in agent.py to get the actions predicted by agent.
 
 .. code-block:: python
 
@@ -61,6 +61,8 @@ To run this enviroment, you just need to run `demo.py` in starter-kit after inst
         print("{}/{}".format(i,mx_step))
         
         # run one step simulation
+        # you can use act() in agent.py to get the actions predicted by agent.
+        actions = {0: 1}
         obs, rwd, dones, info = env.step({0: 1})
         
         # print observations and infos
@@ -177,7 +179,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 3. cd to `/ui`
 
 .. code-block::
-
+    yarn
     yarn start
 
 4. open `localhost:3000` with your browser
@@ -200,9 +202,11 @@ Make a submission
 
 3. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
-4. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform. 
+4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown in the beginning of fixed time ``agent.py``.
 
-5. Participants can report the python package required to build the model if these packages are not included in the current docker environment. The support team will evaluate the request and determine whether to add the package to the provided docker environment.
+5. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform.
 
-6. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
+6. Participants can report the python package required to build the model if these packages are not included in the current docker environment. The support team will evaluate the request and determine whether to add the package to the provided docker environment.
+
+7. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
 
