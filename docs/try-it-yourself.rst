@@ -173,3 +173,14 @@ tips:
 ===============
 Make a submission
 ===============
+
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to 'agent.py' and deep learing model files) into the 'agent' folder. Compress the agent folder as 'agent.zip' to make the submission. Note that, please make sure you directly compress the 'agent' folder, rather than a group of files.
+
+2. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the 'agent' folder, except the '.cfg' file (The '.cfg' file can be revised to incorporate different training traffic).
+
+3. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform. 
+
+4. Participants can report the python package required to build the model if these packages are not included in the current docker environment. The support team will evaluate the request and determine whether to add the package to the provided docker environment.
+
+5. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
+
