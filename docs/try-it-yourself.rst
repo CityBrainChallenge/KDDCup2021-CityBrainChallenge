@@ -12,7 +12,7 @@ Installation guide
 Installation via Docker
 ----------------------------
 
-The simulator engine and the gym environment are built in a docker image. You can pull it down to easily setup the environment.
+The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
 The latest image version is ``0.1.0``, we will notify you if a new version is updated.
 
 
