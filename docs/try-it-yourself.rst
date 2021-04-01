@@ -165,7 +165,7 @@ Results will be saved at ``starter-kit/out/scores.json``, which is of the follow
 Visualization
 ===============
 
-Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. But `mapbox token` and `yarn` is required.
+Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. Here `mapbox token` and `yarn` are required.
 
 
 1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
@@ -202,7 +202,7 @@ Make a submission
 
 3. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
-4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown in the beginning of fixed time ``agent.py``.
+4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown at the beginning of fixed time ``agent.py``.
 
 5. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform.
 
