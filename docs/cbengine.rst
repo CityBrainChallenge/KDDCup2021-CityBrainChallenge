@@ -4,11 +4,6 @@ CBEngine
 ==================
 
 
-Simulator modeling
-*******************
-
-
-
 Data format
 *******************
 
