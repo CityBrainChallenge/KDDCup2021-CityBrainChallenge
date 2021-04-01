@@ -39,7 +39,7 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
 Run simulation
 ================
 
-To test this simulation enviroment, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action).
+To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action).
 
 
 .. code-block:: python
@@ -77,9 +77,8 @@ To test this simulation enviroment, you can run ``demo.py`` in the starter-kit, 
 
 
 
-The meaning of ``simulator_cfg_file``, ``gym_cfg`` is explained in `APIs<https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
+The meaning of ``simulator_cfg_file``, ``gym_cfg`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
-At most of the cases, participants won't modify ``simulator.cfg``. Participants could modify ``gym.py`` and implement their algorithm in ``agent.py``.
 
 Here is a simple example of a fixed time agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` from observation to decide the phase.
 
@@ -87,7 +86,7 @@ Here is a simple example of a fixed time agent implemented at ``agent.py`` to co
 
 .. code-block:: python
 
-    # These code is used to process after your submission ###################
+    # how to import or load local files
     import os
     import sys
     path = os.path.split(os.path.realpath(__file__))[0]
@@ -95,7 +94,6 @@ Here is a simple example of a fixed time agent implemented at ``agent.py`` to co
     import gym_cfg
     with open(path + "/gym_cfg.py", "r") as f:
         pass
-    #########################################################################
 
     class TestAgent():
         def __init__(self):
@@ -156,7 +154,17 @@ Here is a simple example of a fixed time agent implemented at ``agent.py`` to co
             return actions
 
 
+====================
+Evaluation
+====================
 
+``evaluate.py`` is a scoring program that output the scores of your agent. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
+
+.. code-block::
+
+    python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
+
+Then result will be output at the ``--output_dir``
 
 
 ===============
@@ -205,6 +213,7 @@ Here are some Tips:
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - The color of signal is meaningless.
 - Lines indicate roads. The color of the line represents the average speed of the road.
+
 
 
 

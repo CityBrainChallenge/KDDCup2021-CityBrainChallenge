@@ -28,3 +28,32 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_i`: travel time of vehicle :math:`i`;
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
+
+==============
+Code
+==============
+
+Participant will get a ``starter-kit``. It contains::
+
+    # Participants must implement
+    agent/agent.py
+
+    # Participants could modify
+    agent/gym_cfg.py
+    cfg/simulator.cfg
+
+    # A simple demo of the environment
+    demo.py
+
+    # Scoring and simulation program
+    evaluate.py
+
+    # Other files and directory
+    data/flow_1x1_txt
+    data/flow_warm_up_1000.txt
+    data/roadnet_1x1.txt
+    data/roadnet_warm_up.txt
+    log/
+    out/
+
+At most of the cases, participants won't modify ``simulator.cfg``. Participants could modify ``gym.py`` and implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores.
