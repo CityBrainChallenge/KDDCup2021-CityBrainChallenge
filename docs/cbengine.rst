@@ -161,17 +161,18 @@ Here is a Illustration of example above
 Flow File Format
 ''''''''''''''''''''''''''''''''''
 
+Flow file is composed by flows. Each flow has *start_time*, *end_time*, *vehicle_interval*, *route*, which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds
 
 
-the first line of flow file is *n*, the number of flow
+The first line of flow file is *n*, which means the number of flow.
 
-the following *3n* lines indicating configuration of each flow
+The following *3n* lines indicating configuration of each flow. Each flow have 3 configuration lines.
 
-the first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
+The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
 
-the second line of flow configuration indicating the length of route of this flow , *k*
+The second line of flow configuration indicating the length of route of this flow : *k*.
 
-the third line of flow configuration indicating the route of this flow. Here flow's route is defined by roads.
+The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
 
 .. code-block:: c
 
@@ -240,7 +241,11 @@ Observations
 
 Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will help the participants to make their decisions on the traffic signal for the next time step. Detailed description about accessing these observation features can be found in ``agent/gym_cfg.py``. 
 
+Details could be found at `observation format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_
+
 Actions
 **********************
 
 The action to take is defined as the traffic signal phase for each intersection in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section of this page. There are in total eight different phases for a typical four-way intersection. However, to simplify the problem, only the first four signal phases are open to participants at this stage. You can also learn how to set the traffic signals for different intersections in the APIs page.
+
+Details could be found at `action format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_

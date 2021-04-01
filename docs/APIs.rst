@@ -106,11 +106,17 @@ Simulation Step
 
 
 `actions`:
-    - Required to be a dict: ``{agent_id_1: phase_1, ... , agent_id_n: phase_n}``
+    - Required to be a dict:
+
+    .. code-block::
+
+        ``{agent_id_1: phase_1, ... , agent_id_n: phase_n}``
+
     - Set `agent_id` to some `phase` (The figure below demonstrates the allowed traffic movements in each phase)
     - The phase is required to be an integer in the range [1, 8] (note there is no 0)
     - The initial phases of all agents are set to 1
     - The phase of an agent will remain the same as the last phase if not specified in the dict `actions`
+    - `Attention`: If an agent is switched to a different phase, there will be a 5 step period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'.
 
 `observations`:
     - a dict

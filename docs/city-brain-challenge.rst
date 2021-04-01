@@ -56,4 +56,4 @@ Participant will get a ``starter-kit``. It contains::
     log/
     out/
 
-At most of the cases, participants won't modify ``simulator.cfg``. Participants could modify ``gym.py`` and implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores.
+Participants should implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores. Participants could modify ``simulator.cfg`` and  ``gym_cfg.py``.

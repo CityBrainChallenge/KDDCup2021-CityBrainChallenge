@@ -26,7 +26,7 @@ Then you can clone the code of the starter-kit.
 
     git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
 
-After pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code of the starter-kit repo.
+After pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code of the ``starter-kit`` repo.
 
 .. code-block::
 
@@ -164,7 +164,7 @@ Evaluation
 
     python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
 
-Then result will be output at the ``--output_dir``
+Then result will be output at the ``starter-kit/out/scores.json``
 
 
 ===============
