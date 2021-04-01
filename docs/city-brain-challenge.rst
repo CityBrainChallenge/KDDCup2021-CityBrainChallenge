@@ -15,7 +15,7 @@ Evaluation
 
 Delay index will be computed to measure road network traffic performance. The solutions with lower delay index will rank higher. For a completed trip, the delay is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate actual travel time of rest of the trip. The delay index is computed as average trip delay over all vehicles served.
 
-The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:'D_{i} = \frac{TT_{i} + TT_{i}^{r}}{TT_{i}^{f}}'.
+The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \frac{TT_{i} + TT_{i}^{r}}{TT_{i}^{f}}`.
 where 
  - :math:`TT_i`: travel time of vehicle :math:`i`;
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
