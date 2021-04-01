@@ -1,6 +1,6 @@
-.. _Gym:
+.. _APIs:
 
-Gym api
+API functions
 =======================
 The Gym api is the same as the OpenAi Gym. We build out environment based on OpenAI Gym API.
 
@@ -167,25 +167,4 @@ We offer 2 extra interface .
 ``set_log(flag)``:
     - flag == False to turn off log to debug if you need. If you do so, the score function won't work.
 
-=========
-Example
-=========
-
-
-Here is a simple usage of the api
-
-.. code-block:: python
-
-    env = gym.make(
-        'CBEngine-v0',
-        simulator_cfg_file=simulator_cfg_file,
-        thread_num=1,
-        gym_dict=gym_cfg_instance.cfg
-    )
-
-    for i in range(100):
-        print("{}/{}".format(i,mx_step))
-        obs, rwd, dones, info = env.step({0: 1})
-        for k,v in info.items():
-            print("{}:{}".format(k,v))
 

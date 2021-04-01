@@ -1,13 +1,12 @@
-Welcome to KDDCup's documentation!
+Welcome to CityBrainChallenge's documentation!
 ====================================
 
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
 
-    installation
-    Data-Format
-    gym
-    Tutorial
-    visualization
+    city-brain-challenge
+    try-it-yourself
+    cbengine
+    APIs
 
