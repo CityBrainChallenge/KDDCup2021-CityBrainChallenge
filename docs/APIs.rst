@@ -120,7 +120,7 @@ Simulation Step
         0: [(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
         }
 
-    Here is a illustration of the lane order in observation and reward.
+    Here is an illustration of the lane order in observation and reward.
 
         .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.png
             :align: center
@@ -169,12 +169,12 @@ Simulation Reset
 Other interface
 ==================
 
-We offer 2 extra interface:
+We offer two extra interfaces:
 
 ``set_warning(flag)``:
     - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
 
 ``set_log(flag)``:
-    - set flag as False to turn off logs for a faster speed when training. Note that the score function won't work if the logging is turned off.
+    - set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
 
 
