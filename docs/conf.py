@@ -19,8 +19,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'KDD_Gym'
-copyright = '2021, KDD_Gym'
+project = 'City Brain Challenge'
+copyright = '2021, Yunqi Academy of Engineering'
 author = '1'
 
 # The short X.Y version
