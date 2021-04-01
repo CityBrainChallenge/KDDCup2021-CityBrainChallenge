@@ -3,7 +3,7 @@
 Try it yourself
 ==================
 
-Here, we provide guidelines for setting up the simulator and submit results. Here, we go through them in detail, and introduce the installation and submission steps.
+Here, we provide guidelines for setting up the simulation environment and submitting results.
 
 ===================
 Installation guide
@@ -12,21 +12,21 @@ Installation guide
 Installation via Docker
 ----------------------------
 
-The simulator engine and the gym environment are built in a docker image. You can pull it down to easily build the necessary environment.
-For now, the tag of latest image is ``0.1.0``, we will notify you if a new version is pushed.
+The simulator engine and the gym environment are built in a docker image. You can pull it down to easily setup the environment.
+The latest image version is ``0.1.0``, we will notify you if a new version is updated.
 
 
 .. code-block::
 
     docker pull citybrainchallenge/cbengine:0.1.0
 
-Then you can clone the code of starter kit.
+Then you can clone the code of the starter-kit.
 
 .. code-block::
 
     git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
 
-Having pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code in the starter-kit repo.
+After pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code of the starter-kit repo.
 
 .. code-block::
 
@@ -39,7 +39,7 @@ Having pulled down the docker image and cloned the starter-kit, you can run a do
 Run simulation
 ================
 
-To run this enviroment, you just need to run ``demo.py`` in starter-kit after installation, where the ``actions`` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
+To test this simulation enviroment, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action).
 
 .. code-block:: python
 
@@ -74,7 +74,7 @@ To run this enviroment, you just need to run ``demo.py`` in starter-kit after in
         for k,v in info.items():
             print("{}:{}".format(k,v))
 
-Here is a simple example of a fixed time agent to coordinate the traffic signal. It use the `current_step` from observation to decide the phase.
+Here is a simple example of a "fixed time" agent to select traffic signal phase based on a predefined signal plan. It decides signal phase selection based on the `current_step` (i.e., current time step) from `observation`.
 
 
 .. code-block:: python
@@ -151,7 +151,7 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
-Results will be saved as ``starter-kit/out/scores.json``, which is of the following form.
+Results will be saved as ``starter-kit/out/scores.json``, the data format of results is exemplified as follows.
 
 .. code-block::
 
@@ -168,7 +168,7 @@ Results will be saved as ``starter-kit/out/scores.json``, which is of the follow
 Visualization
 ===============
 
-Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. Here `mapbox token` and `yarn` are required.
+The CBEngine can log replay file. You can follow the following steps to visualize the intermediate results of your algorithm. Here `mapbox token` and `yarn` are required.
 
 
 1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
@@ -199,13 +199,13 @@ Here are some Tips:
 Make a submission
 ==================
 
-1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder and name it as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
 
-2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py``, which will load them.
+2. Participants need to train their models offline and submit the trained models along with ``agent.py``, which will load them.
 
-3. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
+3. All submissions should follow the format of our sample code in starter-kit . Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
-4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown at the beginning of fixed time ``agent.py``.
+4. If your model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown at the beginning of fixed time ``agent.py``.
 
 5. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform.
 
