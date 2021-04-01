@@ -2,7 +2,7 @@
 
 API functions
 =======================
-Upon the CBEngine, we provide APIs that shares the similar parameters as the OpenAi Gym environment. 
+Based on the CBEngine, we provide APIs that share the similar parameters as the OpenAI Gym environment. 
 
 
 =============================
@@ -72,7 +72,7 @@ Simulation Initialization
 Environment Configuration: gym_cfg.py
 ============================================
 
-gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym environment. Currently it contains `observation features`. There are 2 options in `observation features`: `lane_speed` , `lane_vehicle_num`, which determines the content of observations you get from the ``env.step()`` api. You must write at least one of the two features.
+``gym_cfg.py`` in ``agent`` folder defines the configuration of gym environment. Currently it contains `observation features`. There are two options in `observation features`, namely `lane_speed` , `lane_vehicle_num`, which determines the content of observations you get from the ``env.step()`` api. You must write at least one of the two features.
 
 .. code-block:: python
 
@@ -85,7 +85,7 @@ gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym envir
 
 `self.cfg`:
     - store the configuration of gym
-    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` is available
+    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` are available
 
 
 ===================
@@ -106,16 +106,16 @@ Simulation Step
 
 
 `actions`:
-    - Required to be a dict: {`agent_id_1`: `phase_1`, ... , `agent_id_n`: `phase_n`}
+    - Required to be a dict: ``{agent_id_1: phase_1, ... , agent_id_n: phase_n}``
     - Set `agent_id` to some `phase` (The figure below demonstrates the allowed traffic movements in each phase)
-    - The phase is required to be an integer in the range [1, 8]. (Note there is no 0.)
-    - The initial phases of all agents are set to 1.
-    - The phase of an agent will remain the same as last phase if not specified in the dict `actions`.
+    - The phase is required to be an integer in the range [1, 8] (note there is no 0)
+    - The initial phases of all agents are set to 1
+    - The phase of an agent will remain the same as the last phase if not specified in the dict `actions`
 
 `observations`:
     - a dict
-    - format: {key_1: observations_values_1, key_2: observations_values_2}
-    - The key is "{}_{}".format(agentid,feature) where feature is given by *gym_cfg.py*.
+    - format: ``{key_1: observations_values_1, key_2: observations_values_2}``
+    - The key is "{}_{}".format(agentid,feature) where feature is given by ``gym_cfg.py``
     - Format of observations_values:
 
     .. code-block::
@@ -162,7 +162,7 @@ Simulation Step
         0: [(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
         }
 
-    Here is a illustration of the lane order in observation and reward.
+    Here is an illustration of the lane order in observation and reward.
 
         .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.png
             :align: center
@@ -211,12 +211,12 @@ Simulation Reset
 Other interface
 ==================
 
-We offer 2 extra interface:
+We offer two extra interfaces:
 
 ``set_warning(flag)``:
     - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
 
 ``set_log(flag)``:
-    - set flag as False to turn off logs for a faster speed when training. Note that the score function won't work if the logging is turned off.
+    - set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
 
 
