@@ -36,7 +36,7 @@ Having pulled down the docker image and cloned the starter-kit, you can run a do
 Run simulation
 ================
 
-To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
+To run this enviroment, you just need to run ``demo.py`` in starter-kit after installation, where the ``actions`` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
 
 .. code-block:: python
 
@@ -148,7 +148,7 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
-Results will be saved at starter-kit/out/scores.json, which is of the following form.
+Results will be saved at ``starter-kit/out/scores.json``, which is of the following form.
 
 .. code-block::
 
@@ -184,8 +184,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 
 4. open `localhost:3000` with your browser
 
-tips:
-
+Here are some Tips:
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - The color of signal is meaningless.
 - Lines indicate roads. The color of the line represents the average speed of the road.
@@ -196,7 +195,7 @@ tips:
 Make a submission
 ==================
 
-1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learing model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that, please make sure you directly compress the ``agent`` folder, rather than a group of files.
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that, please make sure you directly compress the ``agent`` folder, rather than a group of files.
 
 2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py`` that loads them.
 
