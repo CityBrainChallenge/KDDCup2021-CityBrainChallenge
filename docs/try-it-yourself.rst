@@ -151,7 +151,7 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
-Results will be saved at ``starter-kit/out/scores.json``, which is of the following form.
+Results will be saved as ``starter-kit/out/scores.json``, which is of the following form.
 
 .. code-block::
 
