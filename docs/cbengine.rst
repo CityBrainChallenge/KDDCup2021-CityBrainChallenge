@@ -242,4 +242,4 @@ Participants will be able to get a full observation of the traffic on the road n
 Actions
 **********************
 
-The action to take is defined as the traffic signal phase for each intersection in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section of the Try it yoursefl page. You can also learn how to set the traffic signals for different intersections in the APIs page.
+The action to take is defined as the traffic signal phase for each intersection in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section of this page. There are in total eight different phases for a typical four-way intersection. However, to simplify the problem, only the first four signal phases are open to participants at this stage. You can also learn how to set the traffic signals for different intersections in the APIs page.
