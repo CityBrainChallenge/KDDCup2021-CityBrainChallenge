@@ -15,6 +15,7 @@ Installation via Docker
 The simulator engine and the gym environment are built in a docker image. You can pull it down to easily build the necessary environment.
 For now, the tag of latest image is ``0.1.0``, we will notify you if a new version is pushed.
 
+
 .. code-block::
 
     docker pull citybrainchallenge/cbengine:0.1.0
@@ -25,7 +26,7 @@ Then you can clone the code of starter kit.
 
     git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
 
-After having pull down the docker image and clone the starter-kit, you could run a docker container and run the code in the starter-kit repo.
+Having pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code in the starter-kit repo.
 
 .. code-block::
 
@@ -38,7 +39,7 @@ After having pull down the docker image and clone the starter-kit, you could run
 Run simulation
 ================
 
-To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` is simply fixed. In your implementation, you could use act() in agent.py to get the actions predicted by agent.
+To run this enviroment, you just need to run ``demo.py`` in starter-kit after installation, where the ``actions`` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
 
 .. code-block:: python
 
@@ -150,7 +151,7 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
-Results will be saved at starter-kit/out/scores.json. It will be
+Results will be saved at ``starter-kit/out/scores.json``, which is of the following form.
 
 .. code-block::
 
@@ -167,7 +168,7 @@ Results will be saved at starter-kit/out/scores.json. It will be
 Visualization
 ===============
 
-Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. But `mapbox token` and `yarn` is required.
+Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. Here `mapbox token` and `yarn` are required.
 
 
 1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
@@ -186,7 +187,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 
 4. open `localhost:3000` with your browser
 
-tips:
+Here are some Tips:
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - The color of signal is meaningless.
@@ -198,13 +199,13 @@ tips:
 Make a submission
 ==================
 
-1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learing model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that, please make sure you directly compress the ``agent`` folder, rather than a group of files.
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
 
-2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py`` that loads them.
+2. Note that the submited ``agent.py`` should be the testing version. Participants need to train their models offline and submit the trained models along with ``agent.py``, which will load them.
 
 3. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
-4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown in the beginning of fixed time ``agent.py``.
+4. If you model need to import or load some files, please put them to the ``agent`` folder and make sure to use the absolute path. Examples are shown at the beginning of fixed time ``agent.py``.
 
 5. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform.
 
