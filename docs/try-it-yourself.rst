@@ -29,7 +29,7 @@ After having pull down the docker image and clone the starter-kit, you could run
 
     docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.0 bash
     cd starter-kit
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg simulator.cfg
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
 
 
 ===============
