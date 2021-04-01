@@ -59,7 +59,7 @@ step
     observation, reward, dones, info = env.step(action)
 
 
-`step`:
+``step``:
     - env.step(action)
     - return observation, reward, info, dones
 
@@ -155,7 +155,17 @@ reset
     - return (observation, info)
     - reset the engine
 
+==================
+Other interface
+==================
 
+We offer 2 extra interface .
+
+``set_warning(flag)``:
+    - flag == False to turn off the warning of invalid phase
+
+``set_log(flag)``:
+    - flag == False to turn off log to debug if you need. If you do so, the score function won't work.
 
 =========
 Example

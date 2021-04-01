@@ -3,7 +3,7 @@
 Visualization
 ==================
 
-Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm.
+Engine could log replay file. You could follow these steps to easily use these files to get visualization of your algorithm. But `mapbox token` and `yarn` is required.
 
 
 1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
@@ -11,6 +11,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 
 .. code-block::
 
+    mapboxgl.accessToken = Your_Token;
     this.maxTime = max_value_of_*_of_time*.json
 
 3. cd to `/ui`
