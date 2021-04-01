@@ -1,7 +1,9 @@
 .. _cbengine:
 
-CBEngine
+Environment - CBEngine
 ==================
+
+CBEngine (City Brain Engine) is a city-scale traffic simulation environment. In this section, we will introduce the basic configurations to define the environment, including road network and traffic flow.
 
 
 Data format

@@ -2,11 +2,11 @@
 
 API functions
 =======================
-The Gym api is the same as the OpenAi Gym. We build out the traffic simulator environment based on OpenAI Gym API.
+Upon the CBEngine, we provide APIs that shares the similar parameters as the OpenAi Gym environment. 
 
 
 ===============
-Initialize
+Simulation Initialization
 ===============
 .. code-block:: python
 
@@ -30,7 +30,7 @@ Initialize
     - stored in /agent/gym_cfg.py
 
 ===========
-gym_cfg.py
+Environment Configuration: gym_cfg.py
 ===========
 
 gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym environment. Currently it contains `observation features`. There are 2 options in `observation features`: `lane_speed` , `lane_vehicle_num`, which determines the content of observations you get from the ``env.step()`` api. You must write at least one of the two features.
@@ -50,20 +50,20 @@ gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym envir
 
 
 ======
-step
+Simulation Step
 ======
+
+
+``step(actions)``:
+    - Simulate one step
+    - The format of action is specified below.
+    - return observation, reward, info, dones
+    - The format of observations, rewards, infos and dones is specified below.
 
 
 .. code-block:: python
 
     observation, reward, dones, info = env.step(action)
-
-
-``step``:
-    - Api: env.step(actions)
-    - The format of action is specified below.
-    - return observation, reward, info, dones
-    - The format of observations, rewards, infos and dones is specified below.
 
 
 `actions`:
@@ -151,19 +151,19 @@ step
     - Indicating whether the simulation of an agent is ended.
 
 ========
-reset
+Simulation Reset
 ========
+
+
+``reset``:
+    - Reset the simulation
+    - return a tuple: (observation, info)
+    - reset the engine
 
 .. code-block:: python
 
     observation , info = env.reset()
 
-
-
-`reset`:
-    - env.reset()
-    - return a tuple: (observation, info)
-    - reset the engine
 
 ==================
 Other interface

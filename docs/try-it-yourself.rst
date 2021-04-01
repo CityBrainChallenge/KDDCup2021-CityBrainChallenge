@@ -3,6 +3,8 @@
 Try it yourself
 ==================
 
+Here, we provide guidelines for setting up the simulator and submit results. Here, we go through them in detail, and introduce the installation and submission steps.
+
 ===================
 Installation guide
 ===================
@@ -10,7 +12,7 @@ Installation guide
 Installation via Docker
 ----------------------------
 
-The engine and gym environment is built in a docker image. You can pull it down to easily build the necessary environment.
+The simulator engine and the gym environment are built in a docker image. You can pull it down to easily build the necessary environment.
 For now, the tag of latest image is ``0.1.0``, we will notify you if a new version is pushed.
 
 .. code-block::
