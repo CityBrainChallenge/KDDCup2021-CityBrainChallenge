@@ -115,12 +115,12 @@ the road network file contains three datasets
     For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow 2 traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
 
 
-    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.jpg
+    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.pdf
         :align: center
 
         Lane Order
 
-    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.jpg
+    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.pdf
         :align: center
 
         Phase
