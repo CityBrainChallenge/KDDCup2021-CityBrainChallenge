@@ -10,8 +10,8 @@ Installation guide
 Installation via Docker
 ----------------------------
 
-The engine and gym environment is built in a docker image. You can pull it down to easily build the necessary environment.
-For now, the tag of latest image is ``0.1.0``, we will notify you if a new version is pushed.
+The engine and the gym environment are built in a docker image. You can pull it down to easily build the necessary environment.
+For now, the tag of latest image is ``0.1.0``, and we will notify you if a new version is pushed.
 
 .. code-block::
 
@@ -23,7 +23,7 @@ Then you can clone the code of starter kit.
 
     git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
 
-After having pull down the docker image and clone the starter-kit, you could run a docker container and run the code in the starter-kit repo.
+Having pulled down the docker image and cloned the starter-kit, you can run a docker container and run the code in the starter-kit repo.
 
 .. code-block::
 
@@ -36,7 +36,7 @@ After having pull down the docker image and clone the starter-kit, you could run
 Run simulation
 ================
 
-To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` is simply fixed. In your implementation, you could use act() in agent.py to get the actions predicted by agent.
+To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` are simply fixed. In your implementation, you could use `act()` in `agent.py` to get the actions taken by the agent.
 
 .. code-block:: python
 
