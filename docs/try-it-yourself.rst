@@ -36,7 +36,7 @@ Having pulled down the docker image and cloned the starter-kit, you can run a do
 Run simulation
 ================
 
-To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` are simply fixed. In your implementation, you could use `act()` in `agent.py` to get the actions taken by the agent.
+To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `actions` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
 
 .. code-block:: python
 
@@ -148,7 +148,7 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
-Results will be saved at starter-kit/out/scores.json. It will be
+Results will be saved at starter-kit/out/scores.json, which is of the following form.
 
 .. code-block::
 
