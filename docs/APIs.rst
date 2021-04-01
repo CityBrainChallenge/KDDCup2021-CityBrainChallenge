@@ -60,58 +60,67 @@ step
 
 
 ``step``:
-    - env.step(action)
+    - Api: env.step(actions)
+    - The format of action is specified below.
     - return observation, reward, info, dones
+    - The format of observations, rewards, infos and dones is specified below.
 
 
-`action`:
-    - a dict
-    - set `agent_id` to some `phase` (The figure below demonstrates the allowed traffic flows in each phase)
-    - {`agent_id`: `phase`}
+`actions`:
+    - Required to be a dict: {`agent_id_1`: `phase_1`, ... , `agent_id_n`: `phase_n`}
+    - Set `agent_id` to some `phase` (The figure below demonstrates the allowed traffic movements in each phase)
     - The phase is required to be an integer in the range [1, 8].
     - The initial phases of all agents are set to 1.
-    - The phase will remain the same as last phase if not specified in the action.
+    - The phase of an agent will remain the same as last phase if not specified in the dict `actions`.
 
-`observation`:
+`observations`:
     - a dict
-    - {key: observations}
+    - format: {key_1: observations_values_1, key_2: observations_values_2}
     - The key is "{}_{}".format(agentid,feature) where feature is given by *gym_cfg.py*.
-
+    - Format of observations_values:
     .. code-block::
+        # observation values:
 
-        # For lane_speed [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
+        # lane_speed sample: [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
         # The first value is current step
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # Note that, [lane0, lane1, lane2] indicates the [left_turn lane, approach lane, right_turn lane] repespectively of the corresponding road.
-        # The order of roads are determined clock-wise.
-        # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also -1s.
+        # The order of roads are determined clockwise.
+        # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
         # -2 indicating there's no vehicle on this lane
 
-        # for lane_vehcile_num [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        # lane_vehcile_num sample [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
         # The first value is current step
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
 
+        # Sample Output
+        {
         "12530758427_lane_speed": [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2],
         "12530758427_lane_vehicle_num" : [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        ...
+        }
 
 
-`reward`:
+`rewards`:
     - a dict
-    - {`agent_id`: `reward`}
-
+    - {`agent_id_1`: `reward_values_1`, ..., `agent_id_n`: `reward_values_n`}
+    - Format of reward_values:
     .. code-block::
 
-        # list of tuple,value indicating (in_number of this step, out_number of this step)
-        # The length is 24. The order of their roads is defined in 'signal' part of roadnet file
-        # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
-        # If there is -1 in `signal` part of roadnet file, then the lane of this road is filled with three -1.
-        0:[(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
+        # reward value:
+        # a list of tuples indicating (in_number of this step, out_number of this step)
+        # The length of the value list is 24. The order of their roads is defined in 'signal' part of roadnet file and the same as in observation.
+        # The order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
+        # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
+        
+        # Sample Output
+        {
+        0: [(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
+        }
 
-    here is a illustration of the lane order in observation and reward.
+    Here is a illustration of the lane order in observation and reward.
 
         .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.png
             :align: center
@@ -119,7 +128,7 @@ step
 
 `info`:
     - a dict
-    - {`vehicle_id`: `vehicle_info`}
+    - {`vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
 
     .. code-block::
 
@@ -138,8 +147,8 @@ step
 
 `dones`:
     - a dict
-    - {`agent_id`: `bool_value`}
-    - indicating whether the simulation of an agent is ended.
+    - {`agent_id_1`: `bool_value_1`, ..., `agent_id_n`: `bool_value_n`}
+    - Indicating whether the simulation of an agent is ended.
 
 ========
 reset
@@ -153,7 +162,7 @@ reset
 
 `reset`:
     - env.reset()
-    - return (observation, info)
+    - return a tuple: (observation, info)
     - reset the engine
 
 ==================
