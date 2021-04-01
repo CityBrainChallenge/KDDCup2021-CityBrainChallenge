@@ -3,7 +3,7 @@
 Environment - CBEngine
 ==================
 
-CBEngine (City Brain Engine) is a city-scale traffic simulation environment. In this section, we will introduce the basic configurations to define the environment, including road network and traffic flow.
+CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulator - SUMO and VISSIM. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. We will introduce the road network and traffic flow input data formt in the following sections.
 
 
 Data format
@@ -105,16 +105,16 @@ the road network file contains three datasets
     +===========================+=======================+===========================================================================================================================================================================================================================================+
     |inter_id                   |1317137908             |intersection ID                                                                                                                                                                                                                            |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach1_id               |  724                  |road segment (edge) ID of northern exiting approach                                                                                                                                                                                        |
+    |approach0_id               |  724                  |road segment (edge) ID of northern approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach2_id               |700                    |road segment (edge) ID of eastern exiting approach                                                                                                                                                                                         |
+    |approach1_id               |700                    |road segment (edge) ID of eastern approach                                                                                                                                                                                         |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach3_id               |611                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
+    |approach2_id               |611                    |road segment (edge) ID of southern  approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach4_id               |609                    |road segment (edge) ID of southern exiting approach                                                                                                                                                                                        |
+    |approach3_id               |609                    |road segment (edge) ID of southern approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow 2 traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
+    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow a pair of non-conflict traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
 
     .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.png
         :align: center
@@ -239,9 +239,9 @@ Here is an example flow file
 Observations
 *******************
 
-Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will help the participants to make their decisions on the traffic signal for the next time step. Detailed description about accessing these observation features can be found in ``agent/gym_cfg.py``. 
+Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will be helpful for decision-making on the traffic signal phase selection. Detailed description the features of `observation` can be found in ``agent/gym_cfg.py``. 
 
 Actions
 **********************
 
-The action to take is defined as the traffic signal phase for each intersection in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section of this page. There are in total eight different phases for a typical four-way intersection. However, to simplify the problem, only the first four signal phases are open to participants at this stage. You can also learn how to set the traffic signals for different intersections in the APIs page.
+The action is defined as the traffic signal phase for each intersection to be selected in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section on this page. There are a total of 8 different types of phases for a standard four-way intersection. To simplify, only the first 4 signal phases are open to participants at this stage. You can also learn how to set the traffic signals with the information given on the APIs page.
