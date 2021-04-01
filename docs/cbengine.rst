@@ -237,9 +237,9 @@ Here is an example flow file
 Observations
 *******************
 
-You could get a full observation of agents at every step, including vehicle infomations, average speed of each lane, number of vehicles of each lane. Here the observation feature is defined by user in ``agent/gym_cfg.py``
+Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will help the participants to make their decisions on the traffic signal for the next time step. Detailed description about accessing these observation features can be found in ``agent/gym_cfg.py``. 
 
 Actions
 **********************
 
-Every intersection with signal is an agent. You can set the phase of agents, which is `action` here.
+The action to take is defined as the traffic signal phase for each intersection in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section of the Try it yoursefl page. You can also learn how to set the traffic signals for different intersections in the APIs page.
