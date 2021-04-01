@@ -14,7 +14,6 @@ The engine and gym environment is built in a docker image. You can pull it down 
 
 .. code-block::
 
-    docker login -u citybrainchallenge -p 'ChallengeBrainCity!'
     docker pull citybrainchallenge/cbengine:0.1.0
 
 Then you can pull down the code of starter kit
