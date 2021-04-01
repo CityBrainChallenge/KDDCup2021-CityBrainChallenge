@@ -15,7 +15,6 @@ For now, the tag of latest image is 0.1.0, we will notify you if a new version i
 
 .. code-block::
 
-    docker login -u citybrainchallenge -p 'ChallengeBrainCity!'
     docker pull citybrainchallenge/cbengine:0.1.0
 
 Then you can clone the code of starter kit.
