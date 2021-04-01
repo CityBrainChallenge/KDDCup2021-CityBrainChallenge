@@ -3,7 +3,7 @@
 Environment - CBEngine
 ==================
 
-CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulator - SUMO and VISSIM. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. We will introduce the road network and traffic flow input data formt in the following sections.
+CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulators such as SUMO and VISSIM. The following sections describes the format of the road network and traffic flow input data. This description will help you to setup the engine with input data.
 
 
 Data format
