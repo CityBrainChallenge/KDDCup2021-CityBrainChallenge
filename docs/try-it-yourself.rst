@@ -41,6 +41,7 @@ Run simulation
 
 To run this enviroment, you just need to run ``demo.py`` in starter-kit after installation, where the ``actions`` are simply fixed. In your implementation, you could use ``act()`` in ``agent.py`` to get the actions taken by the agent.
 
+
 .. code-block:: python
 
     import CBEngine
@@ -66,7 +67,7 @@ To run this enviroment, you just need to run ``demo.py`` in starter-kit after in
         # run one step simulation
         # you can use act() in agent.py to get the actions predicted by agent.
         actions = {0: 1}
-        obs, rwd, dones, info = env.step({0: 1})
+        obs, rwd, dones, info = env.step(actions)
         
         # print observations and infos
         for k,v in obs.items():
@@ -74,12 +75,17 @@ To run this enviroment, you just need to run ``demo.py`` in starter-kit after in
         for k,v in info.items():
             print("{}:{}".format(k,v))
 
-Here is a simple example of a fixed time agent to coordinate the traffic signal. It use the `current_step` from observation to decide the phase.
+
+The meaning of ``simulator_cfg_file``, ``gym_cfg`` is explained in `APIs<https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
+
+At most of the cases, participants won't modify ``simulator.cfg``. Participants could modify ``gym.py`` and implement their algorithm in ``agent.py``.
+
+Here is a simple example of a fixed time agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` from observation to decide the phase.
 
 
 .. code-block:: python
-    
-    # how to import or load local files with absolute path
+
+    # These code is used to process after your submission ###################
     import os
     import sys
     path = os.path.split(os.path.realpath(__file__))[0]
@@ -87,7 +93,8 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
     import gym_cfg
     with open(path + "/gym_cfg.py", "r") as f:
         pass
-    
+    #########################################################################
+
     class TestAgent():
         def __init__(self):
             self.now_phase = {}
@@ -147,6 +154,9 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
             return actions
 
 
+
+
+
 ===============
 Results
 ===============
@@ -182,6 +192,7 @@ Engine could log replay file. You could follow these steps to easily use these f
 3. cd to `/ui`
 
 .. code-block::
+
     yarn
     yarn start
 

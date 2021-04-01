@@ -5,9 +5,9 @@ API functions
 Upon the CBEngine, we provide APIs that shares the similar parameters as the OpenAi Gym environment. 
 
 
-===============
+=============================
 Simulation Initialization
-===============
+=============================
 .. code-block:: python
 
     env = gym.make(
@@ -21,17 +21,56 @@ Simulation Initialization
     - the path of simulator.cfg
     - be used for initialize engine
 
+
+
+    Example
+
+    .. code-block::
+
+        #configuration for simulator
+
+        # Time Parameters
+        start_time_epoch = 0
+        max_time_epoch = 3600
+
+        # Roadnet file and flow file used to simulate
+        road_file_addr : ./data/roadnet_warm_up.txt
+        vehicle_file_addr : ./data/flow_warm_up_1000.txt
+
+
+        # Log configuration
+        # Don't change the value of report_log_mode
+        report_log_mode : normal
+        # Log path
+        report_log_addr : ./log/
+        # Log interval
+        report_log_rate = 10
+        # Log configuration to track the vehicle. Don't change the value
+        warning_stop_time_log = 100
+
+
+
 `thread_num`:
     - the thread number used for engine
 
 `gym_dict`:
     - the configuration used for initialize gym
     - a dict
-    - stored in /agent/gym_cfg.py
+    - The meaning of it is clarified at next section.
+    - stored in /agent/gym_cfg.py, as a member variable of class ``gym_cfg``.
 
-===========
+    Example of ``gym_dict``
+
+    .. code-block::
+
+        gym_dict = {
+            'observation_features':['lane_speed','lane_vehicle_num']
+        }
+
+
+============================================
 Environment Configuration: gym_cfg.py
-===========
+============================================
 
 gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym environment. Currently it contains `observation features`. There are 2 options in `observation features`: `lane_speed` , `lane_vehicle_num`, which determines the content of observations you get from the ``env.step()`` api. You must write at least one of the two features.
 
@@ -49,9 +88,9 @@ gym_cfg.py is in the ``agent`` folder. It defines the configuration of gym envir
     - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` is available
 
 
-======
+===================
 Simulation Step
-======
+===================
 
 
 ``step(actions)``:
@@ -78,7 +117,9 @@ Simulation Step
     - format: {key_1: observations_values_1, key_2: observations_values_2}
     - The key is "{}_{}".format(agentid,feature) where feature is given by *gym_cfg.py*.
     - Format of observations_values:
+
     .. code-block::
+
         # observation values:
 
         # lane_speed sample: [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
@@ -107,6 +148,7 @@ Simulation Step
     - a dict
     - {`agent_id_1`: `reward_values_1`, ..., `agent_id_n`: `reward_values_n`}
     - Format of reward_values:
+
     .. code-block::
 
         # reward value:
@@ -150,9 +192,9 @@ Simulation Step
     - {`agent_id_1`: `bool_value_1`, ..., `agent_id_n`: `bool_value_n`}
     - Indicating whether the simulation of an agent is ended.
 
-========
+==================
 Simulation Reset
-========
+==================
 
 
 ``reset``:
