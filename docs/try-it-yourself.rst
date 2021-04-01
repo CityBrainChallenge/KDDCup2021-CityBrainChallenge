@@ -3,12 +3,12 @@
 Try it yourself
 ==================
 
-===============
+===================
 Installation guide
-===============
+===================
 
 Installation via Docker
------------
+----------------------------
 
 The engine and gym environment is built in a docker image. You can pull it down to easily build the nessary environment.
 For now, the tag of latest image is 0.1.0, we will notify you if a new version is pushed.
@@ -32,9 +32,9 @@ After having pull down the docker image and clone the starter-kit, you could run
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
 
 
-===============
+================
 Run simulation
-===============
+================
 
 To run this enviroment, you just need to run `demo.py` in starter-kit after installation, where the `action` is empty.
 
@@ -137,7 +137,18 @@ Here is a simple example of a fixed time agent to coordinate the traffic signal.
 Results
 ===============
 
+Results will be saved at starter-kit/out/scores.json. It will be
 
+.. code-block::
+
+    {
+      "success": true,
+      "error_msg": "", // if "success" is false, "error_msg" stores the exception
+      "data": {
+        "total_served_vehicles": 1047, // if "success" is false, here it returns -1
+        "delay_index": 2.3582080966292374 // if "success" is false, here it returns -1
+      }
+    }
 
 ===============
 Visualization
@@ -164,19 +175,19 @@ Engine could log replay file. You could follow these steps to easily use these f
 
 tips:
 
-1. Sky blue indicates left-turning cars, dark blue indicates straight ahead cars, and dark green indicates right-turning cars.
-2. The color of signal is meaningless.
-3. Lines indicate roads.the color of the line represents the average speed.
-4. Lane is not painted, so the car may not be painted on the line.
+- *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
+- The color of signal is meaningless.
+- Lines indicate roads. The color of the line represents the average speed of the road.
 
 
-===============
+
+==================
 Make a submission
-===============
+==================
 
-1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to 'agent.py' and deep learing model files) into the 'agent' folder. Compress the agent folder as 'agent.zip' to make the submission. Note that, please make sure you directly compress the 'agent' folder, rather than a group of files.
+1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learing model files) into the ``agent`` folder. Compress the agent folder as ``agent.zip`` to make the submission. Note that, please make sure you directly compress the ``agent`` folder, rather than a group of files.
 
-2. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the 'agent' folder, except the '.cfg' file (The '.cfg' file can be revised to incorporate different training traffic).
+2. Note that the simulation code will have exactly the same structure as the starter-kit. Hence, please do not modify any file outside the ``agent`` folder, except the ``.cfg`` file (The ``.cfg`` file can be revised to incorporate different training traffic).
 
 3. Please also make sure to only use the packages in the given docker file, so that your code can be executed at the evaluation platform. 
 
