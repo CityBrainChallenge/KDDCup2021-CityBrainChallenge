@@ -11,7 +11,7 @@ Installation via Docker
 ----------------------------
 
 The engine and gym environment is built in a docker image. You can pull it down to easily build the necessary environment.
-For now, the tag of latest image is 0.1.0, we will notify you if a new version is pushed.
+For now, the tag of latest image is `0.1.0`, we will notify you if a new version is pushed.
 
 .. code-block::
 
