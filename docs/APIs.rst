@@ -113,10 +113,8 @@ step
 
     here is a illustration of the lane order in observation and reward.
 
-        .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.jpg
+        .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.png
             :align: center
-
-            lane order
 
 
 `info`:
