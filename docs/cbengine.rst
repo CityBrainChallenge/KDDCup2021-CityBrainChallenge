@@ -169,11 +169,11 @@ Flow file is composed by flows. Each flow is represented as a tuple (*start_time
 
 * The following *3n* lines indicating configuration of each flow. Each flow have 3 configuration lines.
 
-    #. The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
+    * The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
 
-    #. The second line of flow configuration indicating the length of route of this flow : *k*.
+    * The second line of flow configuration indicating the length of route of this flow : *k*.
 
-    #. The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
+    * The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
 
 .. code-block:: c
 
