@@ -162,18 +162,18 @@ Here provides an Illustration of example above.
 Flow File Format
 ''''''''''''''''''''''''''''''''''
 
-Flow file is composed by flows. Each flow is represented as a tuple (*start_time*, *end_time*, *vehicle_interval*, *route*), which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds
+Flow file is composed by flows. Each flow is represented as a tuple (*start_time*, *end_time*, *vehicle_interval*, *route*), which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds. The format of flows contains serval parts:
 
 
-The first line of flow file is *n*, which means the number of flow.
+#. The first line of flow file is *n*, which means the number of flow.
 
-The following *3n* lines indicating configuration of each flow. Each flow have 3 configuration lines.
+#. The following *3n* lines indicating configuration of each flow. Each flow have 3 configuration lines.
 
-The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
+    #. The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
 
-The second line of flow configuration indicating the length of route of this flow : *k*.
+    #.The second line of flow configuration indicating the length of route of this flow : *k*.
 
-The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
+    #.The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
 
 .. code-block:: c
 
