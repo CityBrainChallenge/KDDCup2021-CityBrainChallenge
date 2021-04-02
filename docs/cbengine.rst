@@ -3,7 +3,7 @@
 Environment - CBEngine
 ============================
 
-CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulators such as SUMO and VISSIM. The following sections describes the format of the road network and traffic flow input data. This description will help you to setup the engine with input data.
+CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulators such as SUMO and VISSIM. The following sections describe the format of the road network and traffic flow input data. This description will help you to setup the engine with input data.
 
 
 Data format
@@ -16,10 +16,10 @@ Roadnet File Format
 
 Road network data
 +++++++++++++++++++++
-the road network file contains three datasets
+The road network file contains the following three datasets.
 
 - Intersection dataset
-    consists of identification, location and traffic signal installation information about an intersection. A snippet of intersection dataset is shown below.
+    Intersection data consists of identification, location and traffic signal installation information about each intersection. A snippet of intersection dataset is shown below.
 
     .. code-block::
 
@@ -29,7 +29,7 @@ the road network file contains three datasets
         ...
 
 
-    The attributes of intersection dataset is described in details as below.
+    The attributes of intersection dataset are described in details as below.
 
     +--------------------+----------------------+-----------------------------------------------+
     |Attribute Name      |       Example        |Description                                    |
@@ -58,7 +58,7 @@ the road network file contains three datasets
         1 0 0 0 1 0 0 1 1
         1 0 0 0 1 0 0 1 1
 
-    The attributes of road dataset is described in details as below
+    The attributes of road dataset are described in details as below
 
 
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -114,7 +114,7 @@ the road network file contains three datasets
     |approach3_id               |609                    |road segment (edge) ID of southern approach                                                                                                                                                                                        |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    For a traffic signal, there are at most 8 phases(1 - 8). Every phase allow a pair of non-conflict traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
+    For a traffic signal, there are at most 8 phases (1 - 8). Each phase allows a pair of non-conflict traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
 
     .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.png
         :align: center
@@ -152,7 +152,7 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
     0 1 3 5 7
 
 
-Here is a Illustration of example above
+Here provides an Illustration of example above.
 
 .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet.jpg
         :align: center
@@ -162,7 +162,7 @@ Here is a Illustration of example above
 Flow File Format
 ''''''''''''''''''''''''''''''''''
 
-Flow file is composed by flows. Each flow has *start_time*, *end_time*, *vehicle_interval*, *route*, which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds
+Flow file is composed by flows. Each flow is represented as a tuple (*start_time*, *end_time*, *vehicle_interval*, *route*), which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds
 
 
 The first line of flow file is *n*, which means the number of flow.
