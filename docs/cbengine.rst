@@ -105,21 +105,16 @@ The road network file contains the following three datasets.
     +===========================+=======================+===========================================================================================================================================================================================================================================+
     |inter_id                   |1317137908             |intersection ID                                                                                                                                                                                                                            |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach0_id               |  724                  |road segment (edge) ID of northern approach                                                                                                                                                                                        |
+    |approach0_id               |  724                  |road segment (edge) ID of northern approach                                                                                                                                                                                                |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach1_id               |700                    |road segment (edge) ID of eastern approach                                                                                                                                                                                         |
+    |approach1_id               |700                    |road segment (edge) ID of eastern approach                                                                                                                                                                                                 |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach2_id               |611                    |road segment (edge) ID of southern  approach                                                                                                                                                                                        |
+    |approach2_id               |611                    |road segment (edge) ID of southern  approach                                                                                                                                                                                               |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach3_id               |609                    |road segment (edge) ID of southern approach                                                                                                                                                                                        |
+    |approach3_id               |609                    |road segment (edge) ID of southern approach                                                                                                                                                                                                |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    For a traffic signal, there are at most 8 phases (1 - 8). Each phase allows a pair of non-conflict traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
 
-    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.png
-        :align: center
-
-        Phase and lane ordering
 
 
 
@@ -242,11 +237,24 @@ Observations
 
 Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will be helpful for decision-making on the traffic signal phase selection. Detailed description the features of `observation` can be found in ``agent/gym_cfg.py``. 
 
-Details could be found at `observation format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_
+The format of observations could be found at annotation in code blocks in `observation format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_.
 
 Actions
 **********************
 
-The action is defined as the traffic signal phase for each intersection to be selected in the next 10 seconds. The details about the traffic signal phase setting can be found at the traffic signal dataset section on this page. There are a total of 8 different types of phases for a standard four-way intersection. To simplify, only the first 4 signal phases are open to participants at this stage. You can also learn how to set the traffic signals with the information given on the `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_ page.
+For a traffic signal, there are at most 8 phases (1 - 8). Each phase allows a pair of non-conflict traffic movement to pass this intersection. Here are illustrations of the traffic movements and signal phase.
+
+    .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/phases.png
+        :align: center
+
+        Phase and lane ordering
+
+For example, if an agent is at phase 1, `lane_1` and `lane_7` along with all right turning lanes are passable. The index of the lanes in `observation` and `reward` could be found in `observation format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_.
+
+There are a total of 8 different types of phases for a standard four-way intersection. To simplify, only the first 4 signal phases (1, 2, 3, 4) are open to participants at this stage. You can also learn how to set the traffic signals with the information given on the `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_ page.
+
+The action is defined as the traffic signal phase for each intersection to be selected at next step. If an agent is switched to a different phase, there will be a 5 step period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'. So we don't recommend you to switch agent to a different phase frequently.
+
+
 
 
