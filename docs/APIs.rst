@@ -168,7 +168,7 @@ Simulation Step
         0: [(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
         }
 
-    Here is an illustration of the lane order in observation and reward.
+    Here is an illustration of the lane index in `observation` and `reward`.
 
         .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/roadnet_lanes.png
             :align: center
