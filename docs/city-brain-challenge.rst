@@ -3,7 +3,7 @@
 City Brain Challenge
 ========================
 
-In this challenge, we will provide you with a city-scale road network and its traffic demand derived from real traffic data. You will be in charge of coordinating the traffic at the signalized intersections while maintaining the delay index below a predefined threshold. We will increase the traffic demand and see whether your coordination model can still survive.
+In this challenge, we will provide you with a city-scale road network and its traffic demand derived from real traffic data. You will be in charge of coordinating the traffic signals to maximize number of vehicles served while maintaining an acceptable delay. We will increase the traffic demand and see whether your coordination model can still survive.
 
 
 ===============
