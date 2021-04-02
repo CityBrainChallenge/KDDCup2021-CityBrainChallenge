@@ -45,7 +45,7 @@ The road network file contains the following three datasets.
 
 
 - Road dataset
-    Road datase consists information about road segments in the network. In general, there are two directions on each road segment (i.e., dir1 and dir2). A snippet of road dataset is shown as follows.
+    Road dataset consists information about road segments in the network. In general, there are two directions on each road segment (i.e., dir1 and dir2). A snippet of road dataset is shown as follows.
 
 
     .. code-block::
