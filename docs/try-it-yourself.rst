@@ -50,7 +50,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
     
     # load config
     simulator_cfg_file = './cfg/simulator.cfg'
-    mx_step = 3600
+    mx_step = 360
     gym_cfg_instance = gym_cfg.gym_cfg()
 
     # gym

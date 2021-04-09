@@ -94,7 +94,7 @@ Simulation Step
 
 
 ``step(actions)``:
-    - Simulate one step
+    - Simulate **10** step in engine.
     - The format of action is specified below.
     - return observation, reward, info, dones
     - The format of observations, rewards, infos and dones is specified below.
@@ -158,7 +158,7 @@ Simulation Step
     .. code-block::
 
         # reward value:
-        # a list of tuples indicating (in_number of this step, out_number of this step)
+        # a list of tuples indicating (in_number of the last 10 step, out_number of last 10 step)
         # The length of the value list is 24. The order of their roads is defined in 'signal' part of roadnet file and the same as in observation.
         # The order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.

@@ -235,7 +235,7 @@ Here is an example flow file
 Observations
 *******************
 
-Participants will be able to get a full observation of the traffic on the road network at every step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will be helpful for decision-making on the traffic signal phase selection. Detailed description the features of `observation` can be found in ``agent/gym_cfg.py``. 
+Participants will be able to get a full observation of the traffic on the road network at every 10 step, including vehicle-level information (e.g., position, speed) and lane-level information (e.g., average speed of each lane, number of vehicles on each lane). These observations will be helpful for decision-making on the traffic signal phase selection. Detailed description the features of `observation` can be found in ``agent/gym_cfg.py``.
 
 The format of observations could be found at annotation in code blocks in `observation format <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_.
 
@@ -253,7 +253,7 @@ For example, if an agent is at phase 1, `lane_1` and `lane_7` along with all rig
 
 There are a total of 8 different types of phases for a standard four-way intersection. To simplify, only the first 4 signal phases (1, 2, 3, 4) are open to participants at this stage. You can also learn how to set the traffic signals with the information given on the `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_ page.
 
-The action is defined as the traffic signal phase for each intersection to be selected at next step. If an agent is switched to a different phase, there will be a 5 step period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'. So we don't recommend you to switch agent to a different phase frequently.
+The action is defined as the traffic signal phase for each intersection to be selected at next 10 step. If an agent is switched to a different phase, there will be a 5 step period of 'all red' at this agent, which means all vehicles could not pass this intersection. To reach a real setting, every `env.step()` will run 10 steps in engine, which means the minimum interval of changing agent phase is 10 step.
 
 
 
