@@ -94,7 +94,7 @@ Simulation Step
 
 
 ``step(actions)``:
-    - Simulate **10** step in engine.
+    - Simulate **10** seconds in engine.
     - The format of action is specified below.
     - return observation, reward, info, dones
     - The format of observations, rewards, infos and dones is specified below.
@@ -116,7 +116,7 @@ Simulation Step
     - The phase is required to be an integer in the range [1, 8] (note there is no 0)
     - The initial phases of all agents are set to 1
     - The phase of an agent will remain the same as the last phase if not specified in the dict `actions`
-    - `Attention`: If an agent is switched to a different phase, there will be a 5 step period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'.
+    - `Attention`: If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'.
 
 `observations`:
     - a dict
@@ -129,7 +129,7 @@ Simulation Step
         # observation values:
 
         # lane_speed sample: [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
-        # The first value is current step
+        # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # Note that, [lane0, lane1, lane2] indicates the [left_turn lane, approach lane, right_turn lane] repespectively of the corresponding road.
@@ -138,7 +138,7 @@ Simulation Step
         # -2 indicating there's no vehicle on this lane
 
         # lane_vehcile_num sample [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-        # The first value is current step
+        # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
@@ -158,7 +158,7 @@ Simulation Step
     .. code-block::
 
         # reward value:
-        # a list of tuples indicating (in_number of the last 10 step, out_number of last 10 step)
+        # a list of tuples indicating (in_number of the last 10 seconds, out_number of last 10 seconds)
         # The length of the value list is 24. The order of their roads is defined in 'signal' part of roadnet file and the same as in observation.
         # The order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
@@ -187,7 +187,7 @@ Simulation Step
             "road": [293.0], # Current road of this vehicle.
             "route": [293.0, 195.0, 207.0, 5.0, 67.0, 70.0, 88.0, 92.0, 76.0, 18.0], # Route of this vehicle (starting from current road).
             "speed": [0.0], # Current speed of this vehicle.
-            "start_time": [73.0], # Time step of creation of this vehicle.
+            "start_time": [73.0], # Time of creation of this vehicle.
             "t_ff": [112.716] # Travel time of this vehicle assuming no traffic signal and other vehicle exists.
             },
         ...

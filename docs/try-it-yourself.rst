@@ -188,7 +188,8 @@ Results will be saved as ``starter-kit/out/scores.json``, the data format of res
 Visualization
 ===============
 
-The CBEngine can log replay file. You can follow the following steps to visualize the intermediate results of your algorithm. Here `mapbox token` and `yarn` are required.
+The CBEngine can log replay file. You can follow the following steps to visualize the intermediate results of your algorithm. Here `mapbox token` and `yarn` are required.  You can get a `mapbox token` by registering a mapbox account.
+
 
 
 1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
