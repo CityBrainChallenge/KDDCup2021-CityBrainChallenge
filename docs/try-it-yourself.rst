@@ -80,7 +80,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
 The meaning of ``simulator_cfg_file``, ``gym_cfg`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
-Here is a simple example of a fixed time agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` from observation to decide the phase.
+Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from observation to decide the phase.
 
 
 
