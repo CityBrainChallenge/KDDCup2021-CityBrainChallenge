@@ -3,7 +3,7 @@
 Environment - CBEngine
 ============================
 
-CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The road network and traffic flow input data for CBEngine are compatible with the commonly used traffic simulators such as SUMO and VISSIM. The following sections describe the format of the road network and traffic flow input data. This description will help you to setup the engine with input data.
+CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The following sections describe input data format, observations and actions for the simulation engine.
 
 
 Data format
@@ -24,7 +24,7 @@ The road network file contains the following three datasets.
     .. code-block::
 
         92344 // total number of intersections
-        30.2795476000 120.1653304000 25926073 1
+        30.2795476000 120.1653304000 25926073 1 //latitude, longitude, inter_id, signalized
         30.2801771000 120.1664368000 25926074 0
         ...
 
@@ -80,21 +80,21 @@ The road network file contains the following three datasets.
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |dir2_id                    |2                      |road segment (edge) ID of direction 2                                                                                                                                                                                                      |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |dir1_mov                   |1 0 0 0 1 0 0 1 1      |Every three digits form a group to indicate whether left-turn, through and right-turn movements are permissible for a lane of direction 1. For example, '0 1 1' indicate a shared through and right-turn lane.                             |
+    |dir1_mov                   |1 0 0 0 1 0 0 1 1      |Every 3 digits form a lane permissible movement indicator of direction 1: 100 indicates the inner lane is left-turn only, 010 indicates the middle lane is through movement only, 011 indicates outer lane is a shared through and right-turn lane.                           |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |dir2_mov                   |1 0 0 0 1 0 0 1 1      |Every three digits form a group to indicate whether left-turn, through and right-turn movements are permissible for a lane of direction 2.  |                                                                                              |
+    |dir2_mov                   |1 0 0 0 1 0 0 1 1      |Every 3 digits form a lane permissibl//latitude, longitude, inter_id, signalizede movement indicator of direction 2.  |                                                                                              |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 
 - Traffic signal dataset
-    Note that, we assume that each intersection has no more than four exiting approaches. The exiting approaches 1 to 4 starting from the northern one and rotating in clockwise direction. Here, -1 indicates that the corresponding exiting approach is missing, which generally indicates a three-leg intersection.
+    This dataset describes the connectivity between intersection and road segments. Note that, we assume that each intersection has no more than four approaches. The approaches 1 to 4 starting from the northern one and rotating in clockwise direction. Here, -1 indicates that the corresponding approach is missing, which generally indicates a three-leg intersection.
 
     .. code-block::
 
-        107 // total number of traffic signals
-        1317137908 724 700 611 609 // inter_id, approach_id
-        672874599 311 2260 3830 -1
+        107 // total number of signalized intersections
+        1317137908 724 700 611 609 // inter_id, approach1_id, approach2_id, approach3_id, approach4_id
+        672874599 311 2260 3830 -1 // -1 indicates a three-leg intersection without western approach
         672879594 341 -1 2012 339
 
 
@@ -111,7 +111,7 @@ The road network file contains the following three datasets.
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |approach3_id               |611                    |road segment (edge) ID of southern  approach (Road_6 in example)                                                                                                                                                                                               |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |approach4_id               |609                    |road segment (edge) ID of southern approach (Road_8 in example)                                                                                                                                                                                                |
+    |approach4_id               |609                    |road segment (edge) ID of western approach (Road_8 in example)                                                                                                                                                                                                |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -124,16 +124,18 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
 
 .. code-block:: c
 
-    5
-    30 120 0 1
+    // intersection data
+    5 //5 intersections
+    30 120 0 1 //latitude, longitude, inter_id, signalized
     31 120 1 0
     30 121 2 0
     29 120 3 0
     30 119 4 0
-    4
+    // intersection data
+    4 // 4 road segments (each with 2 directions)
     0 1 30 20 3 3 1 2
-    1 0 0 0 1 0 0 0 1
-    1 0 0 0 1 0 0 0 1
+    1 0 0 0 1 0 0 0 1 // dir1_mov: permissible movements of direction 1
+    1 0 0 0 1 0 0 0 1 // dir2_mov: permissible movements of direction 2
     0 2 30 20 3 3 3 4
     1 0 0 0 1 0 0 0 1
     1 0 0 0 1 0 0 0 1
@@ -143,8 +145,9 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
     0 4 30 20 3 3 7 8
     1 0 0 0 1 0 0 0 1
     1 0 0 0 1 0 0 0 1
-    1
-    0 1 3 5 7
+    //traffic signal data
+    1 /1 traffic signal
+    0 1 3 5 7 // inter_id, approach1_id, approach2_id, approach3_id, approach4_id
 
 
 Here provides an Illustration of example above.
