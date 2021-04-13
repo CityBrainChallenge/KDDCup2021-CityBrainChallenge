@@ -80,7 +80,7 @@ The road network file contains the following three datasets.
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |dir2_id                    |2                      |road segment (edge) ID of direction 2                                                                                                                                                                                                      |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |dir1_mov                   |1 0 0 0 1 0 0 1 1      |Every 3 digits form a lane permissible movement indicator of direction 1: 100 indicates the inner lane is left-turn only, 010 indicates the middle lane is through movement only, 011 indicates outer lane is a shared through and right-turn lane.                           |
+    |dir1_mov                   |1 0 0 0 1 0 0 1 1      |Every 3 digits form a lane permissible movement indicator of direction 1: 100 indicates the inner lane is left-turn only, 010 indicates the middle lane is through movement only, 011 indicates outer lane is a shared through and right-turn lane. |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |dir2_mov                   |1 0 0 0 1 0 0 1 1      |Every 3 digits form a lane permissibl//latitude, longitude, inter_id, signalizede movement indicator of direction 2.  |                                                                                              |
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -160,15 +160,15 @@ Flow File Format
 Flow file is composed by flows. Each flow is represented as a tuple (*start_time*, *end_time*, *vehicle_interval*, *route*), which means from *start_time* to *end_time*, there will be a vehicle with *route* every *vehicle_interval* seconds. The format of flows contains serval parts:
 
 
-* The first line of flow file is *n*, which means the number of flow.
+* The first row of flow file is *n*, which means the number of flow.
 
-* The following *3n* lines indicating configuration of each flow. Each flow have 3 configuration lines.
+* The following *3n* rows indicating configuration of each flow. Each flow have 3 configuration lines.
 
-    * The first line of flow configuration indicating *start_time*, *end_time*, *vehicle_interval*.
+    * The first row consists of *start_time*, *end_time*, *vehicle_interval*.
 
-    * The second line of flow configuration indicating the length of route of this flow : *k*.
+    * The second row is the number of road segments of route for this flow : *k*.
 
-    * The third line of flow configuration indicating the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
+    * The third row describes the `route` of this flow. Here flow's route is defined by `roads` not `intersections`.
 
 .. code-block:: c
 
@@ -191,10 +191,10 @@ Here is an example flow file
 
 .. code-block:: c
 
-    12
-    0 100 5
-    2
-    2 3
+    12 // n = 12
+    0 100 5 // start_time, end_time, vehicle_interval
+    2 // number of road segments
+    2 3 // road segment IDs
     0 100 5
     2
     2 5
