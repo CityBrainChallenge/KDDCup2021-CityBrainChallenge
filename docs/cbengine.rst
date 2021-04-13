@@ -124,15 +124,13 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
 
 .. code-block:: c
 
-    // intersection data
-    5 //5 intersections
-    30 120 0 1 //latitude, longitude, inter_id, signalized
+    5 // intersection data
+    30 120 0 1 // latitude, longitude, inter_id, signalized
     31 120 1 0
     30 121 2 0
     29 120 3 0
     30 119 4 0
-    // intersection data
-    4 // 4 road segments (each with 2 directions)
+    4 // road data
     0 1 30 20 3 3 1 2
     1 0 0 0 1 0 0 0 1 // dir1_mov: permissible movements of direction 1
     1 0 0 0 1 0 0 0 1 // dir2_mov: permissible movements of direction 2
@@ -145,8 +143,7 @@ Here is an example 1x1 roadnet ``roadnet.txt`` .
     0 4 30 20 3 3 7 8
     1 0 0 0 1 0 0 0 1
     1 0 0 0 1 0 0 0 1
-    //traffic signal data
-    1 /1 traffic signal
+    1 // traffic signal data
     0 1 3 5 7 // inter_id, approach1_id, approach2_id, approach3_id, approach4_id
 
 
