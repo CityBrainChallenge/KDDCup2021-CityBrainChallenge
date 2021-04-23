@@ -192,7 +192,7 @@ The CBEngine can log replay file. You can follow the following steps to visualiz
 
 
 
-1. Put the ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
+1. Copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
 2. modify `/ui/src/index.js`
 
 .. code-block::
