@@ -197,13 +197,13 @@ You can visualize the replay of your intermediate results after your solution be
 
 - ``lightinfo.json`` records the information of traffic light.
 - ``roadinfo.json`` records the information of road network.
-- a series of ``time*.json`` files record the intermediate results over all time steps, for example, ``time0.json`` records the results at the first step.
+- ``time*.json`` files record the intermediate results over all time steps, for example, ``time0.json`` records the results at the first step.
 
 3. modify `/ui/src/index.js`
 
 .. code-block::
 
-    mapboxgl.accessToken = Your_Token;
+    mapboxgl.accessToken = Your_Token; # your mapbox default public key
     this.maxTime = max_of_time*.json # if the last file in your ``time*.json`` files is ``time359.json``, it is 359.
 
 4. cd to `/ui` (open a new terminal in your local environment, not the docker environment)
