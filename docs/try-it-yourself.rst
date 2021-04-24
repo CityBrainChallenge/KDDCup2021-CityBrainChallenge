@@ -191,8 +191,8 @@ Visualization
 You can visualize the replay of your intermediate results after your solution being evaluated. Here `mapbox token` and `yarn` are required. You can get a `mapbox token` by registering a mapbox account.
 
 
-0. The visualization process will run in your local environment (not the docker environment). To prepare for visualization, you need to install yarn (npm is required) in your local environment.  
-1. cd to `/ui/src` and create a new folder and named it as 'log'. You need copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` in `/log` and paste into `/ui/src/log`
+0. The visualization process will run in your local environment (not the docker environment). To prepare for visualization, you need to install yarn (npm is required) in your local environment. 
+1. Open the '/KDDCup2021-CityBrainChallenge-starter-kit' folder. Copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` in folder - `/log` and paste into your newly created folder - `/ui/src/log`. 
 - ``lightinfo.json`` records the information of traffic light.
 - ``roadinfo.json`` records the information of road network.
 - a series of ``time*.json`` files record the intermediate results over all time steps, for example, ``time0.json`` records the results at the first step.
@@ -201,9 +201,9 @@ You can visualize the replay of your intermediate results after your solution be
 .. code-block::
 
     mapboxgl.accessToken = Your_Token;
-    this.maxTime = max_of_time*.json # if the last file in you ``time*.json`` files is ``time359.json``, it is 359.
+    this.maxTime = max_of_time*.json # if the last file in your ``time*.json`` files is ``time359.json``, it is 359.
 
-3. cd to `/ui` (open a terminal in your local environment, other than the docker environment)
+3. cd to `/ui` (open a new terminal in your local environment, not the docker environment)
 
 .. code-block::
 
