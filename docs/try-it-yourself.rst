@@ -193,7 +193,7 @@ You can visualize the replay of your intermediate results after your solution be
 
 1. The visualization process will run in your local environment (not the docker environment). To prepare for visualization, you need to install yarn (npm is required) in your local environment. 
 
-2. Open the '/KDDCup2021-CityBrainChallenge-starter-kit' folder. Copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` in folder - `/log` and paste into your newly created folder - `/ui/src/log`:
+2. Open the `/KDDCup2021-CityBrainChallenge-starter-kit` folder. Copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` in `/log` folder and paste into your newly created `/ui/src/log` folder.
 
 - ``lightinfo.json`` records the information of traffic light.
 - ``roadinfo.json`` records the information of road network.
