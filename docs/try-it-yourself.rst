@@ -204,7 +204,7 @@ You can visualize the replay of your intermediate results after your solution be
 .. code-block::
 
     mapboxgl.accessToken = Your_Token; # your mapbox default public key
-    this.maxTime = max_of_time*.json # if the last file in your ``time*.json`` files is ``time359.json``, it is 359.
+    this.maxTime = max_of_time*.json # if the last file of your ``time*.json`` files is ``time359.json``, it is 359.
 
 4. cd to `/ui` (open a new terminal in your local environment, not the docker environment)
 
