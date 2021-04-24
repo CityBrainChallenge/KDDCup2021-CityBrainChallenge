@@ -188,19 +188,22 @@ Results will be saved as ``starter-kit/out/scores.json``, the data format of res
 Visualization
 ===============
 
-The CBEngine can log replay file. You can follow the following steps to visualize the intermediate results of your algorithm. Here `mapbox token` and `yarn` are required.  You can get a `mapbox token` by registering a mapbox account.
+You can visualize the replay of your intermediate results after your solution being evaluated. Here `mapbox token` and `yarn` are required. You can get a `mapbox token` by registering a mapbox account.
 
 
-
-1. Copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` from `/log` to `/ui/src/log`
+0. The visualization process will run in your local environment (not the docker environment). To prepare for visualization, you need to install yarn (npm is required) in your local environment.  
+1. cd to `/ui/src` and create a new folder and named it as 'log'. You need copy the files ``lightinfo.json``, ``roadinfo.json``, ``time*.json`` in `/log` and paste into `/ui/src/log`
+- ``lightinfo.json`` records the information of traffic light.
+- ``roadinfo.json`` records the information of road network.
+- a series of ``time*.json`` files record the intermediate results over all time steps, for example, ``time0.json`` records the results at the first step.
 2. modify `/ui/src/index.js`
 
 .. code-block::
 
     mapboxgl.accessToken = Your_Token;
-    this.maxTime = max_value_of_*_of_time*.json
+    this.maxTime = max_of_time*.json # if the last file in you ``time*.json`` files is ``time359.json``, it is 359.
 
-3. cd to `/ui`
+3. cd to `/ui` (open a terminal in your local environment, other than the docker environment)
 
 .. code-block::
 
