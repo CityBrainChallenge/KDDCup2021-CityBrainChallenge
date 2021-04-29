@@ -51,8 +51,12 @@ Participant will get a ``starter-kit``. It contains::
     # Other files and directory
     data/flow_1x1_txt
     data/flow_warm_up_1000.txt
+    data/flow_round2.txt
     data/roadnet_1x1.txt
     data/roadnet_warm_up.txt
+    data/roadnet_round2.txt
+    agent/agent_DQN.py
+    train_dqn_example.py
     log/
     out/
 

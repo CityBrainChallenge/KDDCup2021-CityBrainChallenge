@@ -14,13 +14,13 @@ Simulation Initialization
             'CBEngine-v0',
             simulator_cfg_file=simulator_cfg_file,
             thread_num=1,
-            gym_dict=gym_cfg_instance.cfg
+            gym_dict=gym_cfg_instance.cfg,
+            metric_period = 200
         )
 
 `simulator_cfg_file`:
     - the path of simulator.cfg
     - be used for initialize engine
-
 
 
     Example
@@ -66,6 +66,10 @@ Simulation Initialization
         gym_dict = {
             'observation_features':['lane_speed','lane_vehicle_num']
         }
+
+`metric_period`:
+    - the interval of scoring
+    - At each intervals, output a score json file
 
 
 ============================================
@@ -225,4 +229,8 @@ We offer two extra interfaces:
 ``set_log(flag)``:
     - set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
 
+``set_ui(flag)``:
+    - set flag as False to turn off visualization logs for a faster speed when training.
 
+``set_info(flag)``:
+    - set flag as False to make `info` that returned from `env.step` to be None, which can make training faster.

@@ -32,7 +32,7 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
 
     docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.1 bash
     cd starter-kit
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
 
 ================
@@ -58,7 +58,8 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
         'CBEngine-v0',
         simulator_cfg_file=simulator_cfg_file,
         thread_num=1,
-        gym_dict=gym_cfg_instance.cfg
+        gym_dict=gym_cfg_instance.cfg,
+        metric_period=200
     )
 
     for i in range(mx_step):
@@ -77,7 +78,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
 
 
 
-The meaning of ``simulator_cfg_file``, ``gym_cfg`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
+The meaning of ``simulator_cfg_file``, ``gym_cfg``,``metric_period`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
 Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from observation to decide the phase.
@@ -115,7 +116,10 @@ Here is a simple example of a fixed time (traffic signal is pre-timed) agent imp
             self.agent_list = agent_list
             self.now_phase = dict.fromkeys(self.agent_list,1)
             self.last_change_step = dict.fromkeys(self.agent_list,0)
-
+        def load_roadnet(self,intersections, roads, agents):
+            self.intersections = intersections
+            self.roads = roads
+            self.agents = agents
         ################################
 
 
@@ -153,6 +157,28 @@ Here is a simple example of a fixed time (traffic signal is pre-timed) agent imp
                 actions[agent] = self.now_phase[agent]
             return actions
 
+Here `load_roadnet` imports the roadnet file.
+
+.. code-block::
+
+    intersections[key_id] = {
+        'have_signal': bool,
+        'end_roads': list of road_id. Roads that end at this intersection. The order is random.
+        'start_roads': list of road_id. Roads that start at this intersection. The order is random.
+        'lanes': list, contains the lane_id in. The order is explained in Docs.
+    }
+    roads[road_id] = {
+        'start_inter':int. Start intersection_id.
+        'end_inter':int. End intersection_id.
+        'length': float. Road length.
+        'speed_limit': float. Road speed limit.
+        'num_lanes': int. Number of lanes in this road.
+        'inverse_road':  Road_id of inverse_road.
+        'lanes': dict. roads[road_id]['lanes'][lane_id] = list of 3 int value. Contains the Steerability of lanes.
+                  lane_id is road_id*100 + 0/1/2... For example, if road 9 have 3 lanes, then their id are 900, 901, 902
+    }
+    agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
+
 
 ====================
 Evaluation
@@ -162,7 +188,7 @@ Evaluation
 
 .. code-block::
 
-    python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg
+    python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
 Then result will be output at the ``starter-kit/out/scores.json``
 
@@ -218,13 +244,17 @@ You can visualize the replay of your intermediate results after your solution be
 Here are some Tips:
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
-- The color of signal is meaningless.
 - Lines indicate roads. The color of the line represents the average speed of the road.
+- Here's an example of an intersection in ui. The number in the center indicates the current phase number. The number of each road indicates its id of the intersection.
+
+.. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/ui_example.jpg
+    :align: center
 
 
 
 
-==================ocess will run in your local environment (not the doc
+
+==================
 Make a submission
 ==================
 
