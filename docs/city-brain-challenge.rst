@@ -18,7 +18,7 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
         :align: center
 
 
-In the qualification round, a city-scale road network and 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, the number increases to 40,000 and 47,000 for the next two 20-minutes. 
+In the qualification round, a city-scale road network and 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, this number increases to 40,000 and 47,000 for the next two 20-minutes. 
 ===============
 Evaluation
 ===============
