@@ -25,9 +25,9 @@ Evaluation
 
 Total number of vehicles served and delay index will be computed to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
 The submission scoring and ranking process follows three principles:
- - Solutions that served more vehicles rank higher.
- - If two solutions served the same number of vehicles, the one with lower delay index ranks higher.
- - If two solutions served the same number of vehicles with same delay index, the one submitted earlier rank higher.
+ - Solutions that served more vehicles will rank higher.
+ - If two solutions served the same number of vehicles, the one with lower delay index will rank higher.
+ - If two solutions served the same number of vehicles with same delay index, the one submitted earlier will rank higher.
 
 The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
 
