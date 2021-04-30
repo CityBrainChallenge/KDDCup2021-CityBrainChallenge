@@ -1,7 +1,7 @@
 .. _citybrainchallenge:
 
 City Brain Challenge
-========================
+=========================
 
 In this challenge, we will provide you with a city-scale road network and its traffic demand derived from real traffic data. You will be in charge of coordinating the traffic signals to maximize number of vehicles served while maintaining an acceptable delay. We will increase the traffic demand and see whether your coordination model can still survive.
 
@@ -17,17 +17,24 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
   .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/intersection.png
         :align: center
 
-
+In the qualification round, a city-scale road network with more than 1,000 intersections and a 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, the number increases to 40,000 and 47,000 for the next two 20-minutes. 
 ===============
 Evaluation
 ===============
 
-**Delay index** will be calculated to measure road network traffic performance. The solutions with a lower delay index will be ranked higher. The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
+Total number of vehicles served and delay index will be computed to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
+The submission scoring and ranking process follows three principles:
+ - Solutions that served more vehicles rank higher.
+ - If two solutions served the same number of vehicles, the one with lower delay index ranks higher.
+ - If two solutions served the same number of vehicles with same delay index, the one submitted earlier rank higher.
+
+The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
 
 The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \frac{TT_{i} + TT_{i}^{r}}{TT_{i}^{f}}`, where, 
  - :math:`TT_i`: travel time of vehicle :math:`i`;
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
+
 
 ==============
 Code
