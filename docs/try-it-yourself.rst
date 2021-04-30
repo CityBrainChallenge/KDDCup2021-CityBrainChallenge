@@ -13,12 +13,12 @@ Installation via Docker
 ----------------------------
 
 The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
-The latest image version is ``0.1.1``, we will notify you if a new version is updated.
+The latest image version is ``0.1.2``, we will notify you if a new version is updated.
 
 
 .. code-block::
 
-    docker pull citybrainchallenge/cbengine:0.1.1
+    docker pull citybrainchallenge/cbengine:0.1.2
 
 Then you can clone the code of the starter-kit.
 
@@ -30,7 +30,7 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
 
 .. code-block::
 
-    docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.1 bash
+    docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.2 bash
     cd starter-kit
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
