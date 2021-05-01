@@ -18,13 +18,15 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
         :align: center
 
 
-In the qualification round, a city-scale road network and 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, the number increases to 40,000 and 47,000 for the next two 20-minutes. 
+In the qualification round, a city-scale road network and 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, the number increases to 40,000 and 47,000 for the next two 20-minutes.
+
 ===============
 Evaluation
 ===============
 
 Total number of vehicles served and delay index will be computed to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
 The submission scoring and ranking process follows three principles:
+
  - Solutions that served more vehicles will rank higher.
  - If two solutions served the same number of vehicles, the one with lower delay index will rank higher.
  - If two solutions served the same number of vehicles with same delay index, the one submitted earlier will rank higher.
