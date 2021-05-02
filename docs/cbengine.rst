@@ -58,8 +58,8 @@ The road network file contains the following three datasets.
         1 0 0 0 1 0 0 1 1
         1 0 0 0 1 0 0 1 1
 
-    The attributes of road dataset are described in details as below
-
+    The attributes of road dataset are described in details as below.
+    Direction 1 is <from_inter_id,to_inter_id>. Direction 2 is <to_inter_id,from_inter_id>.
 
     +---------------------------+-----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |Attribute Name             |       Example         |Description                                                                                                                                                                                                                                |
