@@ -245,7 +245,7 @@ Here are some Tips:
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - Lines indicate roads. The color of the line represents the average speed of the road.
-- Here's an example of an intersection in ui. The number in the center indicates the current phase number. The number of each road indicates its id of the intersection.
+- Here's an example of an intersection in ui. The number in the center indicates the current phase number. The number of each road segment help you identify the permissible movements of current phase, for example, in current phase-1, 0 and 2 left-turn movements are given right-of-way. For more information, please refer to `Action <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_
 
 .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/ui_example.jpg
     :align: center
