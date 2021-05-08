@@ -253,7 +253,7 @@ For example, if an agent is at phase 1, `lane_1` and `lane_7` along with all rig
 
 There are a total of 8 different types of phases for a standard four-way intersection. You can also learn how to set the traffic signals with the information given on the `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_ page.
 
-The action is defined as the traffic signal phase for each intersection to be selected at next 10 seconds. If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at the beginning of the next phase, which means all vehicles could not pass this intersection. Each `env.step()` will run 10 seconds in engine, which means the minimum interval of changing agent phase is 10 seconds.
+The action is defined as the traffic signal phase for each intersection to be selected at next 10 seconds. If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at the beginning of the next phase, which means all vehicles could not pass this intersection. We fix `env.step()` as 10 seconds for practical implementation consideration, which means the decision can be made every 10 seconds.
 
 
 
