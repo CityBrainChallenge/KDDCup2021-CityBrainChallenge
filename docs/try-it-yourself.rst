@@ -239,8 +239,8 @@ You can visualize the replay of your intermediate results after your solution be
     yarn
     yarn start
 
-5. open `localhost:3000` with your browser
-If report "JavaScript heap out of memory", please refer to this `website <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_. 
+5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_.)
+
 Here are some Tips:
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
