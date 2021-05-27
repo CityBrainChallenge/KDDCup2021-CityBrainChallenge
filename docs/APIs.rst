@@ -181,6 +181,7 @@ Simulation Step
 `info`:
     - a dict
     - {`vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
+    - env.set_info(1) to return a dictionary of vehicle information, otherwise, return an empty dictionary.
 
     .. code-block::
 
