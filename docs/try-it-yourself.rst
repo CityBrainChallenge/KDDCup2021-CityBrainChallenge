@@ -188,7 +188,7 @@ Evaluation
 
 .. code-block::
 
-    python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
 Then result will be output at the ``starter-kit/out/scores.json``.
 
