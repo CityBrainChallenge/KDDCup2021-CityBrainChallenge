@@ -190,7 +190,7 @@ Evaluation
 
     python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
-Then result will be output at the ``starter-kit/out/scores.json``
+Then result will be output at the ``starter-kit/out/scores.json``. Note that we set ``--metric_period 200 `` for scoring your solution every 200 seconds.
 
 
 ===============
@@ -239,7 +239,7 @@ You can visualize the replay of your intermediate results after your solution be
     yarn
     yarn start
 
-5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_.)
+5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
 Here are some Tips:
 
