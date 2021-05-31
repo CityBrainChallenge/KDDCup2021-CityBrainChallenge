@@ -184,13 +184,13 @@ Here `load_roadnet` imports the roadnet file.
 Evaluation
 ====================
 
-``evaluate.py`` is a scoring program that output the scores of your agent. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
+``evaluate.py`` is a scoring program that output the scores of your agent. It is the same as the evaluate program on the server. You can evaluate your solution locally by execute:
 
 .. code-block::
 
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
 
-Then result will be output at the ``starter-kit/out/scores.json``.
+Then result will be output at the ``starter-kit/out/scores.json``. In qualification phase, your solution is evaluated every 200 seconds for scoring (i.e., metric_period=200). 
 
 
 ===============
