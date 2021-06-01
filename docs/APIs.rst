@@ -222,7 +222,7 @@ Simulation Reset
 Other interface
 ==================
 
-We offer two extra interfaces:
+The following interfaces for simulation environment are also provided:
 
 ``set_warning(flag)``:
     - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
