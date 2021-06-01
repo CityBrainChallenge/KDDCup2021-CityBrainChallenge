@@ -225,13 +225,13 @@ Other interface
 The following interfaces of simulation environment are also provided:
 
 ``set_warning(flag)``:
-    - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
+    - env.set_warning(0): set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
 
 ``set_log(flag)``:
-    - set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
+    - env.set_log(0): set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
 
 ``set_ui(flag)``:
-    - set flag as False to turn off visualization logs for a faster speed when training.
+    - env.set_ui(0): set flag as False to turn off visualization logs for a faster speed when training.
 
 ``set_info(flag)``:
-    - set flag as False to make `info` that returned from `env.step` to be None, which can make training faster.
+    - env.set_info(0): set flag as False to make `info` that returned from `env.step` to be None, which can make training faster.
