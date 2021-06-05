@@ -199,6 +199,8 @@ Simulation Step
     - a dict
     - key is `str`
     - {'step': current_step, `vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
+    - env.set_info(1) to return a dictionary of vehicle information, otherwise, return an empty dictionary.
+
 
     .. code-block::
 
@@ -206,7 +208,7 @@ Simulation Step
         'step': 2,
         0: {
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
-            "drivable": [29301.0], # Current lane of this vehicle.
+            "drivable": [29301.0], # Current lane of this vehicle. Here 293 is the road segment ID, 01 indicates the middle lane (00 and 02 indicate inner and outer lanes respectively)
             "road": [293.0], # Current road of this vehicle.
             "route": [293.0, 195.0, 207.0, 5.0, 67.0, 70.0, 88.0, 92.0, 76.0, 18.0], # Route of this vehicle (starting from current road).
             "speed": [0.0], # Current speed of this vehicle.
@@ -240,16 +242,16 @@ Simulation Reset
 Other interface
 ==================
 
-We offer two extra interfaces:
+The following interfaces of simulation environment are also provided:
 
 ``set_warning(flag)``:
-    - set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
+    - `env.set_warning(0)`: set flag as False to turn off the warning of invalid phases. The warning will be issued if a green phase to an inexistent lane.
 
 ``set_log(flag)``:
-    - set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
+    - `env.set_log(0)`: set flag as False to turn off logs for a faster speed when training. Note that the score function will not work if the logging is turned off.
 
 ``set_ui(flag)``:
-    - set flag as False to turn off visualization logs for a faster speed when training.
+    - `env.set_ui(0)`: set flag as False to turn off visualization logs for a faster speed when training.
 
 ``set_info(flag)``:
-    - set flag as False to make `info` that returned from `env.step` to be None, which can make training faster.
+    - `env.set_info(0)`: set flag as False to make `info` that returned from `env.step` to be None, which can make training faster.

@@ -25,7 +25,7 @@ In the qualification round, a city-scale road network and 1-hour traffic data is
 Evaluation
 ===============
 
-Total number of vehicles served and delay index will be computed to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
+Total number of vehicles served (i.e., total number of vehicles entering the network) and delay index will be computed every 200 seconds to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
 The submission scoring and ranking process follows three principles:
 
  - Solutions that served more vehicles will rank higher.

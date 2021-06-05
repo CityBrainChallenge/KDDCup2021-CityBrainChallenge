@@ -195,6 +195,7 @@ Here `load_roadnet` imports the roadnet file.
 Evaluation
 ====================
 
+
 ``evaluate.sh`` is a scoring script that output the scores of your agent in multiple flows. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
 
 ``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in round 2.
@@ -206,7 +207,8 @@ Evaluation
     # for evaluating multiple flow in parallel
     bash evaluate.sh agent out
 
-Then multiple flows result will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/your-flow-number/scores.json``
+Then multiple flows result will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/your-flow-number/scores.json``. In qualification phase, your solution is evaluated every 200 seconds for scoring (i.e., metric_period=200).
+
 
 
 ===============
@@ -248,20 +250,20 @@ You can visualize the replay of your intermediate results after your solution be
     mapboxgl.accessToken = Your_Token; # your mapbox default public key
     this.maxTime = max_of_time*.json # if the last file of your ``time*.json`` files is ``time359.json``, it is 359.
 
-4. cd to `/ui` (open a new terminal in your local environment, not the docker environment)
+4. cd to `/ui` (Exit the docker environment first, then run "yarn start")
 
 .. code-block::
 
     yarn
     yarn start
 
-5. open `localhost:3000` with your browser
+5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
 Here are some Tips:
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - Lines indicate roads. The color of the line represents the average speed of the road.
-- Here's an example of an intersection in ui. The number in the center indicates the current phase number. The number of each road indicates its id of the intersection.
+- Here's an example of an intersection in ui. The number in the center (with red background) indicates the current phase number. The number of each road segment help you to identify the permissible movements of current phase, for example, in current phase-1, 0 and 2 left-turn movements are given right-of-way. For more information about signal phase, please refer to `Action <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_.
 
 .. figure:: https://raw.githubusercontent.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge/main/images/ui_example.jpg
     :align: center
