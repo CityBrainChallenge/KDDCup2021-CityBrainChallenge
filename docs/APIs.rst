@@ -10,13 +10,13 @@ Simulation Initialization
 =============================
 .. code-block:: python
 
-    env = gym.make(
-            'CBEngine-v0',
-            simulator_cfg_file=simulator_cfg_file,
-            thread_num=1,
-            gym_dict=gym_cfg_instance.cfg,
-            metric_period = 200
-        )
+    env_config = {
+        "simulator_cfg_file": simulator_cfg_file,
+        "thread_num": 8,
+        "gym_dict": gym_configs,
+        "metric_period": 200
+    }
+    env = CBEngine_rllib_class(env_config)
 
 `simulator_cfg_file`:
     - the path of simulator.cfg
@@ -34,8 +34,8 @@ Simulation Initialization
         max_time_epoch = 3600
 
         # Roadnet file and flow file used to simulate
-        road_file_addr : ./data/roadnet_warm_up.txt
-        vehicle_file_addr : ./data/flow_warm_up_1000.txt
+        road_file_addr : /starter-kit/data/roadnet_round3.txt
+        vehicle_file_addr : /starter-kit/data/flow_round3_flow0.txt
 
 
         # Log configuration
@@ -64,7 +64,9 @@ Simulation Initialization
     .. code-block::
 
         gym_dict = {
-            'observation_features':['lane_speed','lane_vehicle_num']
+            'observation_features':['lane_vehicle_num'],
+            'observation_dimension':24,
+            'custom_observation' : False
         }
 
 `metric_period`:
@@ -82,14 +84,23 @@ Environment Configuration: gym_cfg.py
 
     class gym_cfg():
         def __init__(self):
+
+
             self.cfg = {
-                'observation_features':['lane_speed','lane_vehicle_num']
+                'observation_features':['lane_vehicle_num'],
+                'observation_dimension':24,
+                'custom_observation' : False
             }
 
 
 `self.cfg`:
     - store the configuration of gym
-    - 'observation_features' indicates the return observation feature of the gym instance. Currently `lane_speed`, `lane_vehicle_num` are available
+
+    - ``custom_observation``': If 'True', use costom observation feature in CBEngine_round3.py. If 'False', use 'observation_features'
+
+    - ``observation_features``' : Same as round2. Add 'classic' observation feature, which has dimension of 16. It's order will be same as the order of `observation` from ``env.step()``
+
+    - ``observation_dimension``' : The dimension of observation. Need to be correct both custom observation and default observation.
 
 
 ===================
@@ -121,12 +132,22 @@ Simulation Step
     - The initial phases of all agents are set to 1
     - The phase of an agent will remain the same as the last phase if not specified in the dict `actions`
     - `Attention`: If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'.
+    - In round3, `agent_id` will be `str` rather than `int`
 
 `observations`:
     - a dict
-    - format: ``{key_1: observations_values_1, key_2: observations_values_2}``
-    - The key is "{}_{}".format(agentid,feature) where feature is given by ``gym_cfg.py``
-    - Format of observations_values:
+    - format:
+
+    .. code-block:: python
+
+        {
+            # agent_id : {'observation' : obs}
+            '12647332106' : {'observation': [0, 0, 0, 0, 0, 0, 0, 2, 0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1]}
+        }
+
+    - The key is agent_id (`str`) , the value is a `dict`. The `dict` only contains one key "observation", and its value is a list catenated by the order in ``'observation_features'`` of ``gym_cfg.py``
+
+    - Format of the ``'lane_speed'`` and ``'lane_vehicle_num'`` observations_values:
 
     .. code-block::
 
@@ -147,29 +168,25 @@ Simulation Step
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
 
-        # Sample Output
-        {
-        "12530758427_lane_speed": [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2],
-        "12530758427_lane_vehicle_num" : [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
-        }
+
+        # classic sample [1, 0, 0, 0, 3, 2, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0]
+        # the first 8 values are the left-turing and go-straight lanes ordered by the 'signal' part of roadnet file
+        # the last 8 values are the one-hot code of which lane is available
 
 
 `rewards`:
     - a dict
+    - key is `str`
+    - must implement in ``CBEngine_round3``
     - {`agent_id_1`: `reward_values_1`, ..., `agent_id_n`: `reward_values_n`}
     - Format of reward_values:
+    - `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
 
     .. code-block::
 
-        # reward value:
-        # a list of tuples indicating (in_number of the last 10 seconds, out_number of last 10 seconds)
-        # The length of the value list is 24. The order of their roads is defined in 'signal' part of roadnet file and the same as in observation.
-        # The order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
-        # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
-        
         # Sample Output
         {
-        0: [(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0), (0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0),(0,0),(0,1),(1,0),(0,0)]
+        0: -0.5
         }
 
     Here is an illustration of the lane index in `observation` and `reward`.
@@ -180,11 +197,13 @@ Simulation Step
 
 `info`:
     - a dict
-    - {`vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
+    - key is `str`
+    - {'step': current_step, `vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
 
     .. code-block::
 
         "vehicle_info": {
+        'step': 2,
         0: {
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
             "drivable": [29301.0], # Current lane of this vehicle.
@@ -209,12 +228,12 @@ Simulation Reset
 
 ``reset``:
     - Reset the simulation
-    - return a tuple: (observation, info)
+    - return a dict: observation
     - reset the engine
 
 .. code-block:: python
 
-    observation , info = env.reset()
+    observation = env.reset()
 
 
 ==================

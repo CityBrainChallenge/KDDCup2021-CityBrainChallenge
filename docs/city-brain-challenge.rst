@@ -39,12 +39,13 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
+In multiple flow setting, we just add the total served vehicles of each flow as the final result of total served vehicles, and we calculate the average delay index of all vehicles from all flows as the final result of delay index.
 
-==============
-Code
-==============
+======================
+Round2_Starterkit
+======================
 
-Participant will get a ``starter-kit``. It contains::
+.. code-block::
 
     # Participants must implement
     agent/agent.py
@@ -72,3 +73,59 @@ Participant will get a ``starter-kit``. It contains::
     out/
 
 Participants should implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores. Participants could modify ``simulator.cfg`` and  ``gym_cfg.py``.
+
+======================
+Round3_Starterkit
+======================
+
+Participant will get a ``starter-kit``. It contains::
+
+    # The examples of agent
+    agent/agent.py
+    agent/agent_MP.py
+    agent/agent_rllib.py
+    agent/checkpoint-25
+
+    # CBEngine config file
+    agent/gym_cfg.py
+
+    # Your custom CBEngine
+    agent/CBEngine_round3.py
+
+    # flow data and roadnet data
+    data/flow_round3_flow0.txt
+    ...
+    data/roadnet_round3.txt
+    ...
+
+    # traffic_generation script
+    data/traffic_generation.py
+
+    # where you store your model
+    model/
+
+    # scoring script for single flow
+    evaluate.py
+
+    # summarize the result of multi flow
+    summarize.py
+
+    # scoring script for multi flow
+    evaluate.sh
+
+    # rllib train example
+    rllib_train.py
+
+    # example script for using rllib_train.py
+    train.sh
+
+    # rllib testing example
+    rllib_test.py
+
+    # script for parallel evaluating the model
+    rllib_evaluate.sh
+
+    # simple demo
+    demo.py
+
+Participants should implement their algorithm in agent.py. In round3, custom ``CBEngine_round3`` is available. Participants could **only** modify the observation and reward. In submission, ``agent.py``, ``gym_cfg.py``, ``CBEngine_round3.py`` is necessary.

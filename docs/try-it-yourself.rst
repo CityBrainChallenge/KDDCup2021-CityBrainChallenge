@@ -13,12 +13,12 @@ Installation via Docker
 ----------------------------
 
 The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
-The latest image version is ``0.1.2``, we will notify you if a new version is updated.
+The latest image version is ``0.1.3``, we will notify you if a new version is updated.
 
 
 .. code-block::
 
-    docker pull citybrainchallenge/cbengine:0.1.2
+    docker pull citybrainchallenge/cbengine:0.1.3
 
 Then you can clone the code of the starter-kit.
 
@@ -30,21 +30,24 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
 
 .. code-block::
 
-    docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.2 bash
+    docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.3 bash
     cd starter-kit
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
+    # for evaluating single flow
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200
+    # for evaluating multiple flow in parallel
+    bash evaluate.sh agent out
 
 
 ================
 Run simulation
 ================
 
-To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action).
+To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action). Also, participants could modify the CBEngine.
 
 
 .. code-block:: python
 
-    import CBEngine
+    from agent.CBEngine_round3 import CBEngine_round3 as CBEngine_rllib_class
     import gym
     import agent.gym_cfg as gym_cfg
     
@@ -81,7 +84,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
 The meaning of ``simulator_cfg_file``, ``gym_cfg``,``metric_period`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
-Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from observation to decide the phase.
+Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from info to decide the phase.
 
 
 
@@ -99,23 +102,39 @@ Here is a simple example of a fixed time (traffic signal is pre-timed) agent imp
     class TestAgent():
         def __init__(self):
             self.now_phase = {}
-            
-            # pre-define time of green light
-            self.green_sec = 40
-            
+            self.green_sec = 2
             self.max_phase = 8
             self.last_change_step = {}
-            self.agent_list = []ocess will run in your local environment (not the doc
+            self.agent_list = []
             self.phase_passablelane = {}
-            
+            self.intersections = {}
+            self.roads = {}
+            self.agents = {}
         ################################
-        # load agent list
-        # not suggest to modify this function.
-        # agent_list is a list of agent_id (intersection id)
+        # don't modify this function.
+        # agent_list is a list of agent_id
         def load_agent_list(self,agent_list):
             self.agent_list = agent_list
             self.now_phase = dict.fromkeys(self.agent_list,1)
             self.last_change_step = dict.fromkeys(self.agent_list,0)
+
+        # intersections[key_id] = {
+        #     'have_signal': bool,
+        #     'end_roads': list of road_id. Roads that end at this intersection. The order is random.
+        #     'start_roads': list of road_id. Roads that start at this intersection. The order is random.
+        #     'lanes': list, contains the lane_id in. The order is explained in Docs.
+        # }
+        # roads[road_id] = {
+        #     'start_inter':int. Start intersection_id.
+        #     'end_inter':int. End intersection_id.
+        #     'length': float. Road length.
+        #     'speed_limit': float. Road speed limit.
+        #     'num_lanes': int. Number of lanes in this road.
+        #     'inverse_road':  Road_id of inverse_road.
+        #     'lanes': dict. roads[road_id]['lanes'][lane_id] = list of 3 int value. Contains the Steerability of lanes.
+        #               lane_id is road_id*100 + 0/1/2... For example, if road 9 have 3 lanes, then their id are 900, 901, 902
+        # }
+        # agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
         def load_roadnet(self,intersections, roads, agents):
             self.intersections = intersections
             self.roads = roads
@@ -127,35 +146,27 @@ Here is a simple example of a fixed time (traffic signal is pre-timed) agent imp
             """ !!! MUST BE OVERRIDED !!!
             """
             # here obs contains all of the observations and infos
+
+            # observations is returned 'observation' of env.step()
+            # info is returned 'info' of env.step()
             observations = obs['observations']
             info = obs['info']
             actions = {}
 
+            now_step = info['step']
+            # a simple fixtime agent
 
-            # preprocess observations
-            # get a dict observations_for_agent that contains the features of all agents.
-            observations_for_agent = {}
-            for key,val in observations.items():
-                observations_agent_id = int(key.split('_')[0])
-                observations_feature = key[key.find('_')+1:]
-                if(observations_agent_id not in observations_for_agent.keys()):
-                    observations_for_agent[observations_agent_id] = {}
-                observations_for_agent[observations_agent_id][observations_feature] = val
-
+            # get actions
             for agent in self.agent_list:
                 # select the now_step
-                # change phase for a certain period of time
-                for k,v in observations_for_agent[agent].items():
-                    now_step = v[0]
-                    break
                 step_diff = now_step - self.last_change_step[agent]
                 if(step_diff >= self.green_sec):
                     self.now_phase[agent] = self.now_phase[agent] % self.max_phase + 1
                     self.last_change_step[agent] = now_step
-
-                # construct actions
                 actions[agent] = self.now_phase[agent]
+            # print(self.intersections,self.roads,self.agents)
             return actions
+
 
 Here `load_roadnet` imports the roadnet file.
 
@@ -184,20 +195,25 @@ Here `load_roadnet` imports the roadnet file.
 Evaluation
 ====================
 
-``evaluate.py`` is a scoring program that output the scores of your agent. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
+``evaluate.sh`` is a scoring script that output the scores of your agent in multiple flows. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
+
+``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in round 2.
 
 .. code-block::
 
-    python evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
+    # for evaluating single flow
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200
+    # for evaluating multiple flow in parallel
+    bash evaluate.sh agent out
 
-Then result will be output at the ``starter-kit/out/scores.json``
+Then multiple flows result will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/your-flow-number/scores.json``
 
 
 ===============
 Results
 ===============
 
-Results will be saved as ``starter-kit/out/scores.json``, the data format of results is exemplified as follows.
+Results will be saved as ``/starter-kit/out/scores.json``, the data format of results is exemplified as follows.
 
 .. code-block::
 
@@ -272,3 +288,5 @@ Make a submission
 
 7. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
 
+tips:
+    In round3, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_

@@ -255,6 +255,144 @@ There are a total of 8 different types of phases for a standard four-way interse
 
 The action is defined as the traffic signal phase for each intersection to be selected at next 10 seconds. If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at this agent, which means all vehicles could not pass this intersection. To reach a real setting, every `env.step()` will run 10 seconds in engine, which means the minimum interval of changing agent phase is 10 seconds.
 
+Custom CBEngine
+**********************
+In round 3, participants could modify the `observation` and `reward` in training, and submit their custom `CBEngine`. Here is an example custom `CBEngine`:
 
+.. code-block:: python
 
+    class CBEngine_round3(CBEngine_rllib_class):
+    """See CBEngine_rllib_class in /CBEngine_env/env/CBEngine_rllib/CBEngine_rllib.py
 
+    Need to implement reward.
+
+    implementation of observation is optional
+
+    """
+    def __init__(self,config):
+        super(CBEngine_round3,self).__init__(config)
+        self.observation_features = self.gym_dict['observation_features']
+        self.custom_observation = self.gym_dict['custom_observation']
+        self.observation_dimension = self.gym_dict['observation_dimension']
+
+    def _get_observations(self):
+
+        if(self.custom_observation == False):
+            obs = super(CBEngine_round3, self)._get_observations()
+            return obs
+        else:
+            ############
+            # implement your own observation
+            #
+            # Example: lane_vehicle_num
+            obs = {}
+            lane_vehicle = self.eng.get_lane_vehicles()
+            for agent_id, roads in self.agent_signals.items():
+                result_obs = []
+                for lane in self.intersections[agent_id]['lanes']:
+                    # -1 indicates empty roads in 'signal' of roadnet file
+                    if (lane == -1):
+                        result_obs.append(-1)
+                    else:
+                        # -2 indicates there's no vehicle on this lane
+                        if (lane not in lane_vehicle.keys()):
+                            result_obs.append(0)
+                        else:
+                            # the vehicle number of this lane
+                            result_obs.append(len(lane_vehicle[lane]))
+                # obs[agent_id] = {
+                #     "observation" : your_observation
+                # }
+                # Here agent_id must be str
+
+                obs[agent_id] = {"observation":result_obs}
+
+            # Here agent_id must be str. So here change int to str
+            int_agents = list(obs.keys())
+            for k in int_agents:
+                obs[str(k)] = obs[k]
+                obs.pop(k)
+
+            return obs
+            ############
+
+    def _get_reward(self):
+
+        rwds = {}
+
+        ##################
+        ## Example : pressure as reward.
+        # if(self.observation_features[0] != 'lane_vehicle_num'):
+        #     raise ValueError("maxpressure need 'lane_vehicle_num' as first observation feature")
+        # lane_vehicle = self.eng.get_lane_vehicles()
+        # for agent_id, roads in self.agent_signals.items():
+        #     result_obs = []
+        #     for lane in self.intersections[agent_id]['lanes']:
+        #         # -1 indicates empty roads in 'signal' of roadnet file
+        #         if (lane == -1):
+        #             result_obs.append(-1)
+        #         else:
+        #             # -2 indicates there's no vehicle on this lane
+        #             if (lane not in lane_vehicle.keys()):
+        #                 result_obs.append(0)
+        #             else:
+        #                 # the vehicle number of this lane
+        #                 result_obs.append(len(lane_vehicle[lane]))
+        #     pressure = (np.sum(result_obs[12: 24]) - np.sum(result_obs[0: 12]))
+        #     rwds[agent_id] = pressure
+        ##################
+
+        ##################
+        ## Example : queue length as reward.
+        v_list = self.eng.get_vehicles()
+        for agent_id in self.agent_signals.keys():
+            rwds[agent_id] = 0
+        for vehicle in v_list:
+            vdict = self.eng.get_vehicle_info(vehicle)
+            if(float(vdict['speed'][0])<0.5 and float(vdict['distance'][0]) > 1.0):
+                if(int(vdict['road'][0]) in self.road2signal.keys()):
+                    agent_id = self.road2signal[int(vdict['road'][0])]
+                    rwds[agent_id]-=1
+        # normalization for qlength reward
+        for agent_id in self.agent_signals.keys():
+            rwds[agent_id] /= 10
+
+        ##################
+
+        ##################
+        ## Default reward, which can't be used in rllib
+        ## self.lane_vehicle_state is dict. keys are agent_id(int), values are sets which maintain the vehicles of each lanes.
+
+        # def get_diff(pre,sub):
+        #     in_num = 0
+        #     out_num = 0
+        #     for vehicle in pre:
+        #         if(vehicle not in sub):
+        #             out_num +=1
+        #     for vehicle in sub:
+        #         if(vehicle not in pre):
+        #             in_num += 1
+        #     return in_num,out_num
+        #
+        # lane_vehicle = self.eng.get_lane_vehicles()
+        #
+        # for agent_id, roads in self.agents.items():
+        #     rwds[agent_id] = []
+        #     for lane in self.intersections[agent_id]['lanes']:
+        #         # -1 indicates empty roads in 'signal' of roadnet file
+        #         if (lane == -1):
+        #             rwds[agent_id].append(-1)
+        #         else:
+        #             if(lane not in lane_vehicle.keys()):
+        #                 lane_vehicle[lane] = set()
+        #             rwds[agent_id].append(get_diff(self.lane_vehicle_state[lane],lane_vehicle[lane]))
+        #             self.lane_vehicle_state[lane] = lane_vehicle[lane]
+        ##################
+        # Change int keys to str keys because agent_id in actions must be str
+        int_agents = list(rwds.keys())
+        for k in int_agents:
+            rwds[str(k)] = rwds[k]
+            rwds.pop(k)
+    return rwds
+
+Participants could continue using old `observation` by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
