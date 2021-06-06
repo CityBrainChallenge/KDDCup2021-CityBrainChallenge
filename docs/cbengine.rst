@@ -396,3 +396,23 @@ In round 3, participants could modify the `observation` and `reward` in training
     return rwds
 
 Participants could continue using old `observation` by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
+
+You could use the api of ``self.eng`` to construct your observation. Here is a table of the api.
+
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|API                            |Returned value                 |Description                                                                                  |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_count()            |int                            |The total number of running vehicle                                                          |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicles()                 |list                           |A list of running vehicles' ids                                                              |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_lane_vehicle_count()       |dict                           |A dict. Keys are lane_id, values are number of running vehicles on this lane.                |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_lane_vehicles()            |dict                           |A dict. Keys are lane_id, values are a list of running vehicles on this lane.                |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_speed()            |dict                           |A dict. Keys are vehicle_id of running vehicles, values are their speed                      |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_average_travel_time()      |float                          |The average travel time of both running vehicles and finished vehicles.                      |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_info(vehicle_id)   |dict                           |Input vehicle_id, output the information of the vehicle as a dict.                           |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
