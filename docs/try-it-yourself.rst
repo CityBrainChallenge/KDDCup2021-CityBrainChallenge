@@ -250,7 +250,7 @@ You can visualize the replay of your intermediate results after your solution be
     mapboxgl.accessToken = Your_Token; # your mapbox default public key
     this.maxTime = max_of_time*.json # if the last file of your ``time*.json`` files is ``time359.json``, it is 359.
 
-4. cd to `/ui` (Exit the docker environment first, then run "yarn start")
+4. cd to `/ui` (make sure run "yarn start" in your local environment instead of docker environment)
 
 .. code-block::
 
@@ -259,7 +259,9 @@ You can visualize the replay of your intermediate results after your solution be
 
 5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
-Here are some Tips:
+Here are some Tips:​
+260
+5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
 - *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
 - Lines indicate roads. The color of the line represents the average speed of the road.
