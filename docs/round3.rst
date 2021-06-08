@@ -1,11 +1,11 @@
 .. _round3:
 
-Round3
+Final round
 ========
 
-In round3, participants could use the large-scale cloud computing platform. Here we list main change
+In the final round, a large-scale cloud computing platform is provided for all qualified teams. Followings are some main guidances for the final round,
 
-1. Now participants could submit their own ``CBEngine_round3`` whether in training or in evaluating. Make sure that your dimension of `observation` is aligned in ``gym_cfg.py``. Note that **only** `observation` and `reward` could be modified. You could continue using old `observations`, but the old `reward` can't be used in `rllib` because `rllib` needs single value of each agent as `reward`. Anyway, we provide 2 `rewards`, "pressure" and "queue length", along with the old `reward` in the comment of default `CBEngine_round3.py``.
+1. In this round, participants can submit their own ``CBEngine_round3`` for training or evaluation. Note that **only** `observation` and `reward` could be modified. Please make sure that the dimension of `observation` is aligned with ``gym_cfg.py``. You could continue using the `observations` defined in the qualification round, but the previous `reward` can't be used in `rllib` because `rllib` requires that each agent to be assigned with a `reward`. We provide 2 demo `rewards` definitions, "pressure" and "queue length", along with the old `reward` in the comment of default `CBEngine_round3.py``.
 #. Now the current step is not included in ``observation`` by default. It is now included in ``obs['info']['step']``
 #. The observation format is modified to align with rllib api. Please look up to the `observation <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_
 #. Now the keys (i.e. agent_id) of ``actions``, ``reward``, ``observation``, ``dones`` are `str` instead of `int`.
@@ -15,9 +15,9 @@ In round3, participants could use the large-scale cloud computing platform. Here
 
 
 
-Training and Evaluating
+Training and Evaluation
 ================================
-We provide example codes of training in `rllib` and evaluating the model from `rllib`.
+We provide example codes for training in `rllib` and evaluating the model from `rllib`.
 
 
 - rllib_train.py:
