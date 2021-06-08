@@ -185,7 +185,7 @@ Evaluation
 ====================
 
 ``evaluate.py`` is a scoring program that output the scores of your agent. It is the same as the evaluate program on the server. You can evaluate your solution locally by execute:
-
+export NODE_OPTIONS=--max-old-space-size=8192
 .. code-block::
 
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200
@@ -239,7 +239,7 @@ You can visualize the replay of your intermediate results after your solution be
     yarn
     yarn start
 
-5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
+5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please try to type "export NODE_OPTIONS=--max-old-space-size=8192" on your terminal or refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
 Here are some Tips:
 
