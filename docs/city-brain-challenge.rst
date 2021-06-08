@@ -39,7 +39,7 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
-We will evaluate your solution on multiple traffic flow settings. We just add the total served vehicles over all evaluation scenarios as the final total served vehicles, and we calculate the average delay index of all vehicles over all scenarios as the final delay index.
+We will evaluate your solution on multiple traffic flow settings. We just add the total served vehicles over all evaluation scenarios as the final total served vehicles, and we calculate the average delay index among all vehicles over all scenarios as the final delay index.
 
 ======================
 Round2_Starterkit
@@ -112,7 +112,7 @@ Participant will get a ``starter-kit``. It contains::
 
     # scoring script for multi flow
     evaluate.sh
-
+of
     # rllib train example
     rllib_train.py
 
