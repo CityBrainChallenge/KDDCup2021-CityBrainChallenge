@@ -198,7 +198,7 @@ Evaluation
 
 ``evaluate.sh`` is a scoring script that output the scores of your agent in multiple flows. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
 
-``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in round 2.
+``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the previous round.
 
 .. code-block::
 
@@ -223,7 +223,7 @@ Results will be saved as ``/starter-kit/out/scores.json``, the data format of re
       "success": true,
       "error_msg": "", // if "success" is false, "error_msg" stores the exception
       "data": {
-        "total_served_vehicles": 1047, // if "success" is false, here it returns -1
+        "total_served_vehicles": 1047, // if "success" is false, here it rethe replay of your intermediate results after your solution being evaluated. Here `mapbox token` and `yarn` are required. You can get a `mapbox token` by registering a mapbox account.turns -1
         "delay_index": 2.3582080966292374 // if "success" is false, here it returns -1
       }
     }
@@ -256,7 +256,7 @@ You can visualize the replay of your intermediate results after your solution be
 
     yarn
     yarn start
-
+the replay of your intermediate results after your solution being evaluated. Here `mapbox token` and `yarn` are required. You can get a `mapbox token` by registering a mapbox account.
 5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
 Here are some Tips:​
@@ -292,5 +292,5 @@ Make a submission
 
 7. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
 
-tips:
-    In round3, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_
+Important tips:
+    In the final round, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_
