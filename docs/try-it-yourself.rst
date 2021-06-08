@@ -263,7 +263,7 @@ Here are some Tips:​
 260
 5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
-- *Sky blue* indicates left-turning cars, *dark blue* indicates straight ahead cars, and *dark green* indicates right-turning cars.
+- *Sky blue* indicates left-turning vehicles, *dark blue* indicates going straight vehicles, and *dark green* indicates right-turning vehicles.
 - Lines indicate roads. The color of the line represents the average speed of the road.
 - Here's an example of an intersection in ui. The number in the center (with red background) indicates the current phase number. The number of each road segment help you to identify the permissible movements of current phase, for example, in current phase-1, 0 and 2 left-turn movements are given right-of-way. For more information about signal phase, please refer to `Action <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#actions>`_.
 
