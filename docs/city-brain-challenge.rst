@@ -19,7 +19,7 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
 
 
 
-In the qualification round, a city-scale road network and 1-hour traffic data is provided. We use exactly the same road network and traffic data for scoring your submissions. The traffic demand changes every 20-minute: during the first 20-minute, there are about a total of 33,000 vehicles entered the road network, this number increases to 40,000 and 47,000 for the next two 20-minutes. 
+In the final round, a city-scale road network and 1-hour sample traffic data is provided. We use exactly the same road network but different traffic data for scoring your submissions. Participants are encouraged to use the python script to generate your own sample traffic data for training and testing since the traffic settings for evaluation is not revealed. 
 
 ===============
 Evaluation
@@ -39,7 +39,7 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
-In multiple flow setting, we just add the total served vehicles of each flow as the final result of total served vehicles, and we calculate the average delay index of all vehicles from all flows as the final result of delay index.
+We will evaluate your solution on multiple traffic flow settings. We just add the total served vehicles over all evaluation scenarios as the final total served vehicles, and we calculate the average delay index of all vehicles over all scenarios as the final delay index.
 
 ======================
 Round2_Starterkit
@@ -92,14 +92,14 @@ Participant will get a ``starter-kit``. It contains::
     # Your custom CBEngine
     agent/CBEngine_round3.py
 
-    # flow data and roadnet data
+    # sample traffic flow data and road network data
     data/flow_round3_flow0.txt
     ...
     data/roadnet_round3.txt
     ...
 
-    # traffic_generation script
-    data/traffic_generation.py
+    # demo script for generating sample traffic flow data
+    data/traffic_generator.py
 
     # where you store your model
     model/
