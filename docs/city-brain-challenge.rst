@@ -30,7 +30,7 @@ The submission scoring and ranking process follows three principles:
 
  - Solutions that served more vehicles will rank higher.
  - If two solutions served the same number of vehicles, the one with lower delay index will rank higher.
- - If two solutions served the same number of vehicles with same delay index, the one submitted earlier will rank higher.
+ - If two solutions served the same1.  number of vehicles with same delay index, the one submitted earlier will rank higher.
 
 The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
 
@@ -135,6 +135,8 @@ Final round computing resource
 ======================
 
 Details on computing resources allocation is described as follows:
+
+
 1. In final round, each qualified team will be able to access a computing cluster with 248 CPU cores, 640GB memory, and 1 TB hard disk storage as baseline computing resources. This will allow the participants to run at least 30 simulator instances in parallel. We have installed the `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ to support distributed model training. Sample codes of training models using RLlib are provided. However, participants can also use their own preferred distributed computing packages.
 2. As for the extra computing resources,  we will arrange a computing resource allocation round every 5 days (6/15 2 pm, 6/20 2 pm, 6/25 2 pm, ...). Participants may expect a maintenance time from 2 pm to 10 pm while we allocating the extra computing resources. All above times are in UTC-12 time zone. 
 
