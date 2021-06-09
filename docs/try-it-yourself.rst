@@ -138,7 +138,7 @@ Here is a simple example of a fixed time (traffic signal is pre-timed) agent imp
             for key,val in observations.items():
                 observations_agent_id = int(key.split('_')[0])
                 observations_feature = key[key.find('_')+1:]
-                if(observations_agent_id not in observations_for_agent.keys()):
+                if(observations_agenpython3 evaluate.py --input_dir agent --output_dir out --sim_cfg cfg/simulator.cfg --metric_period 200t_id not in observations_for_agent.keys()):
                     observations_for_agent[observations_agent_id] = {}
                 observations_for_agent[observations_agent_id][observations_feature] = val
 
