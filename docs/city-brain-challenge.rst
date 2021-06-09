@@ -107,7 +107,7 @@ Participant will get a ``starter-kit``. It contains::
     # scoring script for single flow
     evaluate.py
 
-    # summarize the result of multi flow
+    # summarize the result of evaluation your solution on multiple traffic flow settings
     summarize.py
 
     # evaluation and scoring script
@@ -133,3 +133,8 @@ Participants should implement their algorithm in agent.py. In final round, custo
 ======================
 Final round computing resource
 ======================
+
+Details on computing resources allocation is described as follows:
+1. In final round, each qualified team will be able to access a computing cluster with 248 CPU cores, 640GB memory, and 1 TB hard disk storage as baseline computing resources. This will allow the participants to run at least 30 simulator instances in parallel. We have installed the `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ to support distributed model training. Sample codes of training models using RLlib are provided. However, participants can also use their own preferred distributed computing packages.
+2. As for the extra computing resources,  we will arrange a computing resource allocation round every 5 days (6/15 2 pm, 6/20 2 pm, 6/25 2 pm, ...). Participants may expect a maintenance time from 2 pm to 10 pm while we allocating the extra computing resources. All above times are in UTC-12 time zone. 
+
