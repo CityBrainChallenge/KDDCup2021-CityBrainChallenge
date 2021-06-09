@@ -110,9 +110,9 @@ Participant will get a ``starter-kit``. It contains::
     # summarize the result of multi flow
     summarize.py
 
-    # scoring script for multi flow
+    # evaluation and scoring script
     evaluate.sh
-of
+
     # rllib train example
     rllib_train.py
 
