@@ -42,7 +42,7 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
 We will evaluate your solution on multiple traffic flow settings. We just add the total served vehicles over all evaluation scenarios as the final total served vehicles, and we calculate the average delay index among all vehicles over all scenarios as the final delay index.
 
 ======================
-Qualfication round Starterkit
+Qualfication round Starter-kit
 ======================
 
 .. code-block::
@@ -75,7 +75,7 @@ Qualfication round Starterkit
 Participants should implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores. Participants could modify ``simulator.cfg`` and  ``gym_cfg.py``.
 
 ======================
-Final round Starterkit
+Final round Starter-kit
 ======================
 
 Participant will get a ``starter-kit``. It contains::
@@ -129,3 +129,7 @@ of
     demo.py
 
 Participants should implement their algorithm in agent.py. In final round, custom ``CBEngine_round3`` is available. Participants could **only** modify the observation and reward. In submission, ``agent.py``, ``gym_cfg.py``, ``CBEngine_round3.py`` is necessary.
+
+======================
+Final round computing resource
+======================
