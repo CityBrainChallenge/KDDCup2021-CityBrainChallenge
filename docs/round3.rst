@@ -38,7 +38,7 @@ Login
 
 Model development
 
-- `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ are the default packages to support distributed model training. Sample codes of training models using RLlib are provided. 
+- `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ are the default packages to support distributed model training. Sample codes of training models using RLlib are provided in ` rllib_train.py`. 
 - Participants can also use their own preferred distributed computing packages
 
 Result and submission
