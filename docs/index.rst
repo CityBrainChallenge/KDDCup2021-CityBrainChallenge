@@ -8,5 +8,6 @@ Welcome to CityBrainChallenge's documentation!
     city-brain-challenge
     try-it-yourself
     computing resource
+    starter-kit
     cbengine
     APIs
