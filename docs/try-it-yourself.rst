@@ -190,7 +190,7 @@ Here `load_roadnet` imports the roadnet file.
     agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
 
 ====================================
-Training and evaluating rllib model
+Training and evaluating with rllib
 ====================================
 We provide example codes for training in `rllib` and evaluating the model from `rllib`.
 
