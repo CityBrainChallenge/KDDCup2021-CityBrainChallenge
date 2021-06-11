@@ -131,8 +131,4 @@ Participant will get a ``starter-kit``. It contains::
 
 Participants should implement their algorithm in agent.py. In the final phase, custom ``CBEngine_round3`` is available. Participants can **only** revise the observation and reward if they choose to use the rllib interface. Participants can also choose not to use rllib interface and implement their own algorithm. 
 
-======================
-Final phase computing resource
-======================
-
 
