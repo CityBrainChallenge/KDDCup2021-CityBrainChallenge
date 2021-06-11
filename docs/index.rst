@@ -9,4 +9,4 @@ Welcome to CityBrainChallenge's documentation!
     try-it-yourself
     cbengine
     APIs
-    computing resource
+    round3
