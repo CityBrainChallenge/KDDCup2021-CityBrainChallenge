@@ -104,7 +104,7 @@ Participants should implement their algorithm in agent.py. In the final phase, c
 
 1. Participants can submit their own ``CBEngine_round3`` for training or evaluation. Note that **only** `observation` and `reward` could be modified. Please make sure that the dimension of `observation` is aligned with ``gym_cfg.py``. You could continue using the `observations` defined in the qualification phase, but the previous `reward` can't be used in `rllib` because `rllib` requires that each agent to be assigned with a `reward`. We provide 2 demo `rewards` definitions, "pressure" and "queue length", along with the old `reward` in the comment of default `CBEngine_round3.py``.
 #. Now the current step is not included in ``observation`` by default. It is now included in ``obs['info']['step']``
-#. The observation format is modified to align with rllib api. Please look up to the `observation <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_
+#. The observation format is modified to align with rllib api. For more information, please refer to the `observation <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-step>`_
 #. Now the keys (i.e. agent_id) of ``actions``, ``reward``, ``observation``, ``dones`` are `str` instead of `int`.
 
 #. Now `env.reset` return a dict: `observation`.
