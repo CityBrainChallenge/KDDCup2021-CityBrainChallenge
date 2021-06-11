@@ -207,7 +207,7 @@ Simulation Step
 
         "vehicle_info": {
         'step': 2,
-        0: {
+        0: { # 0 is the vehicle ID
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
             "drivable": [29301.0], # Current lane of this vehicle. Here 293 is the road segment ID, 01 indicates the middle lane (00 and 02 indicate inner and outer lanes respectively)
             "road": [293.0], # Current road of this vehicle.
