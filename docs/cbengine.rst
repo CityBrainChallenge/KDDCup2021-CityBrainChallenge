@@ -7,7 +7,7 @@ CBEngine is a microscopic traffic simulation engine that can support city-scale 
 
 Customize CBEngine interface
 **********************
-In the final phase, you can customize the 'CBEngine' interface to define their own `observation` and `reward`, but you need to submit their customized `CBEngine`. Here is an example customized `CBEngine`:
+In the final phase, you can customize the ``CBEngine``interface to define their own `observation` and `reward`, but you need to submit their customized ``CBEngine``. Here is an example customized ``CBEngine``:
 
 .. code-block:: python
 
