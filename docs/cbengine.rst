@@ -7,7 +7,7 @@ CBEngine is a microscopic traffic simulation engine that can support city-scale 
 
 Customize CBEngine interface
 **********************
-In the final phase, you can customize the ``CBEngine`` interface to define their own `observation` and `reward`, but you need to submit their customized ``CBEngine``. Here is an example customized ``CBEngine``:
+In the final phase, you can customize the ``CBEngine`` interface to define their own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example customized ``CBEngine``:
 
 .. code-block:: python
 
@@ -147,7 +147,7 @@ In the final phase, you can customize the ``CBEngine`` interface to define their
 
 Participants can continue using the old `observation` used in qualification phase by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
 
-Note that you are **not allowed** to use `self.eng.log_vehicle_info()` (otherwise, your solution will not be accepted). Here is a table of the APIs (`self.eng`) that are allowable for the final phase:
+Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherwise, your solution will not be accepted). Here is a table of the APIs (e.g., ``self.eng.get_vehicles()``) that are allowable for the final phase:
 
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
 |API                            |Returned value                 |Description                                                                                  |
