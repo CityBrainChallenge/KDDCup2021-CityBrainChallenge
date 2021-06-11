@@ -5,9 +5,9 @@ Environment - CBEngine
 
 CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The following sections describe input data format, observations and actions for the simulation engine.
 
-Customized CBEngine
+Customize CBEngine Interface
 **********************
-In the final phase, participants could modify the `observation` and `reward` in training, and submit their customized `CBEngine`. Here is an example customized `CBEngine`:
+In the final phase, you can customize the 'CBEngine' interface to define their own `observation` and `reward`, but you need to submit their customized `CBEngine`. Here is an example customized `CBEngine`:
 
 .. code-block:: python
 
@@ -145,9 +145,9 @@ In the final phase, participants could modify the `observation` and `reward` in 
             rwds.pop(k)
     return rwds
 
-Participants could continue using old `observation` by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
+Participants can continue using the old `observation` used in qualification phase by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
 
-You could use the api of ``self.eng`` to construct your observation. Here is a table of the api.
+Note that you are **not allowed** to use `self.eng.log_vehicle_info()` (otherwise, your solution will not be accepted). Here is a table of the APIs (`self.eng`) that are allowable for the final phase:
 
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
 |API                            |Returned value                 |Description                                                                                  |
@@ -166,6 +166,9 @@ You could use the api of ``self.eng`` to construct your observation. Here is a t
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
 |get_vehicle_info(vehicle_id)   |dict                           |Input vehicle_id, output the information of the vehicle as a dict.                           |
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+
+
+
 
 Data format
 *******************
