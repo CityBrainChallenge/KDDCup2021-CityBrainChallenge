@@ -3,7 +3,7 @@
 Environment - CBEngine
 ============================
 
-``CBEngine`` is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. ``CBEngine`` can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. ``CBEngine`` is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The following sections describe the ''CBEngine'' interface, data format, observations and actions.
+``CBEngine`` is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. ``CBEngine`` can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. ``CBEngine`` is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The following sections describe how to customize ``CBEngine`` interface, data format, observations and actions.
 
 Customize CBEngine interface
 **********************
