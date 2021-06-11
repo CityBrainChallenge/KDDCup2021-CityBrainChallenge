@@ -19,7 +19,7 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
 
 
 
-In the final round, a city-scale road network and 1-hour sample traffic data is provided. We use exactly the same road network but different traffic data for scoring your submissions. Participants are encouraged to use the python script to generate your own sample traffic data for training and testing since the traffic settings for evaluation is not revealed. 
+In the final phase, a city-scale road network and 1-hour sample traffic data is provided. We use exactly the same road network but different traffic data for scoring your submissions. Participants are encouraged to use the python script to generate your own sample traffic data for training and testing since the traffic settings for evaluation is not revealed. 
 
 ===============
 Evaluation
@@ -43,7 +43,7 @@ The submission scoring and ranking process follows three principles:
  - If two solutions served the same number of vehicles with same delay index, the one submitted earlier will rank higher.
 
 ======================
-Qualfication round Starter-kit
+Qualfication phase Starter-kit
 ======================
 
 .. code-block::
@@ -76,7 +76,7 @@ Qualfication round Starter-kit
 Participants should implement their algorithm in ``agent.py``. And then execute ``evaluate.py`` to get scores. Participants could modify ``simulator.cfg`` and  ``gym_cfg.py``.
 
 ======================
-Final round Starter-kit
+Final phase Starter-kit
 ======================
 
 Participant will get a ``starter-kit``. It contains::
@@ -94,7 +94,7 @@ Participant will get a ``starter-kit``. It contains::
     agent/CBEngine_round3.py
 
     # sample traffic flow data and road network data
-    data/flow_round3_flow0.txt
+    data/flow_round3.txt
     ...
     data/roadnet_round3.txt
     ...
@@ -129,7 +129,10 @@ Participant will get a ``starter-kit``. It contains::
     # simple demo
     demo.py
 
-Participants should implement their algorithm in agent.py. In final phase, custom ``CBEngine_round3`` is available. Participants can **only** revise the observation and reward if they choose to use the rllib interface. Participants can also choose not to use rllib interface and implement their own algorithm. 
+Participants should implement their algorithm in agent.py. In the final phase, custom ``CBEngine_round3`` is available. Participants can **only** revise the observation and reward if they choose to use the rllib interface. Participants can also choose not to use rllib interface and implement their own algorithm. 
 
+======================
+Final phase computing resource
+======================
 
 
