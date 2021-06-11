@@ -37,6 +37,49 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
     # for evaluating multiple flow in parallel
     bash evaluate.sh agent out
 
+===================
+Final phase computing resource
+===================
+
+In the final phase, a large-scale cloud computing platform is provided for all qualified teams. Followings are some details on computing resource allocation and usage.
+
+Computing resource allocation
+----------------------------
+
+Basic computing resource
+
+- Each team will be assigned a computing cluster with 248 CPU cores, 640GB memory, and 1 TB hard disk storage as basic computing resource. 
+- The basic computing resource will allow each team to run at least 30 simulator instances in parallel. 
+
+Bonus resource allocation
+
+- We will arrange 3 rounds of bonus resource allocation on 06/15, 06/20 and 06/25, respectively.
+- Top 10 teams by 2:00 PM UTC-12 of the allocation day can apply for bonus computing resources (up to 144 CPU cores,  384GB memory per team). 
+- Between 2:00 PM and 10:00 PM of the allocation day, we will recycle and re-allocate the bonus computing resources. Participants cannot access the computing resources during this period. 
+
+Bonus resource application
+
+- To apply for bonus computing resource, the team leader needs to send an application email to citybrainchallenge@gmail.com before 2:00 PM UTC-12  of the allocation day. Please use the same email address you used for registration.
+- The email only needs to contain a title: "Computing resource request - team XX (team name)" (Email content is not needed).
+- We will review all applications and grant bonus resources based on the CPU usage of a team in the previous allocation round and send a reponse by 10:00 PM UTC-12 of the allocation day.
+
+How to use the computing resource
+----------------------------
+
+Login
+
+- The top 20 qualified teams' leaders will receive the login credentials along with the confirmation emails.
+- The login credential includes IP address, user name, and password, which you can use to login to the assigned computing cluster (A ubuntu system is pre-installed).
+
+Model development
+
+- `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ are the default packages to support distributed model training. Sample codes of training models using RLlib are provided in ``rllib_train.py``. 
+- Participants can also use their own preferred distributed computing packages
+
+Result and submission
+
+- Participants need to download their training log, results and models to their local storage.  It is the responsibility of the participants to ensure the security of the data.
+- Participants still need to submit their model via the official website to get their leaderboard scores and official ranking.
 
 ================
 Run simulation
@@ -438,22 +481,22 @@ We provide example codes for training in `rllib` and evaluating the model from `
 
 
 =================================
-Evaluation of online environment
+Evaluation
 =================================
 
 
-``evaluate.sh`` is a scoring script that output the scores of your agent in multiple flows. It is the same as the evaluate program on the server. So you'd like to check your agent's behaviour by execute
+``evaluate.sh`` is a scoring script that output the scores of your agent in multiple sample traffic flow in parallel. It is the same as the evaluate program on the server. 
 
-``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the previous round.
+``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the qualification phase.
 
 .. code-block::
 
-    # for evaluating single flow
+    # run evaluation on 1 set of traffic flow 
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200
-    # for evaluating multiple flow in parallel
+    # run evaluation on multiple sets of traffic flow in parallel
     bash evaluate.sh agent out
 
-Then multiple flows result will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/your-flow-number/scores.json``. In qualification phase, your solution is evaluated every 200 seconds for scoring (i.e., metric_period=200).
+The results for multiple traffic flows will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/your-flow-number/scores.json``. In qualification phase, your solution is evaluated every 200 seconds for scoring (i.e., metric_period=200).
 
 
 
@@ -539,4 +582,4 @@ Make a submission
 7. Participants are responsible for ensuring that all the submissions can be successfully tested under the given evaluation framework.
 
 Important tips:
-    In the final round, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_
+    In the final phase, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_
