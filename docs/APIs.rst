@@ -200,20 +200,19 @@ Simulation Step
     - key is `str`
     - {'step': current_step, `vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
     - env.set_info(1) to return a dictionary of vehicle information, otherwise, return an empty dictionary.
+    - "route" and "t_ff" are removed from "vehicle_info" in final phase 
 
 
     .. code-block::
 
         "vehicle_info": {
         'step': 2,
-        0: {
+        0: { # 0 is the vehicle ID
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
             "drivable": [29301.0], # Current lane of this vehicle. Here 293 is the road segment ID, 01 indicates the middle lane (00 and 02 indicate inner and outer lanes respectively)
             "road": [293.0], # Current road of this vehicle.
-            "route": [293.0, 195.0, 207.0, 5.0, 67.0, 70.0, 88.0, 92.0, 76.0, 18.0], # Route of this vehicle (starting from current road).
             "speed": [0.0], # Current speed of this vehicle.
             "start_time": [73.0], # Time of creation of this vehicle.
-            "t_ff": [112.716] # Travel time of this vehicle assuming no traffic signal and other vehicle exists.
             },
         ...
         }

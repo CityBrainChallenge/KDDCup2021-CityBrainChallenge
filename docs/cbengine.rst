@@ -3,11 +3,11 @@
 Environment - CBEngine
 ============================
 
-CBEngine is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. CBEngine can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. CBEngine is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The safety distance car following and lane-changing models used in CBEngine are similar to SUMO (Simulation of Urban Mobility). The following sections describe input data format, observations and actions for the simulation engine.
+``CBEngine`` is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. ``CBEngine`` can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. ``CBEngine`` is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The following sections describe how to customize ``CBEngine`` interface, data format, observations and actions.
 
 Customize CBEngine interface
 **********************
-In the final phase, you can customize the ``CBEngine`` interface to define their own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example customized ``CBEngine``:
+In the final phase, you can customize the ``CBEngine`` interface to define their own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example code to customize ``CBEngine`` interface:
 
 .. code-block:: python
 
@@ -147,7 +147,7 @@ In the final phase, you can customize the ``CBEngine`` interface to define their
 
 Participants can continue using the old `observation` used in qualification phase by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
 
-Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherwise, your solution will not be accepted). Here is a table of the APIs (e.g., ``self.eng.get_vehicles()``) that are allowable for the final phase:
+Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherwise, your solution will not be accepted), which means that you cannot access to the information about vehicle route and travel time at speed limit. Here is a table of the APIs (e.g., ``self.eng.get_vehicles()``) that are allowable for the final phase:
 
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
 |API                            |Returned value                 |Description                                                                                  |
