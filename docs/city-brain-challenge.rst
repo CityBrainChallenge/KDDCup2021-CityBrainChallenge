@@ -25,12 +25,7 @@ In the final round, a city-scale road network and 1-hour sample traffic data is 
 Evaluation
 ===============
 
-Total number of vehicles served (i.e., total number of vehicles entering the network) and delay index will be computed every 200 seconds to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.60. We carefully tuned the delay threshold to ensure that lower bound of level of service can be met if the solution is implemented in a real city. 
-The submission scoring and ranking process follows three principles:
-
- - Solutions that served more vehicles will rank higher.
- - If two solutions served the same number of vehicles, the one with lower delay index will rank higher.
- - If two solutions served the same1.  number of vehicles with same delay index, the one submitted earlier will rank higher.
+Total number of vehicles served (i.e., total number of vehicles entering the network) and delay index will be computed every 120 seconds to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.40. 
 
 The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
 
@@ -39,7 +34,13 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
-We will evaluate your solution on multiple traffic flow settings. We just add the total served vehicles over all evaluation scenarios as the final total served vehicles, and we calculate the average delay index among all vehicles over all scenarios as the final delay index.
+We will evaluate your solution on multiple traffic flow settings. The overall `total number of served vehicles' is computed as the summation of `total number of served vehicles' over all evaluation scenarios. The overall `delay index' is computed as the average delay index among all vehicles over all scenarios.
+
+The submission scoring and ranking process follows three principles:
+
+ - Solutions that served more vehicles will rank higher.
+ - If two solutions served the same number of vehicles, the one with lower delay index will rank higher.
+ - If two solutions served the same number of vehicles with same delay index, the one submitted earlier will rank higher.
 
 ======================
 Qualfication round Starter-kit
@@ -128,15 +129,7 @@ Participant will get a ``starter-kit``. It contains::
     # simple demo
     demo.py
 
-Participants should implement their algorithm in agent.py. In final round, custom ``CBEngine_round3`` is available. Participants could **only** modify the observation and reward. In submission, ``agent.py``, ``gym_cfg.py``, ``CBEngine_round3.py`` is necessary.
-
-======================
-Final round computing resource
-======================
-
-Details on computing resources allocation is described as follows:
+Participants should implement their algorithm in agent.py. In final phase, custom ``CBEngine_round3`` is available. Participants can **only** revise the observation and reward if they choose to use the rllib interface. Participants can also choose not to use rllib interface and implement their own algorithm. 
 
 
-1. In final round, each qualified team will be able to access a computing cluster with 248 CPU cores, 640GB memory, and 1 TB hard disk storage as baseline computing resources. This will allow the participants to run at least 30 simulator instances in parallel. We have installed the `Ray library <https://rise.cs.berkeley.edu/projects/ray/>`_ and `RLlib library <https://rise.cs.berkeley.edu/projects/rllib/>`_ to support distributed model training. Sample codes of training models using RLlib are provided. However, participants can also use their own preferred distributed computing packages.
-2. As for the extra computing resources,  we will arrange a computing resource allocation round every 5 days (6/15 2 pm, 6/20 2 pm, 6/25 2 pm, ...). Participants may expect a maintenance time from 2 pm to 10 pm while we allocating the extra computing resources. All above times are in UTC-12 time zone. 
 
