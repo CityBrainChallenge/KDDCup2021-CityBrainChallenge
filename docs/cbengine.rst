@@ -6,7 +6,7 @@ Environment - CBEngine
 ``CBEngine`` is a microscopic traffic simulation engine that can support city-scale road network traffic simulation. ``CBEngine`` can support fast simulation of road network traffic with thousands of intersections and hundreds of thousands of vehicles. ``CBEngine`` is developed by the team from Yunqi Academy of Engineering. This team will provide timely support for this competition. The following sections describe how to customize ``CBEngine`` interface, data format, observations and actions.
 
 Customize CBEngine interface
-**********************
+********************************************
 In the final phase, you can customize the ``CBEngine`` interface to define their own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example code to customize ``CBEngine`` interface:
 
 .. code-block:: python

@@ -14,7 +14,8 @@ Simulation Initialization
         "simulator_cfg_file": simulator_cfg_file,
         "thread_num": 8,
         "gym_dict": gym_configs,
-        "metric_period": 200
+        "metric_period": 200,
+        "vehicle_info_path": "/starter-kit/log/"
     }
     env = CBEngine_rllib_class(env_config)
 
@@ -73,6 +74,8 @@ Simulation Initialization
     - the interval of scoring
     - At each intervals, output a score json file
 
+`vehicle_info_path`:
+    - the path of vehicle informaton log
 
 ============================================
 Environment Configuration: gym_cfg.py
@@ -132,7 +135,7 @@ Simulation Step
     - The initial phases of all agents are set to 1
     - The phase of an agent will remain the same as the last phase if not specified in the dict `actions`
     - `Attention`: If an agent is switched to a different phase, there will be a 5 seconds period of 'all red' at this agent, which means all vehicles could not pass this intersection. If continuously switched to different phase, agent would be always 'all red'.
-    - In round3, `agent_id` will be `str` rather than `int`
+    - In final round, `agent_id` will be `str` rather than `int`
 
 `observations`:
     - a dict
@@ -153,7 +156,7 @@ Simulation Step
 
         # observation values:
 
-        # lane_speed sample: [13, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
+        # lane_speed sample: [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
         # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
@@ -162,7 +165,7 @@ Simulation Step
         # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
         # -2 indicating there's no vehicle on this lane
 
-        # lane_vehcile_num sample [13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        # lane_vehcile_num sample [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
         # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...

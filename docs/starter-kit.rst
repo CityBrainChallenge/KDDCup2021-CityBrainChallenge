@@ -60,3 +60,5 @@ Participants should implement their algorithm in agent.py. In the final phase, c
 #. Now the keys (i.e. agent_id) of ``actions``, ``reward``, ``observation``, ``dones`` are `str` instead of `int`.
 
 #. Now `env.reset` return a dict: `observation`.
+
+#. Now `route` and `t_ff` are removed from "vehicle_info" in final phase.
