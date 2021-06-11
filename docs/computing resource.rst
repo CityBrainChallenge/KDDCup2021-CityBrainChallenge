@@ -1,4 +1,4 @@
-.. _round3:
+.. _computing resource:
 
 Computing resource
 =================
