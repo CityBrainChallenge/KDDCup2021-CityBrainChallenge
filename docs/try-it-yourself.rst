@@ -299,8 +299,8 @@ We provide example codes for training in `rllib` and evaluating the model from `
 
     .. code-block::
 
-	 python3 rllib_train.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --stop-iters 5 --foldername train_result --num_workers 1 --thread_num 4
-	 python3 rllib_test.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --iteration 5 --foldername train_result --metric_period 120 --thread_num 4
+         python3 rllib_train.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --stop-iters 5 --foldername train_result --num_workers 1 --thread_num 4
+         python3 rllib_test.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --iteration 5 --foldername train_result --metric_period 120 --thread_num 4
 
 =================================
 Evaluation
