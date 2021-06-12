@@ -1,13 +1,13 @@
 .. _computing resource:
 
 Computing resource
-=================
+==================================
 
 In the final phase, a large-scale cloud computing platform is provided for all qualified teams. Followings are some details on computing resource allocation and usage.
 
-===============
+================================
 Computing resource allocation
-===============
+================================
 
 Basic computing resource
 ----------------------------
@@ -23,16 +23,16 @@ Bonus resource allocation
 - Between 2:00 PM and 10:00 PM of the allocation day, we will recycle and re-allocate the bonus computing resources. Participants cannot access the computing resources during this period. 
 
 Apply for bonur computing resource
-----------------------------
+--------------------------------------------------------
 
 - To apply for bonus computing resource, the team leader needs to send an application email to citybrainchallenge@gmail.com before 2:00 PM UTC-12  of the allocation day. Please use the same email address you used for registration.
 - The email only needs to contain a title: "Computing resource request - team XX (team name)" (Email content is not needed).
 - We will review all applications and grant bonus resources based on the CPU usage of a team in the previous allocation round and send a reponse by 10:00 PM UTC-12 of the allocation day.
 
 
-===============
+=============================================
 How to use the computing resource
-===============
+=============================================
 
 Login
 ----------------------------

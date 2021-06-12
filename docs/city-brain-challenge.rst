@@ -18,8 +18,7 @@ Traffic signals coordinate the traffic movements at the intersection and a smart
         :align: center
 
 
-
-In the final phase, a city-scale road network and 1-hour sample traffic data is provided. We use exactly the same road network but different traffic data for scoring your submissions. Participants are encouraged to use the python script to generate your own sample traffic data for training and testing since the traffic settings for evaluation is not revealed. 
+In the final phase, a city-scale road network sample traffic data is provided. We use exactly the same road network but different traffic data for scoring your submissions. Participants are encouraged to use the python script to generate your own sample traffic data for training and testing since the traffic settings for evaluation is not revealed.
 
 ===============
 Evaluation
@@ -34,7 +33,7 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
-We will evaluate your solution on multiple traffic flow settings. The overall `total number of served vehicles' is computed as the summation of `total number of served vehicles' over all evaluation scenarios. The overall `delay index' is computed as the average delay index among all vehicles over all scenarios.
+We will evaluate your solution on multiple traffic flow settings. The overall `total number of served vehicles' is computed as the summation of` total number of served vehicles' over all evaluation scenarios. The overall `delay index` is computed as the average delay index among all vehicles over all scenarios.
 
 The submission scoring and ranking process follows three principles:
 
