@@ -22,7 +22,7 @@ Bonus resource allocation
 - Top 10 teams by 2:00 PM UTC-12 of the allocation day can apply for bonus computing resources (up to 144 CPU cores,  384GB memory per team). 
 - Between 2:00 PM and 10:00 PM of the allocation day, we will recycle and re-allocate the bonus computing resources. Participants cannot access the computing resources during this period. 
 
-Apply for bonur computing resource
+Apply for bonus computing resource
 ----------------------------
 
 - To apply for bonus computing resource, the team leader needs to send an application email to citybrainchallenge@gmail.com before 2:00 PM UTC-12  of the allocation day. Please use the same email address you used for registration.
