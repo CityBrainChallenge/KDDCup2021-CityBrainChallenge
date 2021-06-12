@@ -49,7 +49,7 @@ Participant will get a ``starter-kit``. It contains::
     # script for parallel evaluating the model
     rllib_evaluate.sh
 
-    # simple demoNote that **only** `observation` and `reward` could be modified. Please make sure that the dimension of `observation` is aligned with ``gym_cfg.py``. You could continue using the `observations` defined in the qualification phase, but the previous `reward` can't be used in `rllib` because `rllib` requires that each agent to be assigned with a `reward`. We provide 2 demo `rewards` definitions, "pressure" and "queue length", along with the old `reward` in the comment of default `CBEngine_round3.py``.
+    # a simple demo to check your simulation environment. Note that **only** `observation` and `reward` could be modified. Please make sure that the dimension of `observation` is aligned with ``gym_cfg.py``. You could continue using the `observations` defined in the qualification phase, but the previous `reward` can't be used in `rllib` because `rllib` requires that each agent to be assigned with a `reward`. We provide 2 demo `rewards` definitions, "pressure" and "queue length", along with the old `reward` in the comment of default `CBEngine_round3.py``.
     demo.py
 
 Participants should implement their algorithm in agent.py. In the final phase, custom ``CBEngine_round3`` is available. Participants can **only** revise the observation and reward if they choose to use the rllib interface (Participants are also allowed not to use rllib interface to implement their own algorithm).
