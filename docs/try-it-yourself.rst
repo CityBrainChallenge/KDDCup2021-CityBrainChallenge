@@ -10,7 +10,7 @@ Installation
 ======================================
 
 Installation on your local environment
-----------------------------
+--------------------------------------------------------
 
 The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
 The latest image version is ``0.1.3``, we will notify you if a new version is updated.
@@ -36,11 +36,28 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200 --threshold 1.4
 
 Installation on the computing platform
-----------------------------
+--------------------------------------------------------
 
-================
+First, pull the starter-kit. Make sure the starter-kit is in ``~/rllib_starter_kit/CBEngine_rllib_starterkit``
+
+.. code-block::
+
+    cd ~/rllib_starter_kit
+    git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
+    cp -r KDDCup2021-CityBrainChallenge-starter-kit/. CBEngine_rllib_starterkit/
+
+Then start docker container ``working``. We have deployed ray environment in working. You could check it out by ``ray status``
+
+.. code-block::
+
+    docker exec -it -u root working bash
+    ray status
+
+
+
+================================
 Create sample traffic data
-================
+================================
 
 The python script for generating sample traffic is in the ``data`` folder. You can create your sample traffic flow data by executing,
 
@@ -48,142 +65,26 @@ The python script for generating sample traffic is in the ``data`` folder. You c
 
     python3 traffic_generator.py
     
-Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. 
+Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. Note that in following process, especially in multi-flow training and evaluating process of starter-kit, we rename the file with ``flow_round3_flow*.txt`` and then create a new config file in ``cfg/simulator_round3_flow*.cfg``. To align with the code, you should make sure that your data and configuration file keep this format.
 
 
 
-================
+================================
 Check the CBEngine
-================
+================================
 
-To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action). Also, participants could modify the CBEngine.
+To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action). Also, participants could modify the CBEngine. Code is in `demo.py <https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit/blob/main/demo.py>`_.
 
+.. code-block::
 
-.. code-block:: python
-
-    from agent.CBEngine_round3 import CBEngine_round3 as CBEngine_rllib_class
-    import gym
-    import agent.gym_cfg as gym_cfg
-
-    # load config
-    simulator_cfg_file = '/starter-kit/cfg/simulator_round3_flow0.cfg'
-    mx_step = 360
-    gym_cfg_instance = gym_cfg.gym_cfg()
-    gym_configs = gym_cfg_instance.cfg
-    # gym
-    env_config = {
-        "simulator_cfg_file": simulator_cfg_file,
-        "thread_num": 8,
-        "gym_dict": gym_configs,
-        "metric_period": 200,
-        "vehicle_info_path": "/starter-kit/log/"
-    }
-    env = CBEngine_rllib_class(env_config)
-    env.set_info(1)
-    for i in range(mx_step):
-        print("{}/{}".format(i, mx_step))
-
-        # run one step simulation
-        # you can use act() in agent.py to get the actions predicted by agent.
-        actions = {0: 1}
-        obs, rwd, dones, info = env.step(actions)
-
-        # print observations and infos
-        # for k, v in obs.items():
-        #     print("{}:{}".format(k, v))
-        for k, v in info.items():
-            print("{}:{}".format(k, v))
-
-
+    python3 demo.py
 
 The meaning of ``simulator_cfg_file``, ``gym_cfg``,``metric_period``,``vehicle_info_path`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
-Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from info to decide the phase.
+`agent.py <https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit/blob/main/agent/agent.py>`_ is a simple example of a fixed time (traffic signal is pre-timed) agent coordinating the traffic signal. It use the `current_step` (i.e., current time step) from info to decide the phase.
 
-
-
-.. code-block:: python
-
-    # how to import or load local files
-    import os
-    import sys
-    path = os.path.split(os.path.realpath(__file__))[0]
-    sys.path.append(path)
-    import gym_cfg
-    with open(path + "/gym_cfg.py", "r") as f:
-        pass
-
-    class TestAgent():
-        def __init__(self):
-            self.now_phase = {}
-            self.green_sec = 2
-            self.max_phase = 8
-            self.last_change_step = {}
-            self.agent_list = []
-            self.phase_passablelane = {}
-            self.intersections = {}
-            self.roads = {}
-            self.agents = {}
-        ################################
-        # don't modify this function.
-        # agent_list is a list of agent_id
-        def load_agent_list(self,agent_list):
-            self.agent_list = agent_list
-            self.now_phase = dict.fromkeys(self.agent_list,1)
-            self.last_change_step = dict.fromkeys(self.agent_list,0)
-
-        # intersections[key_id] = {
-        #     'have_signal': bool,
-        #     'end_roads': list of road_id. Roads that end at this intersection. The order is random.
-        #     'start_roads': list of road_id. Roads that start at this intersection. The order is random.
-        #     'lanes': list, contains the lane_id in. The order is explained in Docs.
-        # }
-        # roads[road_id] = {
-        #     'start_inter':int. Start intersection_id.
-        #     'end_inter':int. End intersection_id.
-        #     'length': float. Road length.
-        #     'speed_limit': float. Road speed limit.
-        #     'num_lanes': int. Number of lanes in this road.
-        #     'inverse_road':  Road_id of inverse_road.
-        #     'lanes': dict. roads[road_id]['lanes'][lane_id] = list of 3 int value. Contains the Steerability of lanes.
-        #               lane_id is road_id*100 + 0/1/2... For example, if road 9 have 3 lanes, then their id are 900, 901, 902
-        # }
-        # agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
-        def load_roadnet(self,intersections, roads, agents):
-            self.intersections = intersections
-            self.roads = roads
-            self.agents = agents
-        ################################
-
-
-        def act(self, obs):
-            """ !!! MUST BE OVERRIDED !!!
-            """
-            # here obs contains all of the observations and infos
-
-            # observations is returned 'observation' of env.step()
-            # info is returned 'info' of env.step()
-            observations = obs['observations']
-            info = obs['info']
-            actions = {}
-
-            now_step = info['step']
-            # a simple fixtime agent
-
-            # get actions
-            for agent in self.agent_list:
-                # select the now_step
-                step_diff = now_step - self.last_change_step[agent]
-                if(step_diff >= self.green_sec):
-                    self.now_phase[agent] = self.now_phase[agent] % self.max_phase + 1
-                    self.last_change_step[agent] = now_step
-                actions[agent] = self.now_phase[agent]
-            # print(self.intersections,self.roads,self.agents)
-            return actions
-
-
-Here `load_roadnet` imports the roadnet file. This infomation is also in `CBEngine_rllib` class.
+Here `load_roadnet` imports the roadnet file.
 
 .. code-block::
 
@@ -210,255 +111,8 @@ Here `load_roadnet` imports the roadnet file. This infomation is also in `CBEngi
 Training your model with rllib
 ====================================
 
-We provide example codes for training in `rllib` and evaluating the model from `rllib`.
-
-
-- rllib_train.py:
-    - It's an example code of training model in `rllib`.
-    - In ``train.sh`` we provide a simple training command for `/starter-kit/cfg/simulator_warm_up.cfg`. You could use it to check the environment.
-    - Note that the training result will be in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*``.
-
-.. code-block:: python
-
-    from ray import tune
-    import gym
-    from agent.CBEngine_round3 import CBEngine_round3 as CBEngine_rllib_class
-    import citypb
-    import ray
-    from ray import tune
-    import os
-    import numpy as np
-    import argparse
-    import sys
-    import subprocess
-    parser = argparse.ArgumentParser()
-
-
-
-    if __name__ == "__main__":
-        # some argument
-        parser.add_argument(
-            "--num_workers",
-            type=int,
-            default=30,
-            help="rllib num workers"
-        )
-        parser.add_argument(
-            "--multiflow",
-            '-m',
-            action="store_true",
-            default = False,
-            help="use multiple flow file in training"
-        )
-        parser.add_argument(
-            "--stop-iters",
-            type=int,
-            default=10,
-            help="Number of iterations to train.")
-        parser.add_argument(
-            "--algorithm",
-            type=str,
-            default="A3C",
-            help="algorithm for rllib"
-        )
-        parser.add_argument(
-            "--sim_cfg",
-            type=str,
-            default="/starter-kit/cfg/simulator_round3_flow0.cfg",
-            help = "simulator file for CBEngine"
-        )
-        parser.add_argument(
-            "--metric_period",
-            type=int,
-            default=3600,
-            help = "simulator file for CBEngine"
-        )
-        parser.add_argument(
-            "--thread_num",
-            type=int,
-            default=8,
-            help = "thread num for CBEngine"
-        )
-        parser.add_argument(
-            "--gym_cfg_dir",
-            type = str,
-            default="agent",
-            help = "gym_cfg (observation, reward) for CBEngine"
-        )
-        parser.add_argument(
-            "--checkpoint_freq",
-            type = int,
-            default = 5,
-            help = "frequency of saving checkpoint"
-        )
-
-        parser.add_argument(
-            "--foldername",
-            type = str,
-            default = 'train_result',
-            help = 'The result of the training will be saved in ./model/$algorithm/$foldername/. Foldername can\'t have any space'
-        )
-
-        # find the submission path to import gym_cfg
-        args = parser.parse_args()
-        for dirpath, dirnames, file_names in os.walk(args.gym_cfg_dir):
-            for file_name in [f for f in file_names if f.endswith(".py")]:
-                if file_name == "gym_cfg.py":
-                    cfg_path = dirpath
-        sys.path.append(str(cfg_path))
-        import gym_cfg as gym_cfg_submission
-        gym_cfg_instance = gym_cfg_submission.gym_cfg()
-        gym_dict = gym_cfg_instance.cfg
-        simulator_cfg_files=[]
-
-        # if set '--multiflow', then the CBEngine will utilize flows in 'simulator_cfg_files'
-        if(args.multiflow):
-            simulator_cfg_files = [
-                '/starter-kit/cfg/simulator_round3_flow0.cfg'
-                ]
-        else:
-            simulator_cfg_files = [args.sim_cfg]
-        print('The cfg files of this training   ',format(simulator_cfg_files))
-        class MultiFlowCBEngine(CBEngine_rllib_class):
-            def __init__(self, env_config):
-                env_config["simulator_cfg_file"] = simulator_cfg_files[(env_config.worker_index - 1) % len(simulator_cfg_files)]
-                super(MultiFlowCBEngine, self).__init__(config=env_config)
-
-
-        # some configuration
-        env_config = {
-            "simulator_cfg_file": args.sim_cfg,
-            "thread_num": args.thread_num,
-            "gym_dict": gym_dict,
-            "metric_period":args.metric_period,
-            "vehicle_info_path":"/starter-kit/log/"
-        }
-        obs_size = gym_dict['observation_dimension']
-        OBSERVATION_SPACE = gym.spaces.Dict({
-            "observation": gym.spaces.Box(low=-1e10, high=1e10, shape=(obs_size,))
-        })
-        ACTION_SPACE = gym.spaces.Discrete(9)
-        stop = {
-            "training_iteration": args.stop_iters
-        }
-        ################################
-        # modify this
-        tune_config = {
-            # env config
-            "env":MultiFlowCBEngine,
-            "env_config" : env_config,
-            "multiagent": {
-                "policies": {
-                    "default_policy": (None, OBSERVATION_SPACE, ACTION_SPACE, {},)
-                }
-            },
-
-            "num_cpus_per_worker":args.thread_num,
-            "num_workers":args.num_workers,
-
-
-
-            # add your training config
-
-        }
-        ########################################
-        ray.init(address = "auto")
-        local_path = './model'
-
-
-
-        def name_creator(self=None):
-            return args.foldername
-
-
-        # train model
-        ray.tune.run(args.algorithm, config=tune_config, local_dir=local_path, stop=stop,
-                     checkpoint_freq=args.checkpoint_freq,trial_dirname_creator = name_creator)
-
-
-
-
-- rllit_test.py:
-    - We provide a script ``rllib_test.py`` to evaluate your model of `rllib`. You could set your own arguments to evaluate the model.
-    - Again, the model file is in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*`` after training. In ``rllib_test.py``, you could set the arguments ``--algorithm``, ``--foldername``, ``--iteration`` to load and evaluate the model. You could refer to ``rllib_evaluate.sh``, which is a simple evaluating bash script to use ``rllib_test.py``.
-    - Result will be in ``/log/$flow_number/$folder_name/$iteration``. Here $flow_number is the number of ``simulator_round3_flow*.cfg``.
-    - When submission, you could load the ``checkpoint-*`` file in your `agent.py`. We provide an example ``agent_rllib.py`` in the starterkit.
-    - Don't open lots of evaluating processes in parallel. It would cause the cloud server shutdown!!!!
-    - Here is an example agent of loading the `rllib` model.
-
-.. code-block:: python
-
-    class RLlibTFCheckpointPolicy():
-        def __init__(
-            self, load_path, algorithm, policy_name, observation_space, action_space
-        ):
-            self._checkpoint_path = load_path
-            self._algorithm = algorithm
-            self._policy_name = policy_name
-            self._observation_space = observation_space
-            self._action_space = action_space
-            self._sess = None
-
-            if isinstance(action_space, gym.spaces.Box):
-                self.is_continuous = True
-            elif isinstance(action_space, gym.spaces.Discrete):
-                self.is_continuous = False
-            else:
-                raise TypeError("Unsupport action space")
-
-            if self._sess:
-                return
-
-            if self._algorithm == "PPO":
-                from ray.rllib.agents.ppo.ppo_tf_policy import PPOTFPolicy as LoadPolicy
-            elif self._algorithm in ["A2C", "A3C"]:
-                from ray.rllib.agents.a3c.a3c_tf_policy import A3CTFPolicy as LoadPolicy
-            elif self._algorithm == "PG":
-                from ray.rllib.agents.pg.pg_tf_policy import PGTFPolicy as LoadPolicy
-            elif self._algorithm in ["DQN","APEX"]:
-                from ray.rllib.agents.dqn.dqn_tf_policy import DQNTFPolicy as LoadPolicy
-            else:
-                raise TypeError("Unsupport algorithm")
-
-            self._prep = ModelCatalog.get_preprocessor_for_space(self._observation_space)
-            self._sess = tf.Session(graph=tf.Graph())
-            self._sess.__enter__()
-
-            with tf.name_scope(self._policy_name):
-                # obs_space need to be flattened before passed to PPOTFPolicy
-                flat_obs_space = self._prep.observation_space
-                self.policy = LoadPolicy(flat_obs_space, self._action_space, {})
-                objs = pickle.load(open(self._checkpoint_path, "rb"))
-                objs = pickle.loads(objs["worker"])
-                state = objs["state"]
-                weights = state[self._policy_name]
-                list_keys = list(weights.keys())
-                for k in list_keys:
-                    if(k not in self.policy.get_weights().keys()):
-                        weights.pop(k)
-                self.policy.set_weights(weights)
-
-        def act(self, obs):
-            action = {}
-            if isinstance(obs, list):
-                # batch infer
-                obs = [self._prep.transform(o) for o in obs]
-                action = self.policy.compute_actions(obs, explore=False)[0]
-            elif isinstance(obs, dict):
-                for k,v in obs.items():
-                    obs = self._prep.transform(v)
-                    action[k] = self.policy.compute_actions([obs], explore=False)[0][0]
-            else:
-                # single infer
-                obs = self._prep.transform(obs)
-                action = self.policy.compute_actions([obs], explore=False)[0][0]
-
-            return action
-
-
-====================================
 Customize CBEngine interface
-====================================
+------------------------------------
 
 In the final phase, you can customize the ``CBEngine`` interface to define your own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example code to customize ``CBEngine`` interface:
 
@@ -598,6 +252,8 @@ In the final phase, you can customize the ``CBEngine`` interface to define your 
             rwds.pop(k)
     return rwds
 
+
+
 Participants can continue using the old `observation` used in qualification phase by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
 
 Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherwise, your solution will not be accepted), which means that you cannot access to the information about vehicle route and travel time at speed limit. Here is a table of the APIs (e.g., ``self.eng.get_vehicles()``) that are allowable for the final phase:
@@ -621,29 +277,144 @@ Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherw
 +-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
 
 
+Training example of rllib
+------------------------------------
+
+We provide example codes for training in `rllib` and evaluating the model from `rllib`.
+
+
+- rllib_train.py:
+    - It's an example code of training model in `rllib`.
+    - In ``train.sh`` we provide a simple training command for `/starter-kit/cfg/simulator_round3_flow0.cfg`. You could use it to check the environment.
+    - Note that the training result will be in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*``.
+    - The detail argument description is in code. And for detail of rllib, please refer to `rllib <https://docs.ray.io/en/master/rllib.html>`_.
+    - Code is in `rllib_train.py <https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit/blob/main/rllib_train.py>`_
+    - If you use it in local environment, please comment line 143.
+
+    .. code-block::
+
+        # ray.init(address = "auto")
+
+    - An example of training and evaluating command is here.
+
+    .. code-block::
+
+	 python3 rllib_train.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --stop-iters 5 --foldername train_result --num_workers 1 --thread_num 4
+	 python3 rllib_test.py --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --algorithm DQN --iteration 5 --foldername train_result --metric_period 120 --thread_num 4
+
 =================================
 Evaluation
 =================================
 
-Default evalution method
+Default evaluation method
 ----------------------------
 
-``evaluate.sh`` is a scoring script that output the scores of your agent in multiple sample traffic flow in parallel.
+Here in default evaluation method, inputs are
+    - agent that control the signal. (input_dir)
+    - out directory. (score directory)
+    - simulation config that defines the flow. (sim_cfg).
+    - vehicle log directory where `info_step *.log` in. (vehicle_info_path)
+    - thread number of CBEngine. (thread_num)
+    - the evaluation interval. (metric_period)
+    - threshold of delay index. (threshold)
 
-``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the qualification phase.
+``evaluate.sh`` is an example scoring script that output the scores of your agent in multiple sample traffic flow
+
+``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the qualification phase. Detain of arguments is in code
 
 .. code-block::
 
-    # run evaluation on 1 set of traffic flow 
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg  --metric_period 120 --threshold 1.4 --vehicle_info_path log
+    # run evaluation on single traffic flow
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg  --metric_period 120 --threshold 1.4 --vehicle_info_path log --thread_num 4
+
+    # run evaluation on a set of traffic flow in parallel
+    bash evaluate.sh agent out log 1
 
 
-The results for multiple traffic flows will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In qualification phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
+The single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In final phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
 
 
 Efficient evaluation for a learning-based model
-----------------------------
-For learning-based model, we also provide an extra more efficient evaluation framework. But you can still use the default evaluation method for submission.
+--------------------------------------------------------
+For learning-based model of rllib, we also provide an extra more efficient evaluation framework. But you can still use the default evaluation method.
+
+- rllit_test.py:
+    - We provide a script ``rllib_test.py`` to evaluate your model of `rllib`. You could set your own arguments to evaluate the model.
+    - Again, the model file is in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*`` after training. In ``rllib_test.py``, you could set the arguments ``--algorithm``, ``--foldername``, ``--iteration`` to load and evaluate the model. You could refer to ``rllib_evaluate.sh``, which is a simple evaluating bash script to use ``rllib_test.py``.
+    - Result will be in ``/log/$flow_number/$folder_name/$iteration``. Here $flow_number is the number of ``simulator_round3_flow*.cfg``.
+    - When submission, you could load the ``checkpoint-*`` file in your `agent.py`. We provide an example ``agent_rllib.py`` in the starterkit.
+    - Don't open lots of evaluating processes in parallel. It may exceed the memory limit of computing platform!!!!
+    - Here is an example agent of loading the `rllib` model in `rllib_test.py <https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit/blob/main/rllib_test.py>`_.
+
+.. code-block:: python
+
+    class RLlibTFCheckpointPolicy():
+        def __init__(
+            self, load_path, algorithm, policy_name, observation_space, action_space
+        ):
+            self._checkpoint_path = load_path
+            self._algorithm = algorithm
+            self._policy_name = policy_name
+            self._observation_space = observation_space
+            self._action_space = action_space
+            self._sess = None
+
+            if isinstance(action_space, gym.spaces.Box):
+                self.is_continuous = True
+            elif isinstance(action_space, gym.spaces.Discrete):
+                self.is_continuous = False
+            else:
+                raise TypeError("Unsupport action space")
+
+            if self._sess:
+                return
+
+            if self._algorithm == "PPO":
+                from ray.rllib.agents.ppo.ppo_tf_policy import PPOTFPolicy as LoadPolicy
+            elif self._algorithm in ["A2C", "A3C"]:
+                from ray.rllib.agents.a3c.a3c_tf_policy import A3CTFPolicy as LoadPolicy
+            elif self._algorithm == "PG":
+                from ray.rllib.agents.pg.pg_tf_policy import PGTFPolicy as LoadPolicy
+            elif self._algorithm in ["DQN","APEX"]:
+                from ray.rllib.agents.dqn.dqn_tf_policy import DQNTFPolicy as LoadPolicy
+            else:
+                raise TypeError("Unsupport algorithm")
+
+            self._prep = ModelCatalog.get_preprocessor_for_space(self._observation_space)
+            self._sess = tf.Session(graph=tf.Graph())
+            self._sess.__enter__()
+
+            with tf.name_scope(self._policy_name):
+                # obs_space need to be flattened before passed to PPOTFPolicy
+                flat_obs_space = self._prep.observation_space
+                self.policy = LoadPolicy(flat_obs_space, self._action_space, {})
+                objs = pickle.load(open(self._checkpoint_path, "rb"))
+                objs = pickle.loads(objs["worker"])
+                state = objs["state"]
+                weights = state[self._policy_name]
+                list_keys = list(weights.keys())
+                for k in list_keys:
+                    if(k not in self.policy.get_weights().keys()):
+                        weights.pop(k)
+                self.policy.set_weights(weights)
+
+        def act(self, obs):
+            action = {}
+            if isinstance(obs, list):
+                # batch infer
+                obs = [self._prep.transform(o) for o in obs]
+                action = self.policy.compute_actions(obs, explore=False)[0]
+            elif isinstance(obs, dict):
+                for k,v in obs.items():
+                    obs = self._prep.transform(v)
+                    action[k] = self.policy.compute_actions([obs], explore=False)[0][0]
+            else:
+                # single infer
+                obs = self._prep.transform(obs)
+                action = self.policy.compute_actions([obs], explore=False)[0][0]
+
+            return action
+
 
 
 ===============
