@@ -205,13 +205,9 @@ Here `load_roadnet` imports the roadnet file. This infomation is also in `CBEngi
     }
     agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
 
-====================================
-Evaluate a rule-based solution
-====================================
-
 
 ====================================
-Evaluate a learning-based solution
+Training your model with rllib
 ====================================
 
 We provide example codes for training in `rllib` and evaluating the model from `rllib`.
@@ -382,10 +378,6 @@ We provide example codes for training in `rllib` and evaluating the model from `
 
 
 
-
-
-
-
 - rllit_test.py:
     - We provide a script ``rllib_test.py`` to evaluate your model of `rllib`. You could set your own arguments to evaluate the model.
     - Again, the model file is in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*`` after training. In ``rllib_test.py``, you could set the arguments ``--algorithm``, ``--foldername``, ``--iteration`` to load and evaluate the model. You could refer to ``rllib_evaluate.sh``, which is a simple evaluating bash script to use ``rllib_test.py``.
@@ -464,11 +456,177 @@ We provide example codes for training in `rllib` and evaluating the model from `
             return action
 
 
+====================================
+Customize CBEngine interface
+====================================
+
+In the final phase, you can customize the ``CBEngine`` interface to define your own ``observation`` and ``reward``, but you need to submit their customized ``CBEngine``. Here is an example code to customize ``CBEngine`` interface:
+
+.. code-block:: python
+
+    class CBEngine_round3(CBEngine_rllib_class):
+    """See CBEngine_rllib_class in /CBEngine_env/env/CBEngine_rllib/CBEngine_rllib.py
+
+    Need to implement reward.
+
+    implementation of observation is optional
+
+    """
+    def __init__(self,config):
+        super(CBEngine_round3,self).__init__(config)
+        self.observation_features = self.gym_dict['observation_features']
+        self.custom_observation = self.gym_dict['custom_observation']
+        self.observation_dimension = self.gym_dict['observation_dimension']
+
+    def _get_observations(self):
+
+        if(self.custom_observation == False):
+            obs = super(CBEngine_round3, self)._get_observations()
+            return obs
+        else:
+            ############
+            # implement your own observation
+            #
+            # Example: lane_vehicle_num
+            obs = {}
+            lane_vehicle = self.eng.get_lane_vehicles()
+            for agent_id, roads in self.agent_signals.items():
+                result_obs = []
+                for lane in self.intersections[agent_id]['lanes']:
+                    # -1 indicates empty roads in 'signal' of roadnet file
+                    if (lane == -1):
+                        result_obs.append(-1)
+                    else:
+                        # -2 indicates there's no vehicle on this lane
+                        if (lane not in lane_vehicle.keys()):
+                            result_obs.append(0)
+                        else:
+                            # the vehicle number of this lane
+                            result_obs.append(len(lane_vehicle[lane]))
+                # obs[agent_id] = {
+                #     "observation" : your_observation
+                # }
+                # Here agent_id must be str
+
+                obs[agent_id] = {"observation":result_obs}
+
+            # Here agent_id must be str. So here change int to str
+            int_agents = list(obs.keys())
+            for k in int_agents:
+                obs[str(k)] = obs[k]
+                obs.pop(k)
+
+            return obs
+            ############
+
+    def _get_reward(self):
+
+        rwds = {}
+
+        ##################
+        ## Example : pressure as reward.
+        # if(self.observation_features[0] != 'lane_vehicle_num'):
+        #     raise ValueError("maxpressure need 'lane_vehicle_num' as first observation feature")
+        # lane_vehicle = self.eng.get_lane_vehicles()
+        # for agent_id, roads in self.agent_signals.items():
+        #     result_obs = []
+        #     for lane in self.intersections[agent_id]['lanes']:
+        #         # -1 indicates empty roads in 'signal' of roadnet file
+        #         if (lane == -1):
+        #             result_obs.append(-1)
+        #         else:
+        #             # -2 indicates there's no vehicle on this lane
+        #             if (lane not in lane_vehicle.keys()):
+        #                 result_obs.append(0)
+        #             else:
+        #                 # the vehicle number of this lane
+        #                 result_obs.append(len(lane_vehicle[lane]))
+        #     pressure = (np.sum(result_obs[12: 24]) - np.sum(result_obs[0: 12]))
+        #     rwds[agent_id] = pressure
+        ##################
+
+        ##################
+        ## Example : queue length as reward.
+        v_list = self.eng.get_vehicles()
+        for agent_id in self.agent_signals.keys():
+            rwds[agent_id] = 0
+        for vehicle in v_list:
+            vdict = self.eng.get_vehicle_info(vehicle)
+            if(float(vdict['speed'][0])<0.5 and float(vdict['distance'][0]) > 1.0):
+                if(int(vdict['road'][0]) in self.road2signal.keys()):
+                    agent_id = self.road2signal[int(vdict['road'][0])]
+                    rwds[agent_id]-=1
+        # normalization for qlength reward
+        for agent_id in self.agent_signals.keys():
+            rwds[agent_id] /= 10
+
+        ##################
+
+        ##################
+        ## Default reward, which can't be used in rllib
+        ## self.lane_vehicle_state is dict. keys are agent_id(int), values are sets which maintain the vehicles of each lanes.
+
+        # def get_diff(pre,sub):
+        #     in_num = 0
+        #     out_num = 0
+        #     for vehicle in pre:
+        #         if(vehicle not in sub):
+        #             out_num +=1
+        #     for vehicle in sub:
+        #         if(vehicle not in pre):
+        #             in_num += 1
+        #     return in_num,out_num
+        #
+        # lane_vehicle = self.eng.get_lane_vehicles()
+        #
+        # for agent_id, roads in self.agents.items():
+        #     rwds[agent_id] = []
+        #     for lane in self.intersections[agent_id]['lanes']:
+        #         # -1 indicates empty roads in 'signal' of roadnet file
+        #         if (lane == -1):
+        #             rwds[agent_id].append(-1)
+        #         else:
+        #             if(lane not in lane_vehicle.keys()):
+        #                 lane_vehicle[lane] = set()
+        #             rwds[agent_id].append(get_diff(self.lane_vehicle_state[lane],lane_vehicle[lane]))
+        #             self.lane_vehicle_state[lane] = lane_vehicle[lane]
+        ##################
+        # Change int keys to str keys because agent_id in actions must be str
+        int_agents = list(rwds.keys())
+        for k in int_agents:
+            rwds[str(k)] = rwds[k]
+            rwds.pop(k)
+    return rwds
+
+Participants can continue using the old `observation` used in qualification phase by set ``'custom_observation' : False`` in ``gym_cfg.py``. But `reward` should be implemented because `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
+
+Note that you are **not allowed** to use ``self.eng.log_vehicle_info()`` (otherwise, your solution will not be accepted), which means that you cannot access to the information about vehicle route and travel time at speed limit. Here is a table of the APIs (e.g., ``self.eng.get_vehicles()``) that are allowable for the final phase:
+
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|API                            |Returned value                 |Description                                                                                  |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_count()            |int                            |The total number of running vehicle                                                          |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicles()                 |list                           |A list of running vehicles' ids                                                              |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_lane_vehicle_count()       |dict                           |A dict. Keys are lane_id, values are number of running vehicles on this lane.                |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_lane_vehicles()            |dict                           |A dict. Keys are lane_id, values are a list of running vehicles on this lane.                |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_speed()            |dict                           |A dict. Keys are vehicle_id of running vehicles, values are their speed                      |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_average_travel_time()      |float                          |The average travel time of both running vehicles and finished vehicles.                      |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+|get_vehicle_info(vehicle_id)   |dict                           |Input vehicle_id, output the information of the vehicle as a dict.                           |
++-------------------------------+-------------------------------+---------------------------------------------------------------------------------------------+
+
 
 =================================
 Evaluation
 =================================
 
+Default evalution method
+----------------------------
 
 ``evaluate.sh`` is a scoring script that output the scores of your agent in multiple sample traffic flow in parallel.
 
@@ -482,6 +640,10 @@ Evaluation
 
 The results for multiple traffic flows will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In qualification phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
 
+
+Efficient evaluation for a learning-based model
+----------------------------
+For learning-based model, we also provide an extra more efficient evaluation framework. But you can still use the default evaluation method for submission.
 
 
 ===============
@@ -500,6 +662,8 @@ Results will be saved as ``/starter-kit/out/scores.json``, the data format of re
         "delay_index": 2.3582080966292374 // if "success" is false, here it returns -1
       }
     }
+    
+
 
 ===============
 Visualization
@@ -556,7 +720,7 @@ Make a submission
 
 
 Important tips:
-    In the final phase, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_. So in total participants should submit ``CBEngine_round3.py``, ``agent.py``, ``gym_cfg.py``.
+    In the final phase, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_. So all participants should submit ``CBEngine_round3.py``, ``agent.py``, ``gym_cfg.py``.
 
 1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder and name it as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
 
