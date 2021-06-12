@@ -13,7 +13,7 @@ Participant will get a ``starter-kit``. It contains::
     # CBEngine config file
     agent/gym_cfg.py
 
-    # Your custom CBEngine
+    # To customize CBEngine interfaces
     agent/CBEngine_round3.py
 
     # sample traffic flow data and road network data
