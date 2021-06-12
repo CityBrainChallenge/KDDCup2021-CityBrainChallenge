@@ -6,11 +6,11 @@ Try it yourself
 Here, we provide guidelines for setting up the simulation environment and submitting results.
 
 ======================================
-Installation guide
+Installation
 ======================================
 
-Installation via Docker (local)
----------------------------------
+Installation on your local environment
+----------------------------
 
 The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
 The latest image version is ``0.1.3``, we will notify you if a new version is updated.
@@ -33,15 +33,27 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
     docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.3 bash
     cd starter-kit
     # for evaluating single flow
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 120 --threshold 1.4 --vehicle_info_path log
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200 --threshold 1.4
 
+Installation on the computing platform
+----------------------------
 
+================
+Create sample traffic data
+================
 
+The python script for generating sample traffic is in the ``data`` folder. You can create your sample traffic flow data by executing,
+
+.. code-block::
+
+    python3 traffic_generator.py
+    
+Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. 
 
 
 
 ================
-Run simulation
+Check the CBEngine
 ================
 
 To check your simulation enviroment is ok, you can run ``demo.py`` in the starter-kit, where the ``actions`` are simply fixed. You need to overwrite the function of ``act()`` in ``agent.py`` to define the policy of signal phase selection (i.e., action). Also, participants could modify the CBEngine.
@@ -84,7 +96,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
 
 
 
-The meaning of ``simulator_cfg_file``, ``gym_cfg``, ``metric_period``, ``vehicle_info_path`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
+The meaning of ``simulator_cfg_file``, ``gym_cfg``,``metric_period``,``vehicle_info_path`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
 Here is a simple example of a fixed time (traffic signal is pre-timed) agent implemented at ``agent.py`` to coordinate the traffic signal. It use the `current_step` (i.e., current time step) from info to decide the phase.
@@ -194,8 +206,14 @@ Here `load_roadnet` imports the roadnet file. This infomation is also in `CBEngi
     agents[agent_id] = list of length 8. contains the inroad0_id, inroad1_id, inroad2_id,inroad3_id, outroad0_id, outroad1_id, outroad2_id, outroad3_id
 
 ====================================
-Training and evaluating with rllib
+Evaluate a rule-based solution
 ====================================
+
+
+====================================
+Evaluate a learning-based solution
+====================================
+
 We provide example codes for training in `rllib` and evaluating the model from `rllib`.
 
 
@@ -371,9 +389,9 @@ We provide example codes for training in `rllib` and evaluating the model from `
 - rllit_test.py:
     - We provide a script ``rllib_test.py`` to evaluate your model of `rllib`. You could set your own arguments to evaluate the model.
     - Again, the model file is in ``model/$algorithm/$foldername/checkpoint_*/checkpoint-*`` after training. In ``rllib_test.py``, you could set the arguments ``--algorithm``, ``--foldername``, ``--iteration`` to load and evaluate the model. You could refer to ``rllib_evaluate.sh``, which is a simple evaluating bash script to use ``rllib_test.py``.
-    - Result will be in ``/log/$flow_number/$folder_name/$iteration``. Here ``$flow_number`` is the number of ``simulator_round3_flow*.cfg``.
+    - Result will be in ``/log/$flow_number/$folder_name/$iteration``. Here $flow_number is the number of ``simulator_round3_flow*.cfg``.
     - When submission, you could load the ``checkpoint-*`` file in your `agent.py`. We provide an example ``agent_rllib.py`` in the starterkit.
-    - Don't open lots of evaluating processes in parallel. It would exceed the memory limit of ECS!!!!
+    - Don't open lots of evaluating processes in parallel. It would cause the cloud server shutdown!!!!
     - Here is an example agent of loading the `rllib` model.
 
 .. code-block:: python
@@ -462,7 +480,7 @@ Evaluation
     python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg  --metric_period 120 --threshold 1.4 --vehicle_info_path log
 
 
-The results for single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In qualification phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
+The results for multiple traffic flows will be output at ``/starter-kit/out/scores.json``, while single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In qualification phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
 
 
 
@@ -538,7 +556,7 @@ Make a submission
 
 
 Important tips:
-    In the final phase, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html>`_. So in total participants should submit ``CBEngine_round3.py``, ``agent.py``, ``gym_cfg.py``.
+    In the final phase, you should also submit ``CBEngine_round3.py``. See `CBEngine_round3 <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/cbengine.html#custom-cbengine>`_. So in total participants should submit ``CBEngine_round3.py``, ``agent.py``, ``gym_cfg.py``.
 
 1. To submit the models for evaluation, participants need to modify the starter-kit and place all the model-related files (including but not limited to ``agent.py`` and deep learning model files) into the ``agent`` folder. Compress the agent folder and name it as ``agent.zip`` to make the submission. Note that you need to directly compress the ``agent`` folder, rather than a group of files.
 
