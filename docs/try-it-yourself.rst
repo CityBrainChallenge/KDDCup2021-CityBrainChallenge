@@ -318,9 +318,9 @@ Here in default evaluation method, inputs are
     - the evaluation interval. (metric_period)
     - threshold of delay index. (threshold)
 
-``evaluate.sh`` is an example scoring script that output the scores of your agent in multiple sample traffic flow
+``evaluate.sh`` is an example scoring script that output the scores of your agent in multiple sample traffic flow settings;
 
-``evaluate.py`` is a scoring script that evaluate your agent only in single flow. It is similar to ``evaluate.py`` in the qualification phase. Detain of arguments is in code
+``evaluate.py`` is a scoring script that evaluate your agent only in single traffic flow setting. It is similar to ``evaluate.py`` in the qualification phase. Detairs on how to evaluate your solution is shown below,
 
 .. code-block::
 
@@ -331,7 +331,7 @@ Here in default evaluation method, inputs are
     bash evaluate.sh agent out log 1
 
 
-The single flow result will be output at ``/starter-kit/out/$flow_number/scores.json``. In final phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
+The single traffic flow evaluation result will be output at ``/starter-kit/out/$flow_number/scores.json``. In final phase, your solution is evaluated every 120 seconds for scoring (i.e., metric_period=120).
 
 
 Efficient evaluation for a learning-based model
