@@ -79,7 +79,7 @@ To check your simulation enviroment is ok, you can run ``demo.py`` in the starte
 
     python3 demo.py
 
-The meaning of ``simulator_cfg_file``, ``gym_cfg``, ``metric_period``, ``vehicle_info_path`` is explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
+The paramters ``simulator_cfg_file``, ``gym_cfg``, ``metric_period``, ``vehicle_info_path`` are explained in `APIs <https://kddcup2021-citybrainchallenge.readthedocs.io/en/latest/APIs.html#simulation-initialization>`_
 
 
 `agent.py <https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit/blob/main/agent/agent.py>`_ is a simple example of a fixed time (traffic signal is pre-timed) agent coordinating the traffic signal. It use the `current_step` (i.e., current time step) from info to decide the phase.
