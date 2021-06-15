@@ -18,7 +18,7 @@ Basic computing resource
 Bonus resource allocation
 ----------------------------
 
-- We will arrange 2 rounds of bonus resource allocation on 06/17 and 06/24 (utc-12), respectively.
+- We will arrange 2 rounds of bonus resource allocation on 06/17 and 06/24 (UTC-12), respectively.
 - Top 10 teams by 2:00 PM (UTC-12) of the allocation day can apply for bonus computing resources (up to 144 CPU cores,  384GB memory per team). 
 - Between 2:00 PM and 10:00 PM (UTC-12) of the allocation day, we will recycle and re-allocate the bonus computing resources. Participants cannot access the computing resources during this period. 
 
