@@ -33,7 +33,7 @@ The trip delay :math:`D_{i}` of vehicle :math:`i` is defined as :math:`D_{i} = \
  - :math:`TT_{i}^{r}`: rest of trip travel time, estimated with free-flow speed;
  - :math:`TT_{i}^{f}`: full trip travel time at free-flow speed 
 
-We will evaluate your solution on multiple traffic flow settings. The overall `total number of served vehicles' is computed as the summation of` total number of served vehicles' over all evaluation scenarios. The overall `delay index` is computed as the average delay index among all vehicles over all scenarios.
+We will evaluate your solution on multiple traffic flow settings. The `total number of served vehicles` is computed over all evaluation scenarios. The overall `delay index` is computed as the average delay index among all vehicles of all scenarios.
 
 The submission scoring and ranking process follows three principles:
 
