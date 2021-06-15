@@ -157,7 +157,6 @@ Simulation Step
         # observation values:
 
         # lane_speed sample: [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
-        # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # Note that, [lane0, lane1, lane2] indicates the [left_turn lane, approach lane, right_turn lane] repespectively of the corresponding road.
@@ -166,15 +165,14 @@ Simulation Step
         # -2 indicating there's no vehicle on this lane
 
         # lane_vehcile_num sample [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-        # The first value is current second
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
 
 
-        # classic sample [1, 0, 0, 0, 3, 2, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0]
-        # the first 8 values are the left-turing and go-straight lanes ordered by the 'signal' part of roadnet file
-        # the last 8 values are the one-hot code of which lane is available
+        # a sample code (key = 'classic') to define 'observation' in 'observation_feature': [1, 0, 0, 0, 3, 2, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0]
+        # the first 8 values are the number of vehicles of left-turing and go-straight lanes ordered by the 'signal' part of roadnet file
+        # the last 8 values are the one-hot code indicates which lanes are available in last signal phase
 
 
 `rewards`:
