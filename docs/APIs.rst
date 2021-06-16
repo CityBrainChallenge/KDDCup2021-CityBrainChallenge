@@ -108,7 +108,7 @@ Environment Configuration: gym_cfg.py
 
 ===================
 Simulation Step
-===================
+===================lpful for decision-making on the traffic signal phase selection. Detailed description the features of observation can be found in agent/gym_cfg.py.
 
 
 ``step(actions)``:
@@ -150,13 +150,13 @@ Simulation Step
 
     - The key is agent_id (`str`) , the value is a `dict`. The `dict` only contains one key "observation", and its value is a list catenated by the order in ``'observation_features'`` of ``gym_cfg.py``
 
-    - Format of the ``'lane_speed'`` and ``'lane_vehicle_num'`` observations_values are described below:
+    - Format of the ``'lane_speed'``, ``'lane_vehicle_num'`` and ``'classic'`` observations_values are described below:
 
     .. code-block::
 
         # observation values:
 
-        # "lane_speed" sample: [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
+        # 'lane_speed' sample: [-2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2]
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # Note that, [lane0, lane1, lane2] indicates the [left_turn lane, approach lane, right_turn lane] repespectively of the corresponding road.
@@ -164,13 +164,13 @@ Simulation Step
         # If there is a -1 in the signal part of roadnet file (which indicates this road doesn't exist), then the returned observation of the corresponding lanes on this road are also 3 -1s.
         # -2 indicating there's no vehicle on this lane
 
-        # "lane_vehcile_num" sample [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        # 'lane_vehcile_num' sample [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
         # There are 24 lanes left. The order of their roads is defined in 'signal' part of roadnet file
         # the order is :inroad0lane0, inroad0lane1, inroad0lane2, inroad1lane0 ... inroad3lane2, outroad0lane0, outroad0lane1 ...
         # If there is -1 in signal part of roadnet file, then the lane of this road is filled with three -1.
 
 
-        # "classic" sample: [1, 0, 0, 0, 3, 2, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0]
+        # 'classic' sample: [1, 0, 0, 0, 3, 2, 1, 4, 1, 0, 0, 0, 1, 0, 0, 0]
         # the first 8 values are the number of vehicles of left-turing and go-straight lanes ordered by the 'signal' part of roadnet file
         # the last 8 values are the one-hot code indicates which lanes are available in last signal phase
 
