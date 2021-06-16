@@ -105,7 +105,7 @@ Environment Configuration: gym_cfg.py
 
     - ``observation_dimension``' : The dimension of observation. Need to be correct both custom observation and default observation.
 
-
+lane_vehicle_num
 ===================
 Simulation Step
 ===================lpful for decision-making on the traffic signal phase selection. Detailed description the features of observation can be found in agent/gym_cfg.py.
