@@ -65,7 +65,7 @@ The python script for generating sample traffic is in the ``data`` folder. You c
 
     python3 traffic_generator.py
     
-Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. Note that in following process, especially in training and evaluating your model on multiple traffic flow settings, we rename the file with ``flow_round3_flow*.txt`` and then create a new config file in ``cfg/simulator_round3_flow*.cfg`` (* indexed the traffic flow settings). To align with the code, you should make sure that the name of traffic flow file match with the configuration file.
+Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. Note that in following process, especially in training and evaluating your model on multiple traffic flow settings, we rename the file with ``flow_round3_flow*.txt`` and then create a new config file in ``cfg/simulator_round3_flow*.cfg`` (* indexed the traffic flow settings). To align with the code, you should make sure that the name of traffic flow file match with the configuration file. For more information about ``traffic_generator.py``, please visit `document-1  <https://docs.google.com/document/d/1iwBKijsNwxMDpXF3tCA67jOxLOpu72sRgASkD93_6Rw/edit?usp=sharing>`_ or `document-2  <https://shimo.im/docs/pPrvXpChJgpjpdTD/>`_.   
 
 
 
