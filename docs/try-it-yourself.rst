@@ -65,7 +65,7 @@ The python script for generating sample traffic is in the ``data`` folder. You c
 
     python3 traffic_generator.py
     
-Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. Note that in following process, especially in multi-flow training and evaluating process of starter-kit, we rename the file with ``flow_round3_flow*.txt`` and then create a new config file in ``cfg/simulator_round3_flow*.cfg``. To align with the code, you should make sure that the name of traffic flow file match with the configuration file.
+Afterwards, you will find a newly created or updated ``flow_round3.txt`` file. Note that in following process, especially in training and evaluating your model on multiple traffic flow settings, we rename the file with ``flow_round3_flow*.txt`` and then create a new config file in ``cfg/simulator_round3_flow*.cfg`` (* indexed the traffic flow settings). To align with the code, you should make sure that the name of traffic flow file match with the configuration file.
 
 
 
@@ -180,7 +180,7 @@ In the final phase, you can customize the ``CBEngine`` interface to define your 
         ##################
         ## Example : pressure as reward.
         # if(self.observation_features[0] != 'lane_vehicle_num'):
-        #     raise ValueError("maxpressure need 'lane_vehicle_num' as first observation feature")
+        #     raise ValueError("maxpressure need 'lane_vehicle_num' as first observation feature") ``cfg/simulator_round3_flow*.cfg``. To align with the code, you should make sure that the name of traffic flow file match with the configuration file.
         # lane_vehicle = self.eng.get_lane_vehicles()
         # for agent_id, roads in self.agent_signals.items():
         #     result_obs = []
