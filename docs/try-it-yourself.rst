@@ -46,7 +46,7 @@ First, pull the starter-kit. Make sure the starter-kit is in ``~/rllib_starter_k
     git clone https://github.com/CityBrainChallenge/KDDCup2021-CityBrainChallenge-starter-kit.git
     cp -r KDDCup2021-CityBrainChallenge-starter-kit/. CBEngine_rllib_starterkit/
 
-Then start docker container ``working``. We have deployed ray environment in working. You could check it out by ``ray status``
+Then start docker container ``working``. We have deployed ray environment in ``working``. You could check it out by ``ray status``
 
 .. code-block::
 
