@@ -40,7 +40,7 @@ Login
 ----------------------------
 
 - The top 20 qualified teams' leaders will receive the login credentials along with the confirmation emails.
-- The login credential includes IP address, user name, and password, which you can use to login to the assigned computing cluster (A ubuntu system is pre-installed).
+- The login credential includes IP address (we will add up to 5 IP addresses to the whitelist for each team), user name, and password, which you can use to login to the assigned computing cluster (A ubuntu system is pre-installed).
 
 Model development
 ----------------------------
