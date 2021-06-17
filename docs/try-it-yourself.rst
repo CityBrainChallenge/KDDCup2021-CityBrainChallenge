@@ -33,7 +33,7 @@ After pulled down the docker image and cloned the starter-kit, you can run a doc
     docker run -it -v /path/to/your/starter-kit:/starter-kit citybrainchallenge/cbengine:0.1.3 bash
     cd starter-kit
     # evaluate your solution on 1 traffic flow setting
-    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 200 --threshold 1.4
+    python3 evaluate.py --input_dir agent --output_dir out --sim_cfg /starter-kit/cfg/simulator_round3_flow0.cfg --metric_period 120 --threshold 1.4
 
 Installation on the computing platform
 --------------------------------------------------------
