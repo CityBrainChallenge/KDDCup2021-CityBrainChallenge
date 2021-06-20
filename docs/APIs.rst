@@ -180,7 +180,7 @@ Simulation Step
     - must implement in ``CBEngine_round3``
     - {`agent_id_1`: `reward_values_1`, ..., `agent_id_n`: `reward_values_n`}
     - Format of reward_values:
-    - `reward` in rllib needs to be single values. We provide 2 rewards , ``pressure`` and ``queue length`` , along with the old rewards.
+    - `reward` in rllib needs to be single values. We provide 2 types of rewards definition as demos, ``pressure`` and ``queue length`` , along with the old rewards.
 
     .. code-block::
 
