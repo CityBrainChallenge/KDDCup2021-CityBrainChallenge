@@ -197,8 +197,8 @@ Simulation Step
 
 `info`:
     - a dict
-    - key is `str`
-    - {'step': current_step, `vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
+    - key is vehicle ID, values includes 'distance', 'drivable', 'road', 'speed' and 'start_time'
+    - {`vehicle_id_1`: `vehicle_info_1`, ..., `vehicle_id_m`: `vehicle_info_m`}
     - env.set_info(1) to return a dictionary of vehicle information, otherwise, return an empty dictionary.
     - "route" and "t_ff" are removed from "vehicle_info" in final phase 
 
@@ -210,7 +210,7 @@ Simulation Step
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
             "drivable": [29301.0], # Current lane of this vehicle. Here 293 is the road segment ID, 01 indicates the middle lane (00 and 02 indicate inner and outer lanes respectively)
             "road": [293.0], # Current road of this vehicle.
-            "speed": [0.0], # Current speed of this vehicle.
+            "speed": [0.0], # Current instantaneous speed of this vehicle.
             "start_time": [73.0], # Time of creation of this vehicle.
             },
         ...
