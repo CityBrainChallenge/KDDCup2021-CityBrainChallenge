@@ -204,6 +204,7 @@ Simulation Step
 
 
     .. code-block::
+    
         0: # 0 is the vehicle ID
         { 
             "distance": [259.0], # The distance from this vehicle to the start point of current road.
