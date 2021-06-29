@@ -24,7 +24,7 @@ In the final phase, a city-scale road network sample traffic data is provided. W
 Evaluation
 ===============
 
-Total number of vehicles served (i.e., total number of vehicles entering the network) and delay index will be computed every 120 seconds to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.40. 
+Total number of vehicles served (i.e., total number of vehicles entering the network) and delay index will be computed every 20 seconds to evaluate your submissions. The evaluation process will be terminated once the delay index reaches the predefined threshold 1.40. 
 
 The trip delay index is computed as actual travel time divided by travel time at free-flow speed. For an uncompleted trip, the free-flow speed is used to estimate the travel time of rest of the trip. The delay index is computed as average trip delay index over all vehicles served: :math:`D = \frac{1}{N}\sum_{i=1}^{N}{D_{i}}`.
 
