@@ -14,7 +14,7 @@ Installation on your local environment
 
 The simulator engine and the gym environment are incorporated into the docker image. You can pull it down to easily setup the environment.
 The latest image version is ``0.1.3``, we will notify you if a new version is updated.
-
+0
 
 .. code-block::
 
@@ -466,11 +466,10 @@ You can visualize the replay of your intermediate results after your solution be
     yarn start
 
 the replay of your intermediate results after your solution being evaluated. Here `mapbox token` and `yarn` are required. You can get a `mapbox token` by registering a mapbox account.
+
 5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
 
-Here are some Tips:​
-260
-5. open `localhost:3000` with your browser (If report "JavaScript heap out of memory", please refer to this `website <https://support.snyk.io/hc/en-us/articles/360002046418-JavaScript-heap-out-of-memory>`_)
+Here are some Tips:
 
 - *Sky blue* indicates left-turning vehicles, *dark blue* indicates going straight vehicles, and *dark green* indicates right-turning vehicles.
 - Lines indicate roads. The color of the line represents the average speed of the road.
